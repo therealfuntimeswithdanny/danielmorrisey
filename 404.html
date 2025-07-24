@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Error 404 Page not found</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preload" href="/_next/static/media/97a52bce187043ec-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/>
+    <link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-next-font="size-adjust"/>
+</head>
+<body>
+    <div id="__next">
+        <div>
+            <header class="flex flex-col items-center py-12 md:py-16">
+                <div class="mb-8">
+                    <a href="#" class="flex flex-row items-center">
+                        <img src="/media/server-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
+                        <img src="/media/magnifying-glass-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
+                        <img src="/media/question-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
+                    </a>
+                </div>
+            </header>
+            <div class="w-9/10 max-w-md mx-auto">
+                <h3 id="what-is-tsnet" class="mb-2 mt-5 text-xl font-medium first:mt-0">That Page cant be found</h3>
+                <p>
+                    The page was not found on the server,
+                    <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm">danielmorrisey.com</code></p>
+                    <p id="url"></p><p>
+                    <br><br>
+                    You can try going back to the
+                    <a href="/index.html" class="text-blue-600 transition-colors hover:text-blue-800">Home Page</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("url").innerHTML = "Cloudflare Pages returned \"404 error\" when looking for <code class=\"rounded-lg border bg-gray-50 px-1 py-0.5 text-sm\">" + window.location.href + "</code>.";
+    </script>
+</body>
+</html>
