@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Wait one second!</title>
     
+    <!-- SEO: No-index this page as it's transitional content -->
     <meta name="robots" content="noindex, nofollow">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      /* Ensure full screen height and a nice font family */
       html, body, #__next {
           height: 100%;
       }
@@ -19,9 +23,11 @@
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
     <div id="__next" class="flex flex-col min-h-screen">
         <div class="flex-grow flex flex-col justify-center items-center p-4">
+            <!-- Header: Consistent with the main page design -->
             <header class="flex flex-col items-center py-12 md:py-16">
                 <div class="mb-8">
                     <a href="#" class="flex flex-col items-center">
+                        <!-- Replaced image with a simple SVG for self-containment -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-16 h-16 mb-2 text-blue-600">
                             <path fill="currentColor" d="M256 0c53 0 102.7 13.9 146.3 38.6c-17.7 20.3-43.7 34.4-72.3 39.4c17.5 13.6 28.5 35.8 28.5 60.5c0 44.9-36.4 81.3-81.3 81.3s-81.3-36.4-81.3-81.3c0-24.7 11-46.9 28.5-60.5c-28.6-5-54.6-19.1-72.3-39.4C153.3 13.9 203 0 256 0zm0 304c-88.4 0-160 71.6-160 160c0 17.7 14.3 32 32 32h256c17.7 0 32-14.3 32-32c0-88.4-71.6-160-160-160zm0-192a80 80 0 1 1 0 160a80 80 0 1 1 0-160zM480 320c-17.7 0-32 14.3-32 32c0 88.4-71.6 160-160 160c-88.4 0-160-71.6-160-160c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 123.7 100.3 224 224 224s224-100.3 224-224c0-17.7-14.3-32-32-32z"/>
                         </svg>
@@ -30,22 +36,31 @@
                 </div>
             </header>
             
+            <!-- Content -->
             <main class="w-9/10 max-w-md mx-auto text-center">
                 <div id="redirect-container">
                     <h3 class="mb-4 text-2xl font-medium">You are now leaving danielmorrisey.com</h3>
                     <p id="verification-text" class="mb-2 text-gray-600 dark:text-gray-400">
                         {s} needs to verify the security of the connection before continuing to {r}
                     </p>
+
                     <div id="turnstile-widget" class="flex justify-center my-6"></div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                    <p id="turnstile-message" class="text-gray-500 dark:text-gray-400 mb-6">
+                        Complete the challenge above to enable the button.
+                    </p>
+
+                    <button id="go-now-button" disabled class="bg-gray-400 dark:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed transition-colors">
+                        Go Now
+                    </button>
+
+                    <p class="text-sm text-gray-600 dark:text-gray-400 my-6">
                         Destination: <a id="destination-link" href="#" class="text-blue-600 dark:text-blue-400 break-all hover:underline"></a>
                     </p>
-                    <div id="verification-message" class="hidden text-green-600 dark:text-green-400 font-bold">
-                        Verification successful! Redirecting...
-                    </div>
                 </div>
-                <div id="error-container" class="hidden">
-                     <h3 class="mb-4 text-2xl font-medium text-red-600 dark:text-red-400">Invalid Link</h3>
+                
+                <!-- Error container -->
+                <div id="error-container" class="hidden p-4 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 rounded-lg text-red-700 dark:text-red-300">
+                     <h3 class="mb-2 text-2xl font-medium text-red-600 dark:text-red-400">Invalid Link</h3>
                      <p id="error-message"></p>
                 </div>
             </main>
@@ -56,52 +71,42 @@
         </footer>
     </div>
     <script>
-        // *** IMPORTANT: Update this with your Worker's URL ***
-        const WORKER_URL = 'https://mbd-secure.madebydannyuk.workers.dev';
+        // *** Your Cloudflare Worker URL ***
+        const WORKER_URL = 'https://mbd-secure.madebydannyuk.workers.dev/';
         
-        // This function is called by the Turnstile widget upon successful verification.
-        window.onTurnstileSuccess = async (token) => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectUrl = urlParams.get('r');
-            const sourceUrl = urlParams.get('s');
-            
-            console.log('Turnstile challenge completed. Sending token to worker for validation...');
-            
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        token: token,
-                        redirectUrl: redirectUrl,
-                        source: sourceUrl
-                    }),
-                });
+        // This is your public Turnstile site key.
+        const TURNSTILE_SITE_KEY = '0x4AAAAAABnz2nYFLlHtxvo3';
 
-                if (response.redirected) {
-                    // The browser will automatically follow the redirect.
-                    console.log('Worker validation successful. Redirecting...');
-                } else if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Worker validation failed:', errorText);
-                    document.getElementById('error-message').textContent = 'Verification failed. Please try again.';
-                    document.getElementById('error-container').classList.remove('hidden');
-                    document.getElementById('redirect-container').classList.add('hidden');
-                }
-            } catch (err) {
-                console.error('Network or fetch error:', err);
-                document.getElementById('error-message').textContent = 'An unexpected error occurred. Please try again.';
-                document.getElementById('error-container').classList.remove('hidden');
-                document.getElementById('redirect-container').classList.add('hidden');
+        let turnstileToken = null; // Store the token globally for access by the button.
+
+        // This function is called by the Turnstile widget upon successful verification.
+        window.onTurnstileSuccess = (token) => {
+            console.log('Turnstile challenge completed successfully! Token:', token);
+            turnstileToken = token;
+            
+            // Enable the "Go Now" button and update messages.
+            const goButton = document.getElementById('go-now-button');
+            const turnstileMessage = document.getElementById('turnstile-message');
+            const turnstileWidget = document.getElementById('turnstile-widget');
+
+            if (goButton) {
+                goButton.disabled = false;
+                goButton.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
+                goButton.classList.add('bg-blue-600', 'dark:bg-blue-400', 'hover:bg-blue-700', 'dark:hover:bg-blue-500');
+            }
+            if (turnstileMessage) {
+                turnstileMessage.textContent = 'Verification successful!';
+                turnstileMessage.classList.remove('text-gray-500', 'dark:text-gray-400');
+                turnstileMessage.classList.add('text-green-600', 'dark:text-green-400', 'font-bold');
+            }
+            if (turnstileWidget) {
+                turnstileWidget.style.display = 'none';
             }
         };
 
         window.onloadTurnstileCallback = () => {
-            // IMPORTANT: Replace '1x00000000000000000000AA' with your actual Cloudflare Turnstile public site key.
             turnstile.render('#turnstile-widget', {
-                sitekey: '0x4AAAAAABnz2nYFLlHtxvo3',
+                sitekey: TURNSTILE_SITE_KEY,
                 callback: 'onTurnstileSuccess',
                 theme: 'auto'
             });
@@ -114,16 +119,62 @@
 
             const redirectContainer = document.getElementById('redirect-container');
             const errorContainer = document.getElementById('error-container');
+            const errorMessage = document.getElementById('error-message');
             const destinationLink = document.getElementById('destination-link');
             const verificationText = document.getElementById('verification-text');
+            const goButton = document.getElementById('go-now-button');
             const currentYearSpan = document.getElementById('currentYear');
             currentYearSpan.textContent = new Date().getFullYear();
 
+            // Load the Cloudflare Turnstile script dynamically.
             const script = document.createElement('script');
             script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback';
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
+
+            // Add the click event listener for the "Go Now" button
+            if (goButton) {
+                goButton.addEventListener('click', async () => {
+                    if (!turnstileToken) {
+                        errorMessage.textContent = 'Please complete the security challenge first.';
+                        errorContainer.classList.remove('hidden');
+                        return;
+                    }
+
+                    console.log('Sending token to worker for validation...');
+                    
+                    try {
+                        const response = await fetch(WORKER_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                token: turnstileToken,
+                                redirectUrl: redirectUrl,
+                                source: sourceUrl
+                            }),
+                        });
+
+                        if (response.redirected) {
+                            // The browser will automatically follow the redirect.
+                            console.log('Worker validation successful. Redirecting...');
+                        } else if (!response.ok) {
+                            const errorText = await response.text();
+                            console.error('Worker validation failed:', errorText);
+                            errorMessage.textContent = 'Verification failed. Please try again.';
+                            errorContainer.classList.remove('hidden');
+                            redirectContainer.classList.add('hidden');
+                        }
+                    } catch (err) {
+                        console.error('Network or fetch error:', err);
+                        errorMessage.textContent = 'An unexpected error occurred. Please try again.';
+                        errorContainer.classList.remove('hidden');
+                            redirectContainer.classList.add('hidden');
+                    }
+                });
+            }
 
             if (redirectUrl) {
                 destinationLink.href = redirectUrl;
@@ -132,7 +183,7 @@
                 redirectContainer.classList.remove('hidden');
                 errorContainer.classList.add('hidden');
             } else {
-                document.getElementById('error-message').textContent = 'A valid destination link was not provided. Please check the URL and try again.';
+                errorMessage.textContent = 'A valid destination link was not provided. Please check the URL and try again.';
                 redirectContainer.classList.add('hidden');
                 errorContainer.classList.remove('hidden');
             }
