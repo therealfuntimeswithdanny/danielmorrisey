@@ -69,6 +69,47 @@
     </div>
     <script>
         // Main logic for the secure redirect page.
+        
+        // Function to handle the successful Turnstile challenge.
+        // It is defined in the global scope so the Turnstile script can find it.
+        window.onTurnstileSuccess = (token) => {
+            console.log('Turnstile challenge completed successfully! Token:', token);
+            
+            // Get elements after the DOM is ready.
+            const turnstileWidget = document.getElementById('turnstile-widget');
+            const verificationMessage = document.getElementById('verification-message');
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('r');
+
+            // Show the success message and hide the widget.
+            if (turnstileWidget && verificationMessage) {
+              turnstileWidget.classList.add('hidden');
+              verificationMessage.classList.remove('hidden');
+            }
+
+            // Redirect to the destination URL after a short delay.
+            if (redirectUrl) {
+                console.log('Redirecting to:', redirectUrl);
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1000); // Redirect after 1 second.
+            } else {
+                console.error('Redirect URL is missing.');
+            }
+        };
+
+        // This is the onload callback for the Turnstile script.
+        // It renders the widget after the script has loaded.
+        window.onloadTurnstileCallback = () => {
+            // IMPORTANT: Replace '1x00000000000000000000AA' with your actual Cloudflare Turnstile site key.
+            // This demo key is for testing purposes only.
+            turnstile.render('#turnstile-widget', {
+                sitekey: '0x4AAAAAABnz2nYFLlHtxvo3',
+                callback: 'onTurnstileSuccess',
+                theme: 'auto'
+            });
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const redirectUrl = urlParams.get('r');
@@ -77,38 +118,10 @@
             const redirectContainer = document.getElementById('redirect-container');
             const errorContainer = document.getElementById('error-container');
             const destinationLink = document.getElementById('destination-link');
-            const verificationMessage = document.getElementById('verification-message');
             const verificationText = document.getElementById('verification-text');
 
             const currentYearSpan = document.getElementById('currentYear');
             currentYearSpan.textContent = new Date().getFullYear();
-
-            // Function to handle the successful Turnstile challenge.
-            window.onTurnstileSuccess = (token) => {
-                console.log('Turnstile challenge completed successfully! Token:', token);
-                
-                // Show the success message and hide the widget.
-                const turnstileWidget = document.getElementById('turnstile-widget');
-                turnstileWidget.classList.add('hidden');
-                verificationMessage.classList.remove('hidden');
-
-                // Redirect to the destination URL after a short delay to show the message.
-                setTimeout(() => {
-                    window.location.href = redirectUrl;
-                }, 1000); // Redirect after 1 second.
-            };
-
-            // This is the onload callback for the Turnstile script.
-            // It renders the widget after the script has loaded.
-            window.onloadTurnstileCallback = () => {
-                // IMPORTANT: Replace '1x00000000000000000000AA' with your actual Cloudflare Turnstile site key.
-                // This demo key is for testing purposes only.
-                turnstile.render('#turnstile-widget', {
-                    sitekey: '0x4AAAAAABnz2nYFLlHtxvo3',
-                    callback: 'onTurnstileSuccess',
-                    theme: 'auto'
-                });
-            };
 
             // Load the Cloudflare Turnstile script dynamically.
             const script = document.createElement('script');
