@@ -26,24 +26,35 @@ class StatusBanner extends HTMLElement {
         this.render();
         this.initializeStatusPage();
         this.intervalId = setInterval(() => this.initializeStatusPage(), 60000);
+        window.addEventListener('resize', () => this.adjustBodyPadding());
     }
 
     disconnectedCallback() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
         }
+        window.removeEventListener('resize', () => this.adjustBodyPadding());
     }
 
     render() {
         this.shadowRoot.innerHTML = `
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-                
+
                 :host {
                     all: initial;
                     display: block;
                 }
                 
+                body {
+                    font-family: 'Inter', sans-serif;
+                    background-color: transparent;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    transition: padding-top 0.3s ease-in-out;
+                }
+
                 .overall-status-banner {
                     display: flex;
                     flex-direction: column;
@@ -52,21 +63,28 @@ class StatusBanner extends HTMLElement {
                     border-bottom: 1px solid;
                     font-weight: 500;
                     font-size: 0.875rem;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
                     width: 100%;
-                    z-index: 9999;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 0;
                     font-family: 'Inter', sans-serif;
-                    box-sizing: border-box;
-                    transition: transform 0.3s ease-in-out;
-                    transform: translateY(-100%);
                 }
-                .overall-status-banner.visible {
-                    transform: translateY(0);
+                .overall-status-banner.hidden {
+                    display: none;
                 }
+
+                /* Dynamic Color Styles */
+                .status-style-warning { background-color: #fef9e6; border-color: #fce7b0; color: #4b3e21; }
+                .status-style-warning .status-icon, .status-style-warning .status-text a { color: #d17800; }
+                .status-style-danger { background-color: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+                .status-style-danger .status-icon, .status-style-danger .status-text a { color: #dc2626; }
+                .status-style-info { background-color: #e0f2fe; border-color: #93c5fd; color: #1e40af; }
+                .status-style-info .status-icon, .status-style-info .status-text a { color: #3b82f6; }
+                .status-style-primary { background-color: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+                .status-style-primary .status-icon, .status-style-primary .status-text a { color: #6366f1; }
+                .status-style-light { background-color: #f9fafb; border-color: #e5e7eb; color: #374151; }
+                .status-style-light .status-icon, .status-style-light .status-text a { color: #9ca3af; }
+                .status-style-dark { background-color: #1f2937; border-color: #4b5563; color: #f9fafb; }
+                .status-style-dark .status-icon, .status-style-dark .status-text a { color: #d1d5db; }
 
                 .status-header {
                     display: flex;
@@ -125,24 +143,9 @@ class StatusBanner extends HTMLElement {
                     0% { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
                 }
-
-                /* Dynamic Color Styles */
-                .status-style-warning { background-color: #fef9e6; border-color: #fce7b0; color: #4b3e21; }
-                .status-style-warning .status-icon, .status-style-warning .status-text a { color: #d17800; }
-                .status-style-danger { background-color: #fee2e2; border-color: #fca5a5; color: #991b1b; }
-                .status-style-danger .status-icon, .status-style-danger .status-text a { color: #dc2626; }
-                .status-style-info { background-color: #e0f2fe; border-color: #93c5fd; color: #1e40af; }
-                .status-style-info .status-icon, .status-style-info .status-text a { color: #3b82f6; }
-                .status-style-primary { background-color: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
-                .status-style-primary .status-icon, .status-style-primary .status-text a { color: #6366f1; }
-                .status-style-light { background-color: #f9fafb; border-color: #e5e7eb; color: #374151; }
-                .status-style-light .status-icon, .status-style-light .status-text a { color: #9ca3af; }
-                .status-style-dark { background-color: #1f2937; border-color: #4b5563; color: #f9fafb; }
-                .status-style-dark .status-icon, .status-style-dark .status-text a { color: #d1d5db; }
-
             </style>
             
-            <div id="status-banner" class="overall-status-banner">
+            <div id="status-banner" class="overall-status-banner hidden">
                 <div class="status-header">
                     <span id="status-icon" class="status-icon"></span>
                     <div id="status-text" class="flex-grow"></div>
@@ -155,12 +158,22 @@ class StatusBanner extends HTMLElement {
         `;
     }
 
+    adjustBodyPadding() {
+        const statusBanner = this.shadowRoot.getElementById('status-banner');
+        if (!statusBanner.classList.contains('hidden')) {
+            document.body.style.paddingTop = statusBanner.offsetHeight + 'px';
+        } else {
+            document.body.style.paddingTop = '0';
+        }
+    }
+
     async initializeStatusPage() {
         const loadingIndicator = this.shadowRoot.getElementById('loading-indicator');
         const statusBanner = this.shadowRoot.getElementById('status-banner');
 
-        statusBanner.classList.remove('visible');
+        statusBanner.classList.add('hidden');
         loadingIndicator.style.display = 'block';
+        document.body.style.paddingTop = '0';
 
         let heartbeatData = await this.fetchData(this.API_HEARTBEAT_URL, 'heartbeat');
         let statusPageData = await this.fetchData(this.API_STATUS_PAGE_URL, 'status page');
@@ -235,12 +248,14 @@ class StatusBanner extends HTMLElement {
         loadingIndicator.style.display = 'none';
         statusBanner.className = 'overall-status-banner';
         incidentDetail.classList.add('hidden');
+        this.adjustBodyPadding();
 
         let incident = statusPageData?.incident;
         let incidentFound = incident?.pin;
 
         if (overallStatus === 'operational' && !incidentFound) {
-            statusBanner.classList.remove('visible');
+            statusBanner.classList.add('hidden');
+            this.adjustBodyPadding();
             return;
         }
 
@@ -287,10 +302,12 @@ class StatusBanner extends HTMLElement {
         statusBanner.classList.add(bannerStyleClass);
         statusText.innerHTML = statusMessage;
         statusIcon.textContent = iconText;
-        statusBanner.classList.add('visible');
+        statusBanner.classList.remove('hidden');
+        this.adjustBodyPadding();
 
         closeButton.onclick = () => {
-            statusBanner.classList.remove('visible');
+            statusBanner.classList.add('hidden');
+            this.adjustBodyPadding();
         };
     }
 }
