@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Search Text Bites - Daniel Morrisey</title>
+    <meta name="description" content="Search through Daniel Morrisey's Text Bites"/>
+    <meta name="keywords" content="Danile Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
+    <meta name="author" content="Daniel Morrisey"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://danielmorrisey.com/"/>
+    <meta property="og:title" content="Search Text Bites - Daniel Morrisey"/>
+    <meta property="og:description" content="Search through Daniel Morrisey's Text Bites"/>
+    <meta property="og:image" content="https://public-danielmorrisey-com.danielmorrisey.com/media/banner.jpg"/>
+    <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
+    <link rel="icon" type="image/x-icon" href="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg">
+    <script src="https://kit.fontawesome.com/0ca27f8db1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="__next">
+        <div>
+            <header class="flex flex-col items-center py-12 md:py-16">
+                <div class="mb-8">
+                    <a href="/index.html" class="flex flex-col items-center">
+                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-16 h-16 mb-2 rounded-full"/>
+                        <h1 class="text-3xl font-bold">Daniel Morrisey</h1>
+                    </a>
+                </div>
+            </header>
+            <div class="w-9/10 max-w-md mx-auto">
+                <!-- Search Bar -->
+                <div class="mb-5">
+                    <input type="text" id="projectSearch" placeholder="Search Text Bites..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <h3 class="mb-2 mt-5 text-xl font-medium first:mt-0">Search Results</h3>
+                <div id="projectsList">
+                    <!-- blueskydeck.html -->
+                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
+                        <h4 class="mb-2 text-xl font-small project-title-text">We need a Bluesky version of mastodon’s deck layout</h4>
+                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sun Aug 3, <i class="fa-solid fa-clock"></i> 50 Sec</code>
+                        <p class="project-description mt-2 text-gray-700">
+                            Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.
+                        </p>
+                        <a href="blueskydeck.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a>
+                    </div>
+                    <!-- thepowerofhashtags.html -->
+                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
+                        <h4 class="mb-2 text-xl font-small project-title-text">The Power of Hashtags</h4>
+                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sun Aug 3, <i class="fa-solid fa-clock"></i> 1 Min</code>
+                        <p class="project-description mt-2 text-gray-700">
+                            All it takes is one # to reach an audience of 100+
+                        </p>
+                        <a href="thepowerofhashtags.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a>
+                    </div>
+                    <!-- igotamacmini.html -->
+                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
+                        <h4 class="mb-2 text-xl font-small project-title-text">I got a Mac Mini</h4>
+                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Tue Aug 5, <i class="fa-solid fa-clock"></i> 1 Min</code>
+                        <p class="project-description mt-2 text-gray-700">
+                            It might be mini, but it sure is fast!
+                        </p>
+                        <a href="igotamacmini.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a>
+                    </div>
+                    <!-- index.html -->
+                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
+                        <h4 class="mb-2 text-xl font-small project-title-text">Text Bites</h4>
+                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sun Aug 3, <i class="fa-solid fa-clock"></i> 1 Min</code>
+                        <p class="project-description mt-2 text-gray-700">
+                            From news to things you don't care about read all of Daniel Morriey's Text Bites
+                        </p>
+                        <a href="index.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a>
+                    </div>
+                </div>
+                <p class="mt-8 text-center">
+                    <a href="/index.html" class="text-blue-600 transition-colors hover:text-blue-800"><i class="fa-solid fa-house"></i> Home</a>
+                </p>
+                <p class="text-center">&copy; 2024-<span id="currentYear"></span> <a href="/leaving.html?link=https://madebydanny.uk" class="text-blue-600 transition-colors hover:text-blue-800">Made by Danny UK</a> <i>by Daniel Morrisey</i></p>
+                <hr>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script src="/script/search.js"></script>
+</body>
+</html>
