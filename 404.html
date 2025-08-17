@@ -1,46 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charSet="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Error 404 Page not found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
 
     <meta name="robots" content="noindex, nofollow">
-
+    
+    <!-- Google Fonts for a clean font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <div id="__next">
-        <div>
-            <header class="flex flex-col items-center py-12 md:py-16">
-                <div class="mb-8">
-                    <a href="#" class="flex flex-row items-center">
-                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/server-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
-                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/magnifying-glass-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
-                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/question-solid-full.svg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
-                    </a>
+<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed">
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        
+        <!-- Card-like container for the content -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 w-full max-w-4xl text-center">
+
+            <!-- Header with icons -->
+            <header class="mb-8">
+                <div class="flex flex-row items-center justify-center space-x-4 mb-4">
+                    <i class="fa-solid fa-server text-4xl text-gray-400"></i>
+                    <i class="fa-solid fa-magnifying-glass text-4xl text-gray-400"></i>
+                    <i class="fa-solid fa-circle-question text-4xl text-gray-400"></i>
                 </div>
+                <h1 class="text-3xl font-bold text-gray-900">Page Not Found</h1>
             </header>
-            <div class="w-9/10 max-w-md mx-auto">
-                <h3 id="what-is-tsnet" class="mb-2 mt-5 text-xl font-medium first:mt-0">That Page cant be found</h3>
-                <p>
-                    The page was not found on the server,
-                    <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm">danielmorrisey.com</code></p>
-                    <p id="url"></p><p>
-                    <br><br>
-                    You can try going back to the
-                    <a href="/index.html" class="text-blue-600 transition-colors hover:text-blue-800">Home Page</a>
+            
+            <hr class="border-gray-200 my-8">
+
+            <!-- Error Message Content -->
+            <div class="prose mx-auto max-w-none prose-indigo">
+                <p class="text-xl font-medium text-gray-700">The page can't be found on the server.</p>
+                <p id="url" class="text-gray-600 mt-4"></p>
+                <p class="mt-8 text-lg">
+                    You can try going back to the <a href="/index.html" class="text-indigo-600 hover:text-indigo-800 transition duration-300 font-semibold">Home Page</a>.
                 </p>
             </div>
-            <div class="w-9/10 max-w-md mx-auto">
-                    <br><br>
-                    <p>&copy; 2024-<span id="currentYear"></span> <a href="/leaving.html?link=https://madebydanny.uk" class="text-blue-600 transition-colors hover:text-blue-800">Made by Danny UK</a> <i>by Daniel Morrisey</i></p>
-            </div>
+
+             <!-- Footer -->
+            <footer class="mt-12 pt-4 text-center text-gray-500 border-t border-gray-200">
+                <div class="flex justify-center space-x-6 mb-4 text-lg">
+                    <a href="javascript:history.back()" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="/index.html" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-house"></i> Home</a>
+                </div>
+                <!-- Centered Iframe -->
+                <div class="flex justify-center mt-8">
+                    <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+                </div>
+                <p>
+                    &copy; 2024-<span id="currentYear"></span>
+                    <a href="https://madebydanny.uk" class="hover:text-indigo-600 transition duration-300 font-medium">Made by Danny UK</a>
+                </p>
+                <p class="text-sm mt-1">
+                    by Daniel Morrisey
+                </p>
+            </footer>
+
         </div>
     </div>
+    
     <script>
-        document.getElementById("url").innerHTML = "Cloudflare Pages returned \"404 error\" when looking for <code class=\"rounded-lg border bg-gray-50 px-1 py-0.5 text-sm\">" + window.location.href + "</code>.";
+        // Display the URL of the page that was not found
+        document.getElementById("url").innerHTML = `Cloudflare Pages returned "404 error" when looking for <code class="bg-gray-200 rounded px-1 text-sm font-mono">${window.location.href}</code>.`;
+
+        // Set the current year for the copyright notice
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
-    <script src="/script/main.js"></script>
 </body>
 </html>

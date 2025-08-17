@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charSet="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Daniel Morrisey</title>
-
     <meta name="description" content="From HTML to Python view all of Daniel Morriey's projects"/>
-    <meta name="keywords" content="Danile Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
+    
+    <!-- Google Fonts for a clean font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <meta name="keywords" content="Daniel Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
     <meta name="author" content="Daniel Morrisey"/>
 
     <meta property="og:type" content="website"/>
@@ -17,56 +22,164 @@
 
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
     <link rel="icon" type="image/x-icon" href="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg">
-    <script src="https://kit.fontawesome.com/0ca27f8db1.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div id="__next">
-        <div>
-            <header class="flex flex-col items-center py-12 md:py-16">
-                <div class="mb-8">
-                    <a href="/index.html" class="flex flex-col items-center">
-                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-16 h-16 mb-2"/>
-                        <h1 class="text-3xl font-bold">Daniel Morrisey</h1>
-                    </a>
-                </div>
-            </header>
-            <div class="w-9/10 max-w-md mx-auto">
-                <!-- Search Bar -->
-                <div class="mb-5">
-                    <input type="text" id="projectSearch" placeholder="Search projects..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                
-                <!-- Main Projects Heading -->
-                <h3 class="mb-2 mt-5 text-xl font-medium first:mt-0">Projects</h3>
 
-                <!-- Projects List Container -->
-                <div id="projectsList">
-                    <!-- Project Card 1: Space Shooter -->
-                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">Space Shooter (v1.3)</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><a href="/leaving.html?link=https://github.com/therealfuntimeswithdanny/space-shooter" class="text-blue-600 hover:underline"><i class="fa-brands fa-apple"></i>/therealfuntimeswithdanny/space-shooter</a></code><br><code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><a href="/leaving.html?link=https://github.com/therealfuntimeswithdanny/spaceshooter-windows" class="text-blue-600 hover:underline"><i class="fa-brands fa-windows"></i>/therealfuntimeswith.../spaceshooter-windows</a></code></p>
-                        <p class="project-description mt-2 text-gray-700">
-                            Space Shooter is a simple Space Invaders clone written in Python using Pygame. The game can run on MacOS & Windows.
-                        </p>
-                         <a href="/projects/space-shooter/index.html" class="text-blue-600 transition-colors hover:text-blue-800"> Download & Install</a> <a href="/projects/space-shooter/macos.html" class="text-blue-600 transition-colors hover:text-blue-800"><i class="fa-brands fa-apple"></i> <a href="/projects/space-shooter/windows.html" class="text-blue-600 transition-colors hover:text-blue-800"><i class="fa-brands fa-windows"></i></a>
-                    </div>
+    <!-- Status Banner -->
+    <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed">
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        
+        <!-- Card-like container for the content -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 w-full max-w-4xl">
+
+            <!-- Header Section -->
+            <header class="flex flex-col items-center mb-8 text-center">
+                <a href="/index.html" class="flex flex-col items-center">
+                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-24 h-24 mb-4 rounded-full shadow-lg"/>
+                    <h1 class="text-3xl font-bold text-gray-900">Projects</h1>
+                    <p class="text-lg text-gray-600 font-medium mt-1">From HTML to Python</p>
+                </a>
+            </header>
             
-                    <!-- Project Card 2: Ball Shooter -->
-                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">Ball Shooter (v0.0.1)</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><a href="/leaving.html?link=https://github.com/therealfuntimeswithdanny/ball-shooter" class="text-blue-600 hover:underline"><i class="fa-brands fa-github"></i>/therealfuntimeswithdanny/ball-shooter</a></code></p>
-                        <p class="project-description mt-2 text-gray-700">Ball Shooter is a simple game, where your goal is to destroy all blocks using a paddle and ball. The game is in development.</p>
+            <hr class="border-gray-200 my-8">
+
+            <!-- Search Bar -->
+            <div class="mb-6">
+                <input type="text" id="projectSearch" placeholder="Search projects..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+            </div>
+
+            <!-- Projects List Container -->
+            <div id="projectsList" class="space-y-6">
+                <div class="project-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 project-title-text">Image Scope</h4>
+                    <div class="mb-4">
+                        <code class="rounded-lg border bg-gray-100 px-2 py-1 text-sm block md:inline-block">
+                            <a href="https://github.com/therealfuntimeswithdanny/imagescope" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                                <i class="fa-brands fa-github"></i>/therealfuntimeswithdanny/imagescope
+                            </a>
+                        </code>
+                    </div>
+                    <p class="project-description mt-2 text-gray-700 leading-relaxed">
+                        View random objects under a microscope. In a Tik Tok stye format.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-4">
+                        <a href="https://imagescope.madebydanny.uk" class="inline-flex items-center justify-center bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-semibold hover:bg-gray-300 transition duration-300">
+                            <i class="fa-solid fa-globe"></i>
+                        </a>
                     </div>
                 </div>
+                <!-- Project Card 1: Space Shooter -->
+                <div class="project-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 project-title-text">Space Shooter (v1.3)</h4>
+                    <div class="mb-4">
+                        <code class="rounded-lg border bg-gray-100 px-2 py-1 text-sm block md:inline-block md:mb-0 mb-2">
+                            <a href="https://github.com/therealfuntimeswithdanny/space-shooter" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                                <i class="fa-brands fa-apple"></i>/therealfuntimeswithdanny/space-shooter
+                            </a>
+                        </code>
+                        <code class="rounded-lg border bg-gray-100 px-2 py-1 text-sm block md:inline-block">
+                            <a href="https://github.com/therealfuntimeswithdanny/spaceshooter-windows" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                                <i class="fa-brands fa-windows"></i>/therealfuntimeswithdanny/spaceshooter-windows
+                            </a>
+                        </code>
+                    </div>
+                    <p class="project-description mt-2 text-gray-700 leading-relaxed">
+                        Space Shooter is a simple Space Invaders clone written in Python using Pygame. The game can run on MacOS & Windows.
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-4">
+                         <a href="/projects/space-shooter/index.html" class="inline-flex items-center justify-center bg-indigo-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-indigo-700 transition duration-300 shadow-md">
+                            Download & Install
+                        </a>
+                         <a href="/projects/space-shooter/macos.html" class="inline-flex items-center justify-center bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-semibold hover:bg-gray-300 transition duration-300">
+                            <i class="fa-brands fa-apple"></i>
+                        </a>
+                        <a href="/projects/space-shooter/windows.html" class="inline-flex items-center justify-center bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-semibold hover:bg-gray-300 transition duration-300">
+                            <i class="fa-brands fa-windows"></i>
+                        </a>
+                    </div>
+                </div>
+            
+                <!-- Project Card 2: Ball Shooter -->
+                <div class="project-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 project-title-text">Ball Shooter (v0.0.1)</h4>
+                    <div class="mb-4">
+                        <code class="rounded-lg border bg-gray-100 px-2 py-1 text-sm block md:inline-block">
+                            <a href="https://github.com/therealfuntimeswithdanny/ball-shooter" class="text-indigo-600 hover:text-indigo-800 transition-colors">
+                                <i class="fa-brands fa-github"></i>/therealfuntimeswithdanny/ball-shooter
+                            </a>
+                        </code>
+                    </div>
+                    <p class="project-description mt-2 text-gray-700 leading-relaxed">
+                        Ball Shooter is a simple game, where your goal is to destroy all blocks using a paddle and ball. The game is in development.
+                    </p>
+                </div>
             </div>
-            <div class="w-9/10 max-w-md mx-auto">
-                    <br><br>
-                    <p class="text-center text-gray-500">&copy; 2024-<span id="currentYear"></span> <a href="/leaving.html?link=https://madebydanny.uk" class="text-blue-600 transition-colors hover:text-blue-800">Made by Danny UK</a> <i>by Daniel Morrisey</i></p>
-            </div>
+
+            <!-- Footer -->
+            <footer class="mt-12 pt-4 text-center text-gray-500 border-t border-gray-200">
+                <div class="flex justify-center space-x-6 mb-4 text-lg">
+                    <a href="javascript:history.back()" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="/index.html" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-house"></i> Home</a>
+                </div>
+                <!-- Centered Iframe -->
+                <div class="flex justify-center mt-8">
+                    <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+                </div>
+                <p>
+                    &copy; 2024-<span id="currentYear"></span>
+                    <a href="https://madebydanny.uk" class="hover:text-indigo-600 transition duration-300 font-medium">Made by Danny UK</a>
+                </p>
+                <p class="text-sm mt-1">
+                    by Daniel Morrisey
+                </p>
+            </footer>
+
         </div>
     </div>
-    <script src="/script/main.js"></script>
-    <script src="/script/search.js"></script>
+    
+    <script>
+        // Set the current year for the copyright notice
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Get the search input and all project cards
+        const searchInput = document.getElementById('projectSearch');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Add a 'keyup' event listener to the search input
+        searchInput.addEventListener('keyup', (e) => {
+            // Get the value from the search input and convert it to lowercase
+            const searchValue = e.target.value.toLowerCase();
+
+            // Loop through each project card to check for a match
+            projectCards.forEach(card => {
+                // Get the title and description text from the current card
+                const title = card.querySelector('.project-title-text').textContent.toLowerCase();
+                const description = card.querySelector('.project-description').textContent.toLowerCase();
+
+                // Check if the search value is found in either the title or description
+                if (title.includes(searchValue) || description.includes(searchValue)) {
+                    // If it's a match, show the card
+                    card.style.display = 'block';
+                } else {
+                    // If it's not a match, hide the card
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

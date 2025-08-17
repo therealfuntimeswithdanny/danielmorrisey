@@ -1,103 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charSet="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Bites - Daniel Morrisey</title>
-
     <meta name="description" content="From news to things you don't care about read all of Daniel Morriey's Text Bites"/>
-    <meta name="keywords" content="Danile Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
+    <meta name="keywords" content="Daniel Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
     <meta name="author" content="Daniel Morrisey"/>
 
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://danielmorrisey.com/"/>
-    <meta property="og:title" content="Text Botes - Daniel Morrisey"/>
+    <meta property="og:title" content="Text Bites - Daniel Morrisey"/>
     <meta property="og:description" content="From news to things you don't care about read all of Daniel Morriey's Text Bites"/>
     <meta property="og:image" content="https://public-danielmorrisey-com.danielmorrisey.com/media/banner.jpg"/>
 
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
     <link rel="icon" type="image/x-icon" href="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg">
-    <script src="https://kit.fontawesome.com/0ca27f8db1.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts for a clean font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Status Banner -->
+    <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div id="__next">
-        <div>
-            <header class="flex flex-col items-center py-12 md:py-16">
-                <div class="mb-8">
-                    <a href="/index.html" class="flex flex-col items-center">
-                        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-16 h-16 mb-2 rounded-full"/>
-                        <h1 class="text-3xl font-bold">Daniel Morrisey</h1>
-                    </a>
-                </div>
-            </header>
-            <div class="w-9/10 max-w-md mx-auto">
-                <!-- Search Bar -->
-                <div class="mb-5">
-                    <input type="text" id="projectSearch" placeholder="Search Text Bites..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                
-                <!-- Main Projects Heading -->
-                <h3 class="mb-2 mt-5 text-xl font-medium first:mt-0">Text Bites</h3>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-                <!-- Projects List Container -->
-                <div id="projectsList">
-                     <!-- igotamacmini.html -->
-                    <div class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">I got a Mac Mini</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Tue Aug 5, <i class="fa-solid fa-clock"></i> 1 Min</code>
-                        <p class="project-description mt-2 text-gray-700">
-                            It might be mini, but it sure is fast!
-                        </p>
-                        <a href="igotamacmini.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed">
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+        
+        <!-- Card-like container for the content -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 w-full max-w-4xl">
+
+            <!-- Header Section -->
+            <header class="flex flex-col items-center mb-8 text-center">
+                <a href="/index.html" class="flex flex-col items-center">
+                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-24 h-24 mb-4 rounded-full shadow-lg"/>
+                    <h1 class="text-3xl font-bold text-gray-900">Text Bites</h1>
+                    <p class="text-lg text-gray-600 font-medium mt-1">Updates from Daniel Morrisey</p>
+                </a>
+            </header>
+            
+            <hr class="border-gray-200 my-8">
+
+            <!-- Search Bar -->
+            <div class="mb-6">
+                <input type="text" id="textbiteSearch" placeholder="Search Text Bites..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+            </div>
+
+            <!-- Text Bites List Container -->
+            <div id="projectsList" class="space-y-6">
+                <!-- macminiupdateaug15.html -->
+                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">Mac mini update, 2 weeks later</h4>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Fri Aug 16</span>
+                        <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                     <!-- card -->
-                    <div id="mbdio" class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">I need a Bluesky version of mastodon’s deck layout</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sun Aug 3, <i class="fa-solid fa-clock"></i> 50 Sec</code></p>
-                        <p class="project-description mt-2 text-gray-700">
-                            Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.
-                        </p>
-                         <a href="blueskydeck.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a> <a href="#" class="text-blue-600 transition-colors hover:text-blue-800"> <!-- Share Button --> </a>
+                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                        I still can’t believe it’s 5’ x 5’ and yet so powerful
+                    </p>
+                    <a class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300" href="https://raindrop.madebydanny.uk/?add=1&link=https://daniemorrisey.com/extbites/macminiupdateaug15.html&title=Daniel Morrisey - Mac mini Update, 2 weeks later"><i class="fa-solid fa-bookmark"></i></a> <a href="macminiupdateaug15.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                </div>
+                <!-- igotamacmini.html -->
+                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I got a Mac Mini</h4>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 5</span>
+                        <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                    <!-- card -->
-                    <div id="mbdio" class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">The Power of Hashtags</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sun Aug 3, <i class="fa-solid fa-clock"></i> 1 Min</code></p>
-                        <p class="project-description mt-2 text-gray-700">
-                            All it takes is one # to reach an audience of 100+
-                        </p>
-                         <a href="thepowerofhashtags.html" class="text-blue-600 transition-colors hover:text-blue-800">Read More...</a> <a href="#" class="text-blue-600 transition-colors hover:text-blue-800"> <!-- Share Button --> </a>
+                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                        It might be mini, but it sure is fast!
+                    </p>
+                    <a href="igotamacmini.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                </div>
+                 <!-- card -->
+                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I need a Bluesky version of mastodon’s deck layout</h4>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
+                        <span><i class="fa-solid fa-clock"></i> 50 Sec Read</span>
                     </div>
-                    <!-- card -->
-                    <div id="mbdio" class="project-card mb-4 p-4 border rounded-lg shadow-sm bg-white">
-                        <h4 class="mb-2 text-xl font-small project-title-text">MBD is working on MBDIO</h4>
-                        <code class="rounded-lg border bg-gray-50 px-1 py-0.5 text-sm"><i class="fa-solid fa-calendar"></i> Sat Aug 2, <i class="fa-solid fa-clock"></i> 30 Sec</code></p>
-                        <p class="project-description mt-2 text-gray-700">
-                            MBD is working on a new tool called MBDIO, it's a simple, easy & fast link shortener that will allow you to shorten links and share them.
-                        </p>
-                         <a href="#" class="text-blue-600 transition-colors hover:text-blue-800"><!-- Read More --> </a> <a href="#" class="text-blue-600 transition-colors hover:text-blue-800"> <!-- Share Button --> </a>
+                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                        Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.
+                    </p>
+                    <a href="blueskydeck.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                </div>
+                <!-- card -->
+                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">The Power of Hashtags</h4>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
+                        <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
+                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                        All it takes is one # to reach an audience of 100+
+                    </p>
+                    <a href="thepowerofhashtags.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                </div>
+                <!-- card -->
+                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
+                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">MBD is working on MBDIO</h4>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sat Aug 2</span>
+                        <span><i class="fa-solid fa-clock"></i> 30 Sec Read</span>
+                    </div>
+                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                        MBD is working on a new tool called MBDIO, it's a simple, easy & fast link shortener that will allow you to shorten links and share them.
+                    </p>
+                    <!-- This one doesn't have a link yet, so I've removed the anchor tag to prevent a broken link -->
                 </div>
             </div>
-            <div class="w-9/10 max-w-md mx-auto">
-                    <br><br>
-                    <p class="text-center text-gray-500">&copy; 2024-<span id="currentYear"></span> <a href="/leaving.html?link=https://madebydanny.uk" class="text-blue-600 transition-colors hover:text-blue-800">Made by Danny UK</a> <i>by Daniel Morrisey</i></p>
-            </div>
+
+            <!-- Footer -->
+            <footer class="mt-12 pt-4 text-center text-gray-500 border-t border-gray-200">
+                <div class="flex justify-center space-x-6 mb-4 text-lg">
+                    <a href="javascript:history.back()" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="/index.html" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-house"></i> Home</a>
+                </div>
+                <!-- Centered Iframe -->
+                <div class="flex justify-center mt-8">
+                    <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+                </div>
+                <p>
+                    &copy; 2024-<span id="currentYear"></span>
+                    <a href="https://madebydanny.uk" class="hover:text-indigo-600 transition duration-300 font-medium">Made by Danny UK</a>
+                </p>
+                <p class="text-sm mt-1">
+                    by Daniel Morrisey
+                </p>
+            </footer>
+
         </div>
     </div>
-        <div class="w-9/10 max-w-md mx-auto">
-            <br>
-            <hr>
-            <p>
-                <a href="javascript:history.back()" ><i class="fa-solid fa-arrow-left"></i> Back</a> | <a href="/index.html"><i class="fa-solid fa-house"></i> Home</a> | <a href="/search.html"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
-            </p>
-            <br>
-            <p>&copy; 2024-<span id="currentYear"></span> <a href="/leaving.html?link=https://madebydanny.uk" class="text-blue-600 transition-colors hover:text-blue-800">Made by Danny UK</a> <i>by Daniel Morrisey</i></p>
-            <hr>
-            <br>
-        </div>
-    <script src="/script/main.js"></script>
-    <script src="/script/search.js"></script>
+    
+    <script>
+        // Set the current year for the copyright notice
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Get the search input and all project cards
+        const searchInput = document.getElementById('textbiteSearch');
+        const textbiteCards = document.querySelectorAll('.textbite-card');
+
+        // Add a 'keyup' event listener to the search input
+        searchInput.addEventListener('keyup', (e) => {
+            // Get the value from the search input and convert it to lowercase
+            const searchValue = e.target.value.toLowerCase();
+
+            // Loop through each textbite card to check for a match
+            textbiteCards.forEach(card => {
+                // Get the title and description text from the current card
+                const title = card.querySelector('.textbite-title').textContent.toLowerCase();
+                const description = card.querySelector('.textbite-description').textContent.toLowerCase();
+
+                // Check if the search value is found in either the title or description
+                if (title.includes(searchValue) || description.includes(searchValue)) {
+                    // If it's a match, show the card
+                    card.style.display = 'block';
+                } else {
+                    // If it's not a match, hide the card
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
