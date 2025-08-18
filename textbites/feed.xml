@@ -18,47 +18,74 @@
     </image>
 
     <item>
+      <title>MBD Status now uses Better Stack</title>
+      <link>https://danielmorrisey.com/textbites/mbdstatus.html</link>
+      <description><![CDATA[
+        <p>Faster alerts, higher uptime, and better everything</p>
+        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/bafkreibhgywir5ta2fc2eml25afs7axlthdilurni7xks6asjmyf7awkjm.jpg" alt="Mac Mini on desk" width="600"/>
+      ]]></description>
+      <pubDate>Mon, 18 Aug 2024 12:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/mbdstatus.html</guid>
+      <media:content url="https://public-danielmorrisey-com.danielmorrisey.com/media/bafkreibhgywir5ta2fc2eml25afs7axlthdilurni7xks6asjmyf7awkjm.jpg" medium="image" type="image/jpeg" />
+    </item>
+
+    <item>
       <title>Mac mini update, 2 weeks later</title>
-      <link>https://danielmorrisey.com/extbites/macminiupdateaug15.html</link>
-      <description><![CDATA[I still can’t believe it’s 5’ x 5’ and yet so powerful]]></description>
-      <pubDate>Fri, 16 Aug 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="true">https://danielmorrisey.com/extbites/macminiupdateaug15.html</guid>
+      <link>https://danielmorrisey.com/textbites/macminiupdateaug15.html</link>
+      <description><![CDATA[
+        <p>I still can’t believe it’s 5’ x 5’ and yet so powerful</p>
+        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/mac-mini-m4-desk1.jpeg.webp" alt="Mac Mini on desk" width="600"/>
+      ]]></description>
+      <pubDate>Fri, 15 Aug 2024 12:00:00 GMT</pubDate>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/macminiupdateaug15.html</guid>
       <media:content url="https://public-danielmorrisey-com.danielmorrisey.com/media/mac-mini-m4-desk1.jpeg.webp" medium="image" type="image/jpeg" />
     </item>
 
     <item>
       <title>I got a Mac Mini</title>
-      <link>https://danielmorrisey.com/igotamacmini.html</link>
-      <description><![CDATA[It might be mini, but it sure is fast!]]></description>
+      <link>https://danielmorrisey.com/textbites/igotamacmini.html</link>
+      <description><![CDATA[
+        <p>It might be mini, but it sure is fast!</p>
+        <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/Screenshot%202025-08-05%20at%201.13.08%E2%80%AFPM.png" alt="Mac Mini Screenshot" width="600"/>
+      ]]></description>
       <pubDate>Tue, 05 Aug 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="true">https://danielmorrisey.com/igotamacmini.html</guid>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/igotamacmini.html</guid>
       <media:content url="https://public-danielmorrisey-com.danielmorrisey.com/media/Screenshot%202025-08-05%20at%201.13.08%E2%80%AFPM.png" medium="image" type="image/jpeg" />
     </item>
 
     <item>
       <title>I need a Bluesky version of mastodon’s deck layout</title>
-      <link>https://danielmorrisey.com/blueskydeck.html</link>
-      <description><![CDATA[Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.]]></description>
+      <link>https://danielmorrisey.com/textbites/blueskydeck.html</link>
+      <description><![CDATA[
+        <p>Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.</p>
+        <img src="https://placehold.co/600x400?text=No+Image" alt="Placeholder image" width="600"/>
+      ]]></description>
       <pubDate>Sun, 03 Aug 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="true">https://danielmorrisey.com/blueskydeck.html</guid>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/blueskydeck.html</guid>
       <media:content url="https://placehold.co/600x400?text=No+Image" medium="image" type="image/jpeg" />
     </item>
 
     <item>
       <title>The Power of Hashtags</title>
-      <link>https://danielmorrisey.com/thepowerofhashtags.html</link>
-      <description><![CDATA[All it takes is one # to reach an audience of 100+]]></description>
+      <link>https://danielmorrisey.com/textbites/hepowerofhashtags.html</link>
+      <description><![CDATA[
+        <p>All it takes is one # to reach an audience of 100+</p>
+        <img src="https://placehold.co/600x400?text=No+Image" alt="Placeholder image" width="600"/>
+      ]]></description>
       <pubDate>Sun, 03 Aug 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="true">https://danielmorrisey.com/thepowerofhashtags.html</guid>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/thepowerofhashtags.html</guid>
       <media:content url="https://placehold.co/600x400?text=No+Image" medium="image" type="image/jpeg" />
     </item>
 
     <item>
       <title>MBD is working on MBDIO</title>
-      <link>https://danielmorrisey.com/mbdio.html</link>
-      <description><![CDATA[MBD is working on a new tool called MBDIO, it's a simple, easy & fast link shortener that will allow you to shorten links and share them.]]></description>
+      <link>https://danielmorrisey.com/textbites/mbdio.html</link>
+      <description><![CDATA[
+        <p>MBD is working on a new tool called MBDIO, it's a simple, easy & fast link shortener that will allow you to shorten links and share them.</p>
+        <img src="https://placehold.co/600x400?text=No+Image" alt="Placeholder image" width="600"/>
+      ]]></description>
       <pubDate>Sat, 02 Aug 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="true">https://danielmorrisey.com/mbdio.html</guid>
+      <guid isPermaLink="true">https://danielmorrisey.com/textbites/mbdio.html</guid>
       <media:content url="https://placehold.co/600x400?text=No+Image" medium="image" type="image/jpeg" />
     </item>
 
