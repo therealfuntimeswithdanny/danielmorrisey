@@ -1,5 +1,7 @@
 async function loadArticles() {
   const RSS_URL = "/textbites/feed.xml"; // your local file
+  const PROXY = "https://corsproxy.io/?"; // proxy base
+
   try {
     const response = await fetch(RSS_URL);
     const text = await response.text();
@@ -43,12 +45,19 @@ async function loadArticles() {
         image = media.getAttribute("url");
       }
 
+      // Wrap image with proxy if found
+      if (image) {
+        image = PROXY + encodeURIComponent(image);
+      } else {
+        image = "https://placehold.co/300x200?text=No+Image";
+      }
+
       // Build card
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
         <a href="${link}" target="_blank">
-          <img src="${image || 'https://placehold.co/300x200?text=No+Image'}" alt="${title}">
+          <img src="${image}" alt="${title}">
         </a>
         <div class="card-content">
           <a href="${link}" target="_blank">
