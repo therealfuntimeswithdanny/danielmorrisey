@@ -33,7 +33,7 @@
           card.className = "card";
           card.innerHTML = `
             <a href="${link}" target="_blank">
-              <img src="${image || 'https://via.placeholder.com/300x200?text=No+Image'}" alt="${title}">
+              <img src="${image || 'https://placehold.co/600x400?text=No+Image'}" alt="${title}">
             </a>
             <div class="card-content">
               <a href="${link}" target="_blank">
