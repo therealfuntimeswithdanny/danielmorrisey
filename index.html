@@ -28,7 +28,13 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- RSS Feed-->
+    <script src="/rssloader/mbdnews.js"></script>
+    <script src="/rssloader/textbites.js"></script>
+    <link rel="stylesheet" href="/rssloader/style.css"/>
+
+
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -51,7 +57,7 @@
                 <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Daniel Morrisey's Profile" class="w-32 h-32 rounded-full object-cover shadow-lg mb-6 md:mb-0 md:mr-8">
                 <div>
                     <h1 class="text-4xl font-bold text-gray-900 mb-2">Daniel Morrisey</h1>
-                    <p class="text-xl text-gray-600 font-medium">Writer @ MBD & <i class="fa-brands fa-html5"></i> <i class="fa-brands fa-css3"></i> <i class="fa-brands fa-js"></i> <i class="fa-brands fa-python"></i> developer</p>
+                    <p class="text-xl text-gray-600 font-medium">Writer @ MBD News & <i class="fa-brands fa-html5"></i> <i class="fa-brands fa-css3"></i> <i class="fa-brands fa-js"></i> <i class="fa-brands fa-python"></i> developer</p>
                     <div class="mt-4 flex justify-center md:justify-start">
                         <!-- Bluesky Link -->
                         <a href="https://bsky.app/profile/danielmorrisey.com" class="bg-blue-600 text-white py-2 px-6 rounded-full font-semibold hover:bg-indigo-700 transition duration-300 shadow-md">
@@ -60,7 +66,9 @@
                     </div>
                 </div>
             </header>
-            
+            <!-- Centered Iframe -->
+            <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>            
+
             <hr class="border-gray-200 my-8">
 
             <!-- About Section -->
@@ -95,51 +103,62 @@
                         <span>Text Bites</span>
                     </a>
                     <!-- Uptime -->
-                    <a href="https://status.madebydanny.uk" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://status.madebydanny.uk" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-solid fa-server"></i></i>
                         <span>Status</span>
                     </a>
                     <!-- Bluesky -->
-                    <a href="https://bsky.app/profile/danielmorrisey.com" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://bsky.app/profile/danielmorrisey.com" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-brands fa-bluesky"></i>
                         <span>Bluesky</span>
                     </a>
-                     <!-- Bluesky -->
-                    <a href="https://bsky.app/profile/alt.danielmorrisey.com" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-bluesky"></i>
-                        <span>Bluesky (alt)</span>
-                    </a>
                     <!-- Threads -->
-                    <a href="https://threads.com/madebydanny.uk" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://threads.com/madebydanny.uk" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-brands fa-threads"></i>
                         <span>Threads</span>
                     </a>
                     <!-- Mastodon -->
-                    <a href="https://mastodon.social/@danielmorrisey" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://mastodon.social/@danielmorrisey" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-brands fa-mastodon"></i>
                         <span>Mastodon</span>
                     </a>
                     <!-- Linkedin -->
-                    <a href="https://linkedin.com/in/danielemorrisey" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://linkedin.com/in/danielemorrisey" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-brands fa-linkedin"></i>
                         <span>Linkedin</span>
                     </a>
                     <!-- GitHub -->
-                    <a href="https://github.com/therealfuntimeswithdanny" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://github.com/therealfuntimeswithdanny" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-brands fa-github"></i>
                         <span>GitHub</span>
                     </a>
                     <!-- MBD News -->
-                    <a href="https://news.madebydanny.uk/" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://news.madebydanny.uk/" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-solid fa-newspaper text-lg"></i>
                         <span>MBD News</span>
                     </a>
                     <!-- Image Scope -->
-                    <a href="https://imagescope.madebydanny.uk/" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
+                    <a href="https://imagescope.madebydanny.uk/" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
                         <i class="fa-solid fa-microscope"></i>
                         <span>Image Scope</span>
                     </a>
                 </div>
+            </section>
+
+            <hr class="border-gray-200 my-8">
+
+            <!-- RSS Feed(s)-->
+             <section>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Trending from MBD News <i class="fa-solid fa-arrow-trend-up"></i></h2>
+                <div class="articles" id="articles"></div>
+             </section>
+
+            <hr class="border-gray-200 my-8">
+                        
+            <!-- RSS Feed(s)-->
+            <section>
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">Text Bites <i class="fa-solid fa-arrow-trend-up"></i></h2>
+              <div class="articles" id="textbites"></div>
             </section>
 
             <!-- Footer -->
