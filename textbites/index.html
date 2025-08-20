@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family: 'Fira Code', monospace; background-color: #1e1e1e; color: #f0f0f0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; line-height: 1.625;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,11 @@
 
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
     <link rel="icon" type="image/x-icon" href="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg">
-    <!-- Google Fonts for a clean font -->
+    
+    <!-- Using Fira Code for a cohesive terminal theme -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Status Banner -->
     <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
@@ -32,138 +33,130 @@
 
     <!-- Footer-->
     <script src="/script/footer.js"></script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-    <!-- Footer Custom Element Script -->
-    <script src="/script/footer.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed">
+<body style="font-family: 'Fira Code', monospace; background-color: #1e1e1e; color: #f0f0f0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; line-height: 1.625;">
 
     <!-- Main Container -->
-    <div class="min-h-screen flex items-center justify-center p-4">
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;">
         
         <!-- Card-like container for the content -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 w-full max-w-4xl">
+        <div style="background-color: #2c2c2c; border-radius: 8px; border: 1px solid #444; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); padding: 2rem; width: 100%; max-width: 45rem;">
 
             <!-- Header Section -->
-            <header class="flex flex-col items-center mb-8 text-center">
-                <a href="/index.html" class="flex flex-col items-center">
-                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" class="w-24 h-24 mb-4 rounded-full shadow-lg"/>
-                    <h1 class="text-3xl font-bold text-gray-900">Text Bites</h1>
-                    <p class="text-lg text-gray-600 font-medium mt-1">Updates from Daniel Morrisey</p>
+            <header style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 2rem;">
+                <a href="/index.html" style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Profile Picture" style="width: 6rem; height: 6rem; margin-bottom: 1rem; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"/>
+                    <h1 style="font-size: 2rem; font-weight: 600; color: #f0f0f0; margin-bottom: 0.5rem;">Text Bites</h1>
+                    <p style="font-size: 1.125rem; color: #f0f0f0; font-weight: 400; margin-top: 0.25rem;">Updates from Daniel Morrisey</p>
                 </a>
             </header>
             
-            <hr class="border-gray-200 my-8">
+            <hr style="border-color: #444; margin-top: 1.5rem; margin-bottom: 1.5rem;">
 
             <!-- Search Bar -->
-            <div class="mb-6">
-                <input type="text" id="textbiteSearch" placeholder="Search Text Bites..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"> 
+            <div style="margin-bottom: 1.5rem;">
+                <input type="text" id="textbiteSearch" placeholder="Search Text Bites..." style="width: 100%; padding: 0.5rem 1rem; background-color: #1e1e1e; border: 1px solid #444; border-radius: 9999px; outline: none; transition: border-color 0.3s; color: #f0f0f0;"/> 
             </div>
 
-            <div class="w-auto h-1/3 bg-orange-200 rounded px-4 py-2">
-                <p class="flex items-center gap-2">
-                    <a href="/textbites/feed.xml" target="blank_">RSS Feed <i class="fa-solid fa-rss"></i></a>
+            <div style="background-color: transparent; border: 1px solid #3cb878; color: #3cb878; padding: 0.5rem 1rem; border-radius: 8px;">
+                <p style="display: flex; align-items: center; gap: 0.5rem;">
+                    <a href="/textbites/feed.xml" target="blank_" style="color: #3cb878; text-decoration: none;">RSS Feed <i class="fa-solid fa-rss"></i></a>
                 </p>
             </div>
 
             <br>
             <!-- Text Bites List Container -->
-            <div id="projectsList" class="space-y-6">
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I ditched Word for Markdown</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 19</span>
+            <div id="projectsList" style="space-y: 1.5rem;">
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">I ditched Word for Markdown</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 19</span>
                         <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                        All thanks to this one Tool
                     </p>
-                    <a href="noyoutubenowmedium.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="noyoutubenowmedium.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I replaced the YouTube app on my phone with Medium</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 19</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">I replaced the YouTube app on my phone with Medium</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 19</span>
                         <span><i class="fa-solid fa-clock"></i> 2 Min Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         I stopped doom scrolling and started Doom Reading
                     </p>
-                    <a href="noyoutubenowmedium.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="noyoutubenowmedium.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                 <!-- mbdstatus.html -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">MBD Status now uses Better Stack</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Mon Aug 18</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">MBD Status now uses Better Stack</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Mon Aug 18</span>
                         <span><i class="fa-solid fa-clock"></i> 45 Sec Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         Faster alerts, higher uptime, and better everything
                     </p>
-                    <a href="mbdstatus.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="mbdstatus.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                 <!-- macminiupdateaug15.html -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">Mac mini update, 2 weeks later</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Fri Aug 15</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">Mac mini update, 2 weeks later</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Fri Aug 15</span>
                         <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         I still can’t believe it’s 5’ x 5’ and yet so powerful
                     </p>
-                    <a href="macminiupdateaug15.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="macminiupdateaug15.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                 <!-- igotamacmini.html -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I got a Mac Mini</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 5</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">I got a Mac Mini</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Tue Aug 5</span>
                         <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         It might be mini, but it sure is fast!
                     </p>
-                    <a href="igotamacmini.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="igotamacmini.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                  <!-- card -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">I need a Bluesky version of mastodon’s deck layout</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">I need a Bluesky version of mastodon’s deck layout</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
                         <span><i class="fa-solid fa-clock"></i> 50 Sec Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         Just like Mastodon, Threads also has a “deck” layout for desktop users. And my 3 main social media platforms I use are Bluesky, Mastodon, and Threads. Having a Bluesky Deck layout for desktop would be nice to have.
                     </p>
-                    <a href="blueskydeck.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="blueskydeck.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                 <!-- card -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">The Power of Hashtags</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">The Power of Hashtags</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Sun Aug 3</span>
                         <span><i class="fa-solid fa-clock"></i> 1 Min Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         All it takes is one # to reach an audience of 100+
                     </p>
-                    <a href="thepowerofhashtags.html" class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Read More...</a>
+                    <a href="thepowerofhashtags.html" style="display: inline-block; margin-top: 1rem; color: #3cb878; text-decoration: none; font-weight: 600;">Read More...</a>
                 </div>
                 <!-- card -->
-                <div class="textbite-card bg-gray-50 p-6 rounded-2xl shadow-md">
-                    <h4 class="text-xl font-semibold mb-2 text-gray-900 textbite-title">MBD is working on MBDIO</h4>
-                    <div class="text-sm text-gray-500 mb-4">
-                        <span class="mr-3"><i class="fa-solid fa-calendar-alt"></i> Sat Aug 2</span>
+                <div style="background-color: #2c2c2c; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border: 1px solid #444;">
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f0f0f0;">MBD is working on MBDIO</h4>
+                    <div style="font-size: 0.875rem; color: #999; margin-bottom: 1rem;">
+                        <span style="margin-right: 0.75rem;"><i class="fa-solid fa-calendar-alt"></i> Sat Aug 2</span>
                         <span><i class="fa-solid fa-clock"></i> 30 Sec Read</span>
                     </div>
-                    <p class="mt-2 text-gray-700 leading-relaxed textbite-description">
+                    <p style="margin-top: 0.5rem; color: #f0f0f0; line-height: 1.625;">
                         MBD is working on a new tool called MBDIO, it's a simple, easy & fast link shortener that will allow you to shorten links and share them.
                     </p>
                     <!-- This one doesn't have a link yet, so I've removed the anchor tag to prevent a broken link -->
@@ -171,20 +164,20 @@
             </div>
 
             <!-- Footer -->
-            <footer class="mt-12 pt-4 text-center text-gray-500 border-t border-gray-200">
-                <div class="flex justify-center space-x-6 mb-4 text-lg">
-                    <a href="javascript:history.back()" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-arrow-left"></i> Back</a>
-                    <a href="/index.html" class="text-gray-600 hover:text-indigo-600 transition duration-300"><i class="fa-solid fa-house"></i> Home</a>
+            <footer style="margin-top: 3rem; padding-top: 1rem; text-align: center; color: #f0f0f0; border-top: 1px solid #444;">
+                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; font-size: 1.125rem;">
+                    <a href="javascript:history.back()" style="color: #f0f0f0; text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                    <a href="/index.html" style="color: #f0f0f0; text-decoration: none;"><i class="fa-solid fa-house"></i> Home</a>
                 </div>
                 <!-- Centered Iframe -->
-                <div class="flex justify-center mt-8">
-                    <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
                 </div>
                 <p>
                     &copy; 2024-<span id="currentYear"></span>
-                    <a href="https://madebydanny.uk" class="hover:text-indigo-600 transition duration-300 font-medium">Made by Danny UK</a>
+                    <a href="https://madebydanny.uk" style="color: #3cb878; font-weight: 600; text-decoration: none;">Made by Danny UK</a>
                 </p>
-                <p class="text-sm mt-1">
+                <p style="font-size: 0.875rem; margin-top: 0.25rem;">
                     by Daniel Morrisey
                 </p>
             </footer>
@@ -198,7 +191,7 @@
 
         // Get the search input and all project cards
         const searchInput = document.getElementById('textbiteSearch');
-        const textbiteCards = document.querySelectorAll('.textbite-card');
+        const textbiteCards = document.querySelectorAll('#projectsList > div');
 
         // Add a 'keyup' event listener to the search input
         searchInput.addEventListener('keyup', (e) => {
@@ -208,8 +201,8 @@
             // Loop through each textbite card to check for a match
             textbiteCards.forEach(card => {
                 // Get the title and description text from the current card
-                const title = card.querySelector('.textbite-title').textContent.toLowerCase();
-                const description = card.querySelector('.textbite-description').textContent.toLowerCase();
+                const title = card.querySelector('h4').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
 
                 // Check if the search value is found in either the title or description
                 if (title.includes(searchValue) || description.includes(searchValue)) {
@@ -223,6 +216,5 @@
         });
     </script>
 </div>
-    <app-info></app-info>
 </body>
 </html>

@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width", initial-scale="1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Morrisey</title>
     <meta name="description" content="Writer @ MBD News & HTML, CSS, Javascript & Python developer">
     
-    <!-- Google Fonts for a clean font -->
+    <!-- Google Fonts for a monospaced terminal font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
     <meta name="keywords" content="Daniel Morrisey, Danny Morrisey, MBD, Made by Danny, Made by Danny UK"/>
     <meta name="author" content="Daniel Morrisey"/>
@@ -26,178 +26,192 @@
     <!-- Status Banner -->
     <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- RSS Feed-->
     <script src="/rssloader/mbdnews.js"></script>
     <script src="/rssloader/textbites.js"></script>
     <link rel="stylesheet" href="/rssloader/style.css"/>
 
-
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="/css/index.css">
+
     <!-- Footer-->
     <script src="/script/footer.js"></script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed">
+<body>
 
-    <!-- Main Container -->
-    <div class="min-h-screen flex items-center justify-center p-4">
+    <!-- Using <main> for semantic structure and accessibility -->
+    <main class="main-container">
         
-        <!-- Card-like container for the content -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 w-full max-w-4xl">
+        <!-- Terminal-like container for the content -->
+        <div class="terminal-container">
 
             <!-- Profile Section -->
-            <header class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left mb-8">
-                <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Daniel Morrisey's Profile" class="w-32 h-32 rounded-full object-cover shadow-lg mb-6 md:mb-0 md:mr-8">
+            <header class="profile-header">
+                <div class="profile-visuals">
+                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Daniel Morrisey's Profile" class="profile-img">
+                </div>
                 <div>
-                    <h1 class="text-4xl font-bold text-gray-900 mb-2">Daniel Morrisey</h1>
-                    <p class="text-xl text-gray-600 font-medium">Writer @ MBD News & <i class="fa-brands fa-html5"></i> <i class="fa-brands fa-css3"></i> <i class="fa-brands fa-js"></i> <i class="fa-brands fa-python"></i> developer</p>
-                    <div class="mt-4 flex justify-center md:justify-start">
-                        <!-- Bluesky Link -->
-                        <a href="https://bsky.app/profile/danielmorrisey.com" class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-indigo-700 transition duration-300 shadow-md">
-                            <i class="fa-brands fa-medium"></i> Follow on Medium
-                        </a>
-                    </div>
+                    <h1 class="profile-name">Daniel Morrisey</h1>
+                    <!-- The bio is the only element with the typing effect -->
+                    <p class="profile-bio"><span id="bio-text"></span><span class="cursor"></span></p>
                 </div>
             </header>
-            <!-- Centered Iframe -->
-            <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>            
-
-            <hr class="border-gray-200 my-8">
+            <div class="social-button-container">
+                    <a href="https://bsky.app/profile/danielmorrisey.com" class="follow-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-medium"></i> Follow on Medium
+                    </a>
+            </div>
+            <hr>
 
             <!-- About Section -->
-            <section class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">About</h2>
-                <p class="text-lg text-gray-700 mb-4">
-                    Welcome to 
-                    <code class="bg-gray-100 text-gray-900 px-2 py-1 rounded-lg">danielmorrisey.com</code>, I use this site as a place to share & store my
-                    <a href="/projects/index.html" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">projects</a> & <a href="/textbites/index.html" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">text bites</a>.
+            <section class="about-section">
+                <h2>About</h2>
+                <p class="about-paragraph">
+                    Welcome to <code class="code-snippet">danielmorrisey.com</code>, I use this site as a place to share & store my
+                    <a href="/projects/index.html" class="about-link">projects</a> & <a href="/textbites/index.html" class="about-link">text bites</a>.
                 </p>
-                <p class="text-lg text-gray-700">
-                    I also use <code class="bg-gray-100 text-gray-900 px-2 py-1 rounded-lg">danielmorrisey.com</code> to host some backend services and as a content delivery network (CDN) for my other sites & projects.
+                <p class="about-paragraph">
+                    I also use <code class="code-snippet">danielmorrisey.com</code> to host some backend services and as a content delivery network (CDN) for my other sites & projects.
                     <br><br>
-                    I also own the domain <code class="bg-gray-100 text-gray-900 px-2 py-1 rounded-lg">madebydanny.uk</code> I use it for more "professional" projects & sites like <a href="https://news.madebydanny.uk" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">MBD News</a>.
+                    I also own the domain <code class="code-snippet">madebydanny.uk</code> I use it for more "professional" projects & sites like <a href="https://news.madebydanny.uk" target="_blank" rel="noopener noreferrer" class="about-link">MBD News</a>.
                 </p>
-                <p class="text-lg text-gray-700">
+                <p class="about-paragraph">
                     <br><br>
-                    For more "professional" posts/textbites view my <a href="https://medium.com/@danielmorrisey" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">Medium Profile</a>.
+                    For more "professional" posts/textbites view my <a href="https://medium.com/@danielmorrisey" target="_blank" rel="noopener noreferrer" class="about-link">Medium Profile</a>.
                     <br><br>
-                    I also own the domain <code class="bg-gray-100 text-gray-900 px-2 py-1 rounded-lg">madebydanny.uk</code> I use it for more "professional" projects & sites like <a href="https://news.madebydanny.uk" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">MBD News</a>.
+                    I also own the domain <code class="code-snippet">madebydanny.uk</code> I use it for more "professional" projects & sites like <a href="https://news.madebydanny.uk" target="_blank" rel="noopener noreferrer" class="about-link">MBD News</a>.
                 </p>
             </section>
             
-            <hr class="border-gray-200 my-8">
+            <hr>
 
             <!-- Links Section -->
             <section>
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">Where to find me & my work</h2>
-                <div class="flex flex-wrap gap-4">
+                <h2>Where to find me & my work</h2>
+                <div class="links-container">
                     <!-- Projects -->
-                    <a href="/projects/index.html" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-solid fa-folder-open text-lg"></i>
+                    <a href="/projects/index.html" class="link-item">
+                        <i class="fa-solid fa-folder-open link-icon"></i>
                         <span>My Projects</span>
                     </a>
                     <!-- Text Bites -->
-                    <a href="/textbites/index.html" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-solid fa-book text-lg"></i>
+                    <a href="/textbites/index.html" class="link-item">
+                        <i class="fa-solid fa-book link-icon"></i>
                         <span>Text Bites</span>
                     </a>
                     <!-- Uptime -->
-                    <a href="https://status.madebydanny.uk" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-solid fa-server"></i></i>
+                    <a href="https://status.madebydanny.uk" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-solid fa-server link-icon"></i></i>
                         <span>Status</span>
                     </a>
                     <!-- Medium -->
-                    <a href="https://medium.com/@danielmorrisey" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-medium"></i>
+                    <a href="https://medium.com/@danielmorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-medium link-icon"></i>
                         <span>Medium</span>
                     </a>
                     <!-- Bluesky -->
-                    <a href="https://bsky.app/profile/danielmorrisey.com" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-bluesky"></i>
+                    <a href="https://bsky.app/profile/danielmorrisey.com" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-bluesky link-icon"></i>
                         <span>Bluesky</span>
                     </a>
                     <!-- Threads -->
-                    <a href="https://threads.com/madebydanny.uk" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-threads"></i>
+                    <a href="https://threads.com/madebydanny.uk" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-threads link-icon"></i>
                         <span>Threads</span>
                     </a>
                     <!-- Mastodon -->
-                    <a href="https://mastodon.social/@danielmorrisey" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-mastodon"></i>
+                    <a href="https://mastodon.social/@danielmorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-mastodon link-icon"></i>
                         <span>Mastodon</span>
                     </a>
                     <!-- Linkedin -->
-                    <a href="https://linkedin.com/in/danielemorrisey" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/danielemorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-linkedin link-icon"></i>
                         <span>Linkedin</span>
                     </a>
                     <!-- GitHub -->
-                    <a href="https://github.com/therealfuntimeswithdanny" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-brands fa-github"></i>
+                    <a href="https://github.com/therealfuntimeswithdanny" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-brands fa-github link-icon"></i>
                         <span>GitHub</span>
                     </a>
                     <!-- MBD News -->
-                    <a href="https://news.madebydanny.uk/" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-solid fa-newspaper text-lg"></i>
+                    <a href="https://news.madebydanny.uk/" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-solid fa-newspaper link-icon"></i>
                         <span>MBD News</span>
                     </a>
                     <!-- Image Scope -->
-                    <a href="https://imagescope.madebydanny.uk/" target="blank_" class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-xl text-gray-700 hover:bg-gray-200 transition duration-300">
-                        <i class="fa-solid fa-microscope"></i>
+                    <a href="https://imagescope.madebydanny.uk/" target="_blank" rel="noopener noreferrer" class="link-item">
+                        <i class="fa-solid fa-microscope link-icon"></i>
                         <span>Image Scope</span>
                     </a>
                 </div>
             </section>
             
-            <hr class="border-gray-200 my-8">
+            <hr>
 
             <!-- RSS Feed(s)-->
              <section>
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">Trending from MBD News <i class="fa-solid fa-arrow-trend-up"></i></h2>
+                <h2>Trending from MBD News <i class="fa-solid fa-arrow-trend-up"></i></h2>
                 <div class="articles" id="articles"></div>
              </section>
 
-            <hr class="border-gray-200 my-8">
+            <hr>
                         
             <!-- RSS Feed(s)-->
             <section>
-              <h2 class="text-2xl font-bold text-gray-900 mb-4">Medium Feed <i class="fa-brands fa-medium"></i></h2>
+              <h2>Medium Feed <i class="fa-brands fa-medium"></i></h2>
               <div class="articles" id="textbites"></div>
             </section>
 
-            <footer class="mt-12 pt-4 text-center text-gray-500 border-t border-gray-200">
+            <footer class="footer">
                 <!-- Centered Iframe -->
-                <div class="flex justify-center mt-8">
-                    <iframe src="https://status.madebydanny.uk/badge?theme=light" width="200" height="30" frameborder="0" scrolling="no"></iframe>
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <!-- Added a title for accessibility -->
+                    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="30" frameborder="0" scrolling="no" title="Website status badge"></iframe>
                 </div>
                 <p>
                     &copy; 2024-<span id="currentYear"></span>
-                    <a href="https://madebydanny.uk" target="blank_" class="hover:text-indigo-600 transition duration-300 font-medium">Made by Danny UK</a>
+                    <a href="https://madebydanny.uk" target="_blank" rel="noopener noreferrer" class="footer-link">Made by Danny UK</a>
                 </p>
-                <p class="text-sm mt-1">
+                <p style="font-size: 0.875rem; margin-top: 0.25rem;">
                     by Daniel Morrisey
                 </p>
                 <p>
-                    MBD is made possible thanks to <a href="https://cloudflare.com" target="blank_">Cloudflare</a> & <a href="https://cloudinary.com" traget="blank_">Cloudinary</a>
+                    MBD is made possible thanks to <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" class="footer-link">Cloudflare</a> & <a href="https://cloudinary.com" target="_blank" rel="noopener noreferrer" class="footer-link">Cloudinary</a>
                 </p>
             </footer>
 
         </div>
-    </div>
+    </main>
     
     <script>
         // Set the current year for the copyright notice
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Typing Effect for Bio
+        const bioText = "Writer @ MBD News & HTML, CSS, Javascript & Python developer";
+        const bioElement = document.getElementById('bio-text');
+        const cursor = document.querySelector('.cursor');
+        let i = 0;
+        let typingSpeed = 50;
+
+        function typeWriter() {
+            if (i < bioText.length) {
+                bioElement.textContent += bioText.charAt(i);
+                i++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                cursor.style.animation = 'none';
+            }
+        }
+        
+        // Start the typing effect when the page loads
+        window.onload = function() {
+          typeWriter();
+        };
+
     </script>
 </body>
 </html>
