@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Morrisey</title>
-    <meta name="description" content="Writer @ MBD News & HTML, CSS, Javascript & Python developer">
+    <meta name="description" content="Writer @ Code and Chaos & HTML, CSS, Javascript & Python developer">
     
     <!-- Google Fonts for a monospaced terminal font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://danielmorrisey.com/"/>
     <meta property="og:title" content="Daniel Morrisey"/>
-    <meta property="og:description" content="Writer @ MBD News & HTML, CSS, Javascript & Python developer"/>
+    <meta property="og:description" content="Writer @ Code and Chaos & HTML, CSS, Javascript & Python developer"/>
     <meta property="og:image" content="https://public-danielmorrisey-com.danielmorrisey.com/media/banner.jpg"/>
 
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
@@ -30,150 +30,122 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="/css/index.css">
-
-    <!-- Footer-->
-    <script src="/script/footer.js"></script>
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 40px;
+        }
+        a {
+            color: #f71900;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #333;
+            margin: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        i {
+            margin-right: 8px;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Using <main> for semantic structure and accessibility -->
-    <main class="main-container">
-        
-        <!-- Terminal-like container for the content -->
-        <div class="terminal-container">
-
-            <!-- Profile Section -->
-            <header class="profile-header">
-                <div class="profile-visuals">
-                    <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Daniel Morrisey's Profile" class="profile-img">
-                </div>
-                <div>
-                    <h1 class="profile-name">Daniel Morrisey</h1>
-                    <!-- The bio is the only element with the typing effect -->
-                    <p class="profile-bio"><span id="bio-text"></span><span class="cursor"></span></p>
-                </div>
-            </header>
-            <div class="social-button-container">
-                    <a href="https://medium.com/@danielmorrisey" class="follow-button" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-medium"></i> Follow on Medium
-                    </a>
-            </div>
-            <hr>
-
-            <!-- About Section -->
-            <section class="about-section">
-                <h2>About</h2>
-                <p class="about-paragraph">
-                    Hello World i'm Daniel, a writer at <a href="https://medium.com/@danielmorrisey" target="_blank" rel="noopener noreferrer">Code and Chaos</a> and a frontend developer with a passion for HTML, CSS, JavaScript, and Python.
-                    <br><br>
-                    I don't really use this site, but for <i>real</i> content you can find me on <a href="https://medium.com/@danielmorrisey" target="_blank" rel="noopener noreferrer">Medium</a> or <a href="https://bsky.app/profile/danielmorrisey.com" target="_blank" rel="noopener noreferrer">Bluesky</a>.
-                </p>
-            </section>
-            
-            <hr>
-
-            <!-- Links Section -->
-            <section>
-                <h2>Where to find me & my work</h2>
-                <div class="links-container">
-                    <!-- Text Bites -->
-                    <a href="/pi/index.html" class="link-item">
-                    
-                        <span>π's</span>
-                    </a>
-                    <!-- Uptime -->
-                    <a href="https://status.madebydanny.uk" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-solid fa-server link-icon"></i></i>
-                        <span>Status</span>
-                    </a>
-                    <!-- Medium -->
-                    <a href="https://medium.com/@danielmorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-medium link-icon"></i>
-                        <span>Medium</span>
-                    </a>
-                    <!-- Bluesky -->
-                    <a href="https://bsky.app/profile/danielmorrisey.com" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-bluesky link-icon"></i>
-                        <span>Bluesky</span>
-                    </a>
-                    <!-- Threads -->
-                    <a href="https://threads.com/madebydanny.uk" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-threads link-icon"></i>
-                        <span>Threads</span>
-                    </a>
-                    <!-- Mastodon -->
-                    <a href="https://mastodon.social/@danielmorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-mastodon link-icon"></i>
-                        <span>Mastodon</span>
-                    </a>
-                    <!-- Linkedin -->
-                    <a href="https://linkedin.com/in/danielemorrisey" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-linkedin link-icon"></i>
-                        <span>Linkedin</span>
-                    </a>
-                    <!-- GitHub -->
-                    <a href="https://github.com/therealfuntimeswithdanny" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-brands fa-github link-icon"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <!-- Image Scope -->
-                    <a href="https://imagescope.madebydanny.uk/" target="_blank" rel="noopener noreferrer" class="link-item">
-                        <i class="fa-solid fa-microscope link-icon"></i>
-                        <span>Image Scope</span>
-                    </a>
-                </div>
-            </section>
-
-            <hr>
-            <footer class="footer">
-                <!-- Centered Iframe -->
-                <div style="display: flex; justify-content: center; margin-top: 2rem;">
-                    <!-- Added a title for accessibility -->
-                    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="30" frameborder="0" scrolling="no" title="Website status badge"></iframe>
-                </div>
-                <p>
-                    &copy; 2024-<span id="currentYear"></span>
-                    <a href="https://madebydanny.uk" target="_blank" rel="noopener noreferrer" class="footer-link">Made by Danny UK</a>
-                </p>
-                <p style="font-size: 0.875rem; margin-top: 0.25rem;">
-                    by Daniel Morrisey
-                </p>
-                <p>
-                    MBD is made possible thanks to <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" class="footer-link">Cloudflare</a> & <a href="https://cloudinary.com" target="_blank" rel="noopener noreferrer" class="footer-link">Cloudinary</a>
-                </p>
-            </footer>
-
-        </div>
-    </main>
+    <p class="title"><b>Hello World</b> I'm Daniel Morrisey</p>
+    <p>Writer @ <a href="https://medium.com/code-and-chaos" target="_blank">Code and Chaos</a> & HTML, CSS, Javascript & Python developer</p>
+    <hr>
+    <p>Find me on:</p>
+    <ul>
+        <li><a href="https://bsky.app/profile/danielmorrisey.com" target="_blank"><i class="fa-brands fa-bluesky"></i> Bluesky</a></li>
+        <li><a href="https://threads.com/madebydanny.uk" target="_blank"><i class="fa-brands fa-threads"></i> Threads</a></li>
+        <li><a href="https://medium.com/@danielmorrisey" target="_blank"><i class="fa-brands fa-medium"></i> Medium</a></li>
+        <li><a href="mailto:danielmorrisey.large390@passinbox.com" target="_blank"><i class="fa-solid fa-envelope"></i> Email</a></li>
+    </ul>
+    <hr>
+    <p>Latest Posts by Daniel Morrisey</p>
     
+    <div id="loading">Fetching posts...</div>
+
+    <div id="post-list" style="display: none;"></div>
+
+    <div id="error-message" style="display: none;">Failed to load posts. Please try again later.</div>
+
     <script>
-        // Set the current year for the copyright notice
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        const postList = document.getElementById('post-list');
+        const loadingIndicator = document.getElementById('loading');
+        const errorMessage = document.getElementById('error-message');
 
-        // Typing Effect for Bio
-        const bioText = "Writer @ Code and Chaos on Medium & Frontend Developer";
-        const bioElement = document.getElementById('bio-text');
-        const cursor = document.querySelector('.cursor');
-        let i = 0;
-        let typingSpeed = 50; // Speed of typing in milliseconds
+        const fetchPosts = async () => {
+            const feedUrl = 'https://medium.com/feed/@danielmorrisey';
+            // Using corsproxy.io instead of allorigins.win as it seems to be more reliable
+            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(feedUrl)}`;
 
-        function typeWriter() {
-            if (i < bioText.length) {
-                bioElement.textContent += bioText.charAt(i);
-                i++;
-                setTimeout(typeWriter, typingSpeed);
-            } else {
-                cursor.style.animation = 'none';
+            try {
+                const response = await fetch(proxyUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.text(); // Get response as text instead of json
+                
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, 'text/xml');
+                
+                const items = xmlDoc.querySelectorAll('item');
+                const postsToShow = 5;
+                
+                if (items.length > 0) {
+                    items.forEach((item, index) => {
+                        if (index < postsToShow) {
+                            const title = item.querySelector('title').textContent;
+                            const link = item.querySelector('link').textContent;
+
+                            const paragraph = document.createElement('p');
+                            const linkElement = document.createElement('a');
+                            const iconElement = document.createElement('i');
+
+                            linkElement.href = link;
+                            linkElement.textContent = title;
+                            linkElement.target = "_blank";
+                            
+                            iconElement.className = "fa-solid fa-arrow-up-right-from-square";
+                            iconElement.style.marginLeft = "5px"; // Add a small space
+                            
+                            paragraph.appendChild(linkElement);
+                            paragraph.appendChild(iconElement);
+                            
+                            postList.appendChild(paragraph);
+                        }
+                    });
+                    postList.style.display = 'block';
+                } else {
+                    errorMessage.textContent = "No posts found.";
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error fetching or parsing the feed:', error);
+                errorMessage.style.display = 'block';
+            } finally {
+                loadingIndicator.style.display = 'none';
             }
-        }
-
-        
-        // Start the typing effect when the page loads
-        window.onload = function() {
-          typeWriter();
         };
 
+        document.addEventListener('DOMContentLoaded', fetchPosts);
     </script>
 </body>
 </html>
