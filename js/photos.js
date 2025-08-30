@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // This array acts as our JavaScript database
     const images = [
+        // --- mbdcdn ---
+        "https://public-cdn.madebydanny.uk/user-content/2025-08-30/IMG_2100.jpeg",
+        "https://public-cdn.madebydanny.uk/user-content/2025-08-30/IMG_1818.jpeg",
         // --- root ---
         "https://img.madebydanny.uk/img/DSC_4726.avif",
         "https://img.madebydanny.uk/img/IMG_1489.avif",
