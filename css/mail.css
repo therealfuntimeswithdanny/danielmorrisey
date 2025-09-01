@@ -5,24 +5,16 @@ body {
     margin: 40px;
 }
 a {
-    color: #f71900;
+    color: #ffffff;
     text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
+    color:rgb(255, 0, 0);
 }
 hr {
     border: 0;
     height: 1px;
     background: #333;
     margin: 20px 0;
-}
-.title {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-.heading {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
 }

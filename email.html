@@ -6,14 +6,19 @@
     <title>Email Redirect</title>
     <!-- Include the Cloudflare Turnstile script -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <link rel="stylesheet" href="/css/mail.css">
 </head>
 <body>
     <div id="initial-message">
-        <h1>Please complete the verification</h1>
+        <p>Please complete the verification</p>
         <p>This helps us confirm you are a person. After you complete the check, a link will appear to send an email.</p>
+
+        <hr>
         
         <!-- The div where the Turnstile widget will be rendered -->
         <div class="cf-turnstile" data-sitekey="0x4AAAAAABxkewgSFiEtacXa" data-callback="handleTurnstileCallback"></div>
+        <p>Powered by <a href="https://cloudflare.com">Cloudflare</a> <i>Turnstile</i></p>
     </div>
 
     <div id="redirect-message" style="display: none;">
