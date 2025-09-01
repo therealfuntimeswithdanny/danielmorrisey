@@ -4,6 +4,31 @@ body {
     color: #e0e0e0;
     margin: 40px;
 }
+body.light-mode {
+    background-color: #e0e0e0;
+    color: #121212;
+}
+body.light-mode a {
+    color: #c71900;
+}
+body.light-mode hr {
+    background: #ccc;
+}
+body.light-mode .subtitle {
+    color: #444;
+}
+body.light-mode .download-btn {
+    background-color: #c71900;
+}
+body.light-mode .download-btn:hover {
+    background-color: #b01600;
+}
+body.light-mode .download-message {
+    color: #c71900;
+}
+body.light-mode .photo-item img {
+    border-color: #ccc;
+}
 a {
     color: #f71900;
     text-decoration: none;
@@ -58,6 +83,7 @@ i {
     cursor: pointer;
     font-family: 'Fira Code', monospace;
     transition: background-color 0.3s;
+    white-space: nowrap; /* Prevents button text from wrapping */
 }
 .download-btn:hover {
     background-color: #e01600;

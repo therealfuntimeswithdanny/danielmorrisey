@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------------ *
- *  Utility: set the current year
+ * Utility: set the current year
  * ------------------------------------------------------------------ */
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
 /* ------------------------------------------------------------------ *
- *  Configuration
+ * Configuration
  * ------------------------------------------------------------------ */
 const CONFIG = {
   FEED_URL:            'https://medium.com/feed/@danielmorrisey',
@@ -14,23 +14,25 @@ const CONFIG = {
 };
 
 /* ------------------------------------------------------------------ *
- *  DOM references – grab them once so we don’t query repeatedly
+ * DOM references – grab them once so we don’t query repeatedly
  * ------------------------------------------------------------------ */
 const dom = {
   postList:     document.getElementById('post-list'),
   loading:      document.getElementById('loading'),
-  errorMessage: document.getElementById('error-message')
+  errorMessage: document.getElementById('error-message'),
+  themeToggle:  document.getElementById('theme-toggle'),
+  body:         document.body
 };
 
 /* ------------------------------------------------------------------ *
- *  Helper: show / hide UI elements
+ * Helper: show / hide UI elements
  * ------------------------------------------------------------------ */
 function toggleVisibility(el, visible) {
   el.style.display = visible ? '' : 'none';
 }
 
 /* ------------------------------------------------------------------ *
- *  Helper: create a single post element
+ * Helper: create a single post element
  * ------------------------------------------------------------------ */
 function createPostItem({ title = '(no title)', link = '#' }) {
   const p   = document.createElement('p');
@@ -50,7 +52,7 @@ function createPostItem({ title = '(no title)', link = '#' }) {
 }
 
 /* ------------------------------------------------------------------ *
- *  Main: fetch, parse and render the RSS feed
+ * Main: fetch, parse and render the RSS feed
  * ------------------------------------------------------------------ */
 async function fetchPosts() {
   toggleVisibility(dom.loading, true);
@@ -86,7 +88,7 @@ async function fetchPosts() {
 }
 
 /* ------------------------------------------------------------------ *
- *  Helper: store the current URL in the hidden <url> element
+ * Helper: store the current URL in the hidden <url> element
  * ------------------------------------------------------------------ */
 function setErrorUrl() {
   const el = document.getElementById('error-url');
@@ -94,10 +96,42 @@ function setErrorUrl() {
 }
 
 /* ------------------------------------------------------------------ *
- *  Initialise – run once now and then on an interval
+ * Theme Toggle Functionality
+ * ------------------------------------------------------------------ */
+function updateTheme() {
+    if (dom.body.classList.contains('light-mode')) {
+        dom.body.classList.remove('light-mode');
+        dom.body.classList.add('dark-mode');
+        dom.themeToggle.textContent = 'Switch to Light Mode';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        dom.body.classList.remove('dark-mode');
+        dom.body.classList.add('light-mode');
+        dom.themeToggle.textContent = 'Switch to Dark Mode';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+/* ------------------------------------------------------------------ *
+ * Initialise – run once now and then on an interval
  * ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
-  setErrorUrl();                 // store the URL for your 404 page
-  fetchPosts();                  // initial load
-  setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS); // repeat periodically
+    setErrorUrl();
+    fetchPosts();
+    setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
+
+    // Initial theme setup based on localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        dom.body.classList.remove('dark-mode');
+        dom.body.classList.add('light-mode');
+        dom.themeToggle.textContent = 'Switch to Dark Mode';
+    } else {
+        dom.body.classList.remove('light-mode');
+        dom.body.classList.add('dark-mode');
+        dom.themeToggle.textContent = 'Switch to Light Mode';
+    }
+
+    // Event listener for the theme toggle button
+    dom.themeToggle.addEventListener('click', updateTheme);
 });

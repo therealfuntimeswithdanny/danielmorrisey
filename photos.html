@@ -21,8 +21,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <link rel="stylesheet" href="/css/photos.css">
+    <script src="/js/script.js" defer></script>
 </head>
-<body>
+<body class="dark-mode">
     <div class="header">
         <p class="title">My Photos</p>
         <p class="subtitle">100's of photos supercharged by Cloudflare</p>
@@ -31,11 +32,11 @@
         </button>
         <div id="downloadMessage" class="download-message"></div>
         <p><a href="/index.html"><i class="fa-solid fa-arrow-left"></i>Back</a></p>
+        <button id="theme-toggle" class="download-btn">Switch to Light Mode</button>
     </div>
     <hr>
     <div class="photo-gallery" id="photo-gallery">
-        <!-- Photo items will be generated here by JavaScript -->
-    </div>
+        </div>
     <hr>
     <p class="heading">Made Possible thanks to:</p>
     <ul>
@@ -46,7 +47,6 @@
     <hr>
     <p>&copy; 2024-<span id="current-year"></span> Made by Danny UK, <i>by Daniel Morrisey</i></p>
 
-    <!-- External JavaScript file -->
     <script src="/js/photos.js" defer></script>
 </body>
 </html>

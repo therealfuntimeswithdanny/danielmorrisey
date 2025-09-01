@@ -4,6 +4,10 @@ body {
     color: #e0e0e0;
     margin: 40px;
 }
+body.light-mode {
+    background-color: #e0e0e0;
+    color: #121212;
+}
 a {
     color: #f71900;
     text-decoration: none;
@@ -26,4 +30,14 @@ hr {
     margin-top: 20px;
     margin-bottom: 10px;
 }
-
+#theme-toggle {
+    background: none;
+    border: none;
+    color: #f71900;
+    font-family: 'Fira Code', monospace;
+    cursor: pointer;
+    padding: 0;
+}
+#theme-toggle:hover {
+    text-decoration: underline;
+}
