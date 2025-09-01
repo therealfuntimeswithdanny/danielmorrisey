@@ -1,4 +1,43 @@
-<a href="mailto:www@danielmorrisey.com">Click this if your inbox does not open</a>
-<script>
-    window.location.href = "mailto:www@danielmorrisey.com";
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Redirect</title>
+    <!-- Include the Cloudflare Turnstile script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+    <div id="initial-message">
+        <h1>Please complete the verification</h1>
+        <p>This helps us confirm you are a person. After you complete the check, a link will appear to send an email.</p>
+        
+        <!-- The div where the Turnstile widget will be rendered -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAABxkewgSFiEtacXa" data-callback="handleTurnstileCallback"></div>
+    </div>
+
+    <div id="redirect-message" style="display: none;">
+        <h1>Verification Complete!</h1>
+        <p>
+            If the verification does not work, you can manually click the link below to send an email to:
+            <a href="mailto:www@danielmorrisey.com">www@danielmorrisey.com</a>
+        </p>
+    </div>
+
+    <script>
+        // This function will be called by Cloudflare when the verification is successful.
+        function handleTurnstileCallback(token) {
+            console.log("Turnstile verification successful. Token:", token);
+            
+            // Hide the initial verification message
+            document.getElementById('initial-message').style.display = 'none';
+
+            // Show the redirect message and link
+            document.getElementById('redirect-message').style.display = 'block';
+
+            // After successful verification and showing the link, redirect the user to the mailto link.
+            window.location.href = "mailto:www@danielmorrisey.com";
+        }
+    </script>
+</body>
+</html>
