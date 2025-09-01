@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // This array acts as our JavaScript database
     const images = [
         // --- mbdcdn ---
+        "https://public-cdn.madebydanny.uk/user-content/2025-09-01/IMG_0489.jpeg",
         "https://public-cdn.madebydanny.uk/user-content/2025-09-01/IMG_0310.jpeg",
         "https://public-cdn.madebydanny.uk/user-content/2025-09-01/IMG_0282.jpeg",
         "https://public-cdn.madebydanny.uk/user-content/2025-08-30/IMG_2100.jpeg",
