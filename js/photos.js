@@ -124,70 +124,78 @@ document.addEventListener('DOMContentLoaded', function() {
         "https://img.madebydanny.uk/img/upload-5/DSC_0097.avif",
         "https://img.madebydanny.uk/img/upload-5/DSC_0115.avif",
     ];
-
-    const gallery = document.getElementById('photo-gallery');
-    const downloadAllBtn = document.getElementById('downloadAllBtn');
-    const downloadMessage = document.getElementById('downloadMessage');
-
-    // Dynamically create and add images to the gallery
-    images.forEach(imageUrl => {
-        const photoItem = document.createElement('div');
-        photoItem.classList.add('photo-item');
-
-        const img = document.createElement('img');
-        img.src = imageUrl;
-        img.alt = imageUrl.split('/').pop().split('.')[0]; // Set alt text from filename
-
-        // Add an onerror listener to handle failed images
-        img.onerror = function() {
-            console.error(`Failed to load image: ${this.src}. Replacing with placeholder.`);
-            this.src = "https://placehold.co/600x400/94a3b8/e2e8f0?text=Image+Failed";
-        };
-
-        const overlay = document.createElement('div');
-        overlay.classList.add('image-overlay');
-        overlay.textContent = img.alt;
-
-        photoItem.appendChild(img);
-        photoItem.appendChild(overlay);
-        gallery.appendChild(photoItem);
-    });
     
-    // Set the current year in the footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    // Function to load gallery AFTER Turnstile passes
+    function loadGallery() {
+        images.forEach(imageUrl => {
+            const photoItem = document.createElement('div');
+            photoItem.classList.add('photo-item');
 
-    // Bulk download functionality
-    downloadAllBtn.addEventListener('click', async () => {
-        downloadMessage.textContent = 'Preparing files...';
-        const zip = new JSZip();
-        let filesProcessed = 0;
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = imageUrl.split('/').pop().split('.')[0];
 
-        for (const imageUrl of images) {
-            try {
-                const response = await fetch(imageUrl);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch ${imageUrl}: ${response.statusText}`);
-                }
-                const blob = await response.blob();
-                const filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-                zip.file(filename, blob, { binary: true });
-                filesProcessed++;
-                downloadMessage.textContent = `Downloaded ${filesProcessed} of ${images.length} files...`;
-            } catch (error) {
-                console.error('Error fetching image for download:', error);
-                // We'll continue to the next image even if one fails
-            }
-        }
+            img.onerror = function() {
+                console.error(`Failed to load image: ${this.src}`);
+                this.src = "https://placehold.co/600x400/94a3b8/e2e8f0?text=Image+Failed";
+            };
 
-        downloadMessage.textContent = `Creating zip file...`;
-        zip.generateAsync({ type: "blob" }).then(function(content) {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(content);
-            link.download = "photos.zip";
-            link.click();
-            link.remove();
-            downloadMessage.textContent = 'Download complete!';
-            setTimeout(() => downloadMessage.textContent = '', 3000);
+            const overlay = document.createElement('div');
+            overlay.classList.add('image-overlay');
+            overlay.textContent = img.alt;
+
+            photoItem.appendChild(img);
+            photoItem.appendChild(overlay);
+            gallery.appendChild(photoItem);
         });
-    });
+
+        // Enable the download button
+        setupBulkDownload();
+    }
+
+    // Bulk download setup (moved inside function)
+    function setupBulkDownload() {
+        downloadAllBtn.addEventListener('click', async () => {
+            downloadMessage.textContent = 'Preparing files...';
+            const zip = new JSZip();
+            let filesProcessed = 0;
+
+            for (const imageUrl of images) {
+                try {
+                    const response = await fetch(imageUrl);
+                    if (!response.ok) throw new Error(`Failed to fetch ${imageUrl}`);
+                    const blob = await response.blob();
+                    const filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+                    zip.file(filename, blob, { binary: true });
+                    filesProcessed++;
+                    downloadMessage.textContent = `Downloaded ${filesProcessed} of ${images.length} files...`;
+                } catch (error) {
+                    console.error('Error fetching:', error);
+                }
+            }
+
+            downloadMessage.textContent = `Creating zip file...`;
+            zip.generateAsync({ type: "blob" }).then(function(content) {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = "photos.zip";
+                link.click();
+                link.remove();
+                downloadMessage.textContent = 'Download complete!';
+                setTimeout(() => downloadMessage.textContent = '', 3000);
+            });
+        });
+    }
+
+    // Expose function for Turnstile callback
+    window.onTurnstileSuccess = function(token) {
+        console.log("Turnstile success, token:", token);
+        // Hide widget after success
+        document.getElementById("turnstile-container").style.display = "none";
+        // Load photos
+        loadGallery();
+    };
+
+    // Footer year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 });

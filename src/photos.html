@@ -20,11 +20,19 @@
     <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="stylesheet" href="/css/photos.css">
     <script src="/js/script.js" defer></script>
     <script src="/js/photos.js" defer></script>
 </head>
 <body class="dark-mode">
+    <div id="turnstile-container" style="margin: 20px 0; text-align:center;">
+        <div class="cf-turnstile"
+            data-sitekey="0x4AAAAAABykovUJYDnnq8-a"
+            data-callback="onTurnstileSuccess"
+            data-theme="dark">
+        </div>
+    </div> 
     <div class="header">
         <p class="title">My Photos</p>
         <p class="subtitle">100's of photos supercharged by Cloudflare</p>
