@@ -22,7 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <link rel="stylesheet" href="/css/photos.css">
     <script src="/js/photos.js" defer></script>
-    <script src="/js/footer.js" defer></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/script.js" defer></script>
 
     <!-- Cloudflare Turnstile script -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -48,7 +49,6 @@
         </button>
         <div id="downloadMessage" class="download-message"></div>
         <p><a href="/index.html"><i class="fa-solid fa-arrow-left"></i>Back</a></p>
-        <button id="theme-toggle" class="download-btn">Switch to Light Mode</button>
     </div>
 
     <hr>
@@ -63,6 +63,7 @@
         <li><a href="https://gemini.google.com" target="_blank"><i class="fa-brands fa-google"></i> Google Gemini</a></li>
     </ul>
     <hr>
-    <footer></footer>
+    <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i> <button id="theme-toggle">Switch to Light Mode</button></p>
+    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="25" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
 </body>
 </html>

@@ -1,33 +1,17 @@
 /* ------------------------------------------------------------------ *
- * Footer injection
- * ------------------------------------------------------------------ */
-function initFooter() {
-  const footer = document.querySelector("footer");
-  if (!footer) return;
-
-  footer.innerHTML = `
-    <p>
-      &copy; 2024-<span id="current-year"></span> Made by Danny UK,
-      <i>by Daniel Morrisey</i> / <a href="/search.html"><i class="fa-solid fa-magnifying-glass"></i></a> <i>(comming soon!)</i> / 
-      <button id="theme-toggle">Switch to Light Mode</button>
-    </p>
-  `;
-}
-
-/* ------------------------------------------------------------------ *
  * Configuration
  * ------------------------------------------------------------------ */
 const CONFIG = {
-  FEED_URL:            'https://medium.com/feed/@danielmorrisey',
-  PROXY_URL:           url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  POSTS_TO_SHOW:       5,
+  FEED_URL: 'https://medium.com/feed/@danielmorrisey',
+  PROXY_URL: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  POSTS_TO_SHOW: 5,
   REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
 
 /* ------------------------------------------------------------------ *
  * DOM references – grab them once so we don’t query repeatedly
  * ------------------------------------------------------------------ */
-let dom = {}; // will populate after footer is initialized
+let dom = {};
 
 /* ------------------------------------------------------------------ *
  * Helper: show / hide UI elements
@@ -41,11 +25,11 @@ function toggleVisibility(el, visible) {
  * Helper: create a single post element
  * ------------------------------------------------------------------ */
 function createPostItem({ title = '(no title)', link = '#' }) {
-  const p   = document.createElement('p');
-  const a   = document.createElement('a');
+  const p = document.createElement('p');
+  const a = document.createElement('a');
   const icn = document.createElement('i');
 
-  a.href   = link;
+  a.href = link;
   a.textContent = title;
   a.target = '_blank';
 
@@ -78,12 +62,13 @@ async function fetchPosts() {
 
     items
       .slice(0, CONFIG.POSTS_TO_SHOW)
-      .map(item => ({
+      .map((item) => ({
         title: item.querySelector('title')?.textContent ?? '(no title)',
-        link:  item.querySelector('link')?.textContent ?? '#'
+        link: item.querySelector('link')?.textContent ?? '#',
       }))
-      .forEach(postData => dom.postList.appendChild(createPostItem(postData)));
-
+      .forEach((postData) =>
+        dom.postList.appendChild(createPostItem(postData))
+      );
   } catch (err) {
     console.error('RSS fetch/parse error:', err);
     if (dom.errorMessage) {
@@ -93,14 +78,6 @@ async function fetchPosts() {
   } finally {
     toggleVisibility(dom.loading, false);
   }
-}
-
-/* ------------------------------------------------------------------ *
- * Helper: store the current URL in the hidden <url> element
- * ------------------------------------------------------------------ */
-function setErrorUrl() {
-  const el = document.getElementById('error-url');
-  if (el) el.textContent = window.location.href;
 }
 
 /* ------------------------------------------------------------------ *
@@ -115,58 +92,31 @@ function setRootDomain() {
 }
 
 /* ------------------------------------------------------------------ *
- * Theme Toggle Functionality
+ * Utility: set the current URL in the hidden <url> element
  * ------------------------------------------------------------------ */
-function updateTheme() {
-  if (!dom.body || !dom.themeToggle) return;
-
-  if (dom.body.classList.contains('light-mode')) {
-    dom.body.classList.replace('light-mode', 'dark-mode');
-    dom.themeToggle.textContent = 'Switch to Light Mode';
-    localStorage.setItem('theme', 'dark');
-  } else {
-    dom.body.classList.replace('dark-mode', 'light-mode');
-    dom.themeToggle.textContent = 'Switch to Dark Mode';
-    localStorage.setItem('theme', 'light');
-  }
+function setErrorUrl() {
+  const el = document.getElementById('error-url');
+  if (el) el.textContent = window.location.href;
 }
 
 /* ------------------------------------------------------------------ *
  * Initialise – run once now and then on an interval
  * ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inject footer
-  initFooter();
+  dom = {
+    postList: document.getElementById('post-list'),
+    loading: document.getElementById('loading'),
+    errorMessage: document.getElementById('error-message'),
+    body: document.body,
+  };
 
-  // 2. Set current year
+  // Set current year
   const yearEl = document.getElementById('current-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // 3. Populate DOM references now that footer exists
-  dom = {
-    postList:     document.getElementById('post-list'),
-    loading:      document.getElementById('loading'),
-    errorMessage: document.getElementById('error-message'),
-    themeToggle:  document.getElementById('theme-toggle'),
-    body:         document.body
-  };
-
-  // 4. Initialise utilities
+  // Initialise utilities and start fetching posts
   setErrorUrl();
   setRootDomain();
   fetchPosts();
   setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
-
-  // 5. Initial theme setup based on localStorage
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    dom.body.classList.replace('dark-mode', 'light-mode');
-    if (dom.themeToggle) dom.themeToggle.textContent = 'Switch to Dark Mode';
-  } else {
-    dom.body.classList.replace('light-mode', 'dark-mode');
-    if (dom.themeToggle) dom.themeToggle.textContent = 'Switch to Light Mode';
-  }
-
-  // 6. Theme toggle button listener
-  if (dom.themeToggle) dom.themeToggle.addEventListener('click', updateTheme);
 });
