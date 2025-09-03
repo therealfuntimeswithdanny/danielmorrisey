@@ -17,22 +17,29 @@
     <meta property="og:image" content="https://public-danielmorrisey-com.danielmorrisey.com/media/banner.jpg"/>
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
     <link rel="icon" type="image/x-icon" href="https://public-cdn.madebydanny.uk/user-content/2025-08-31/images-solid-full.svg">
-    <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
+    <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="stylesheet" href="/css/photos.css">
     <script src="/js/script.js" defer></script>
     <script src="/js/photos.js" defer></script>
+
+    <!-- Cloudflare Turnstile script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="dark-mode">
-    <div id="turnstile-container" style="margin: 20px 0; text-align:center;">
-        <div class="cf-turnstile"
-            data-sitekey="0x4AAAAAABykovUJYDnnq8-a"
-            data-callback="onTurnstileSuccess"
-            data-theme="dark">
+    <!-- Fullscreen Turnstile overlay -->
+    <div id="turnstile-container">
+        <div>
+            <p>Please verify you are human to view the gallery</p>
+            <div class="cf-turnstile"
+                data-sitekey="0x4AAAAAABykovUJYDnnq8-a"
+                data-callback="onTurnstileSuccess"
+                data-theme="dark">
+            </div>
         </div>
-    </div> 
+    </div>
+
     <div class="header">
         <p class="title">My Photos</p>
         <p class="subtitle">100's of photos supercharged by Cloudflare</p>
@@ -43,17 +50,17 @@
         <p><a href="/index.html"><i class="fa-solid fa-arrow-left"></i>Back</a></p>
         <button id="theme-toggle" class="download-btn">Switch to Light Mode</button>
     </div>
+
     <hr>
-    <div class="photo-gallery" id="photo-gallery">
-        </div>
+    <div class="photo-gallery" id="photo-gallery"></div>
     <hr>
     <p class="heading">Made Possible thanks to:</p>
     <ul>
         <li><a href="https://corsproxy.io/" target="_blank"><i class="fa-solid fa-globe"></i> CORS Proxy</a></li>
         <li><a href="https://fontawesome.com/" target="_blank"><i class="fa-brands fa-font-awesome"></i> Font Awesome</a></li>
         <li><a href="https://cloudflare.com" target="_blank"><i class="fa-brands fa-cloudflare"></i> Cloudflare</a></li>
-        <li><a href="https://github.com" traget="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
-        <li><a href="https://gemini.google.com" traget="_blank"><i class="fa-brands fa-google"></i> Google Gemini</a></li>
+        <li><a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
+        <li><a href="https://gemini.google.com" target="_blank"><i class="fa-brands fa-google"></i> Google Gemini</a></li>
     </ul>
     <hr>
     <footer></footer>

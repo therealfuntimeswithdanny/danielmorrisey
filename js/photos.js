@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('photo-gallery');
     const downloadAllBtn = document.getElementById('downloadAllBtn');
     const downloadMessage = document.getElementById('downloadMessage');
-    // This array acts as our JavaScript database
     const images = [
         // --- mbdcdn ---
         "https://public-cdn.madebydanny.uk/user-content/2025-09-01/IMG_0489.jpeg",
@@ -128,7 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "https://img.madebydanny.uk/img/upload-5/DSC_0115.avif",
     ];
 
-    // Function to load gallery AFTER Turnstile passes
+    /**
+     * Function to load the photo gallery
+     */
     function loadGallery() {
         images.forEach(imageUrl => {
             const photoItem = document.createElement('div');
@@ -152,11 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
             gallery.appendChild(photoItem);
         });
 
-        // Enable the download button
         setupBulkDownload();
     }
 
-    // Bulk download setup (moved inside function)
+    /**
+     * Bulk download setup
+     */
     function setupBulkDownload() {
         downloadAllBtn.addEventListener('click', async () => {
             downloadMessage.textContent = 'Preparing files...';
@@ -173,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     filesProcessed++;
                     downloadMessage.textContent = `Downloaded ${filesProcessed} of ${images.length} files...`;
                 } catch (error) {
-                    console.error('Error fetching:', error);
+                    console.error('Error fetching image for download:', error);
                 }
             }
 
@@ -190,12 +192,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Expose function for Turnstile callback
+    /**
+     * Cloudflare Turnstile success callback
+     */
     window.onTurnstileSuccess = function(token) {
         console.log("Turnstile success, token:", token);
-        // Hide widget after success
-        document.getElementById("turnstile-container").style.display = "none";
-        // Load photos
+        // Hide overlay
+        const turnstileBox = document.getElementById("turnstile-container");
+        if (turnstileBox) turnstileBox.style.display = "none";
+        // Load gallery now
         loadGallery();
     };
 
