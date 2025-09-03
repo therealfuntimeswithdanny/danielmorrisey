@@ -3,19 +3,9 @@
  * ------------------------------------------------------------------ */
 const MICROBLOG_DATA = [
     {
-        "title": "A New Beginning",
+        "title": "Test",
         "date": "September 3, 2025",
         "content": "Starting a new microblog project. This is a place for short thoughts, quick links, and small updates. Using this as a test. It's built with simple HTML, CSS, and JS, just like the good old days."
-    },
-    {
-        "title": "Coffee and Code",
-        "date": "September 2, 2025",
-        "content": "Enjoying my morning coffee and working on a new Python script. The goal is to automate some data analysis tasks. It’s a work in progress, but the journey is the fun part!"
-    },
-    {
-        "title": "A Link to Check Out",
-        "date": "September 1, 2025",
-        "content": "Found a fascinating article on the evolution of front-end frameworks. A lot has changed since jQuery was king! Read it here: <a href='https://example.com/article' target='_blank'>The Evolution of Web Dev</a>."
     }
 ];
 
