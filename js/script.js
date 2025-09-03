@@ -1,7 +1,18 @@
 /* ------------------------------------------------------------------ *
- * Utility: set the current year
+ * Footer injection
  * ------------------------------------------------------------------ */
-document.getElementById('current-year').textContent = new Date().getFullYear();
+function initFooter() {
+  const footer = document.querySelector("footer");
+  if (!footer) return;
+
+  footer.innerHTML = `
+    <p>
+      &copy; 2024-<span id="current-year"></span> Made by Danny UK,
+      <i>by Daniel Morrisey</i> / <a href="/search.html"><i class="fa-solid fa-magnifying-glass"></i></a> <i>(comming soon!)</i> / 
+      <button id="theme-toggle">Switch to Light Mode</button>
+    </p>
+  `;
+}
 
 /* ------------------------------------------------------------------ *
  * Configuration
@@ -9,25 +20,20 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
 const CONFIG = {
   FEED_URL:            'https://medium.com/feed/@danielmorrisey',
   PROXY_URL:           url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  POSTS_TO_SHOW:      5,
+  POSTS_TO_SHOW:       5,
   REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
 
 /* ------------------------------------------------------------------ *
  * DOM references – grab them once so we don’t query repeatedly
  * ------------------------------------------------------------------ */
-const dom = {
-  postList:     document.getElementById('post-list'),
-  loading:      document.getElementById('loading'),
-  errorMessage: document.getElementById('error-message'),
-  themeToggle:  document.getElementById('theme-toggle'),
-  body:         document.body
-};
+let dom = {}; // will populate after footer is initialized
 
 /* ------------------------------------------------------------------ *
  * Helper: show / hide UI elements
  * ------------------------------------------------------------------ */
 function toggleVisibility(el, visible) {
+  if (!el) return;
   el.style.display = visible ? '' : 'none';
 }
 
@@ -57,7 +63,7 @@ function createPostItem({ title = '(no title)', link = '#' }) {
 async function fetchPosts() {
   toggleVisibility(dom.loading, true);
   toggleVisibility(dom.errorMessage, false);
-  dom.postList.innerHTML = ''; // clear previous items
+  if (dom.postList) dom.postList.innerHTML = ''; // clear previous items
 
   try {
     const response = await fetch(CONFIG.PROXY_URL(CONFIG.FEED_URL));
@@ -80,8 +86,10 @@ async function fetchPosts() {
 
   } catch (err) {
     console.error('RSS fetch/parse error:', err);
-    dom.errorMessage.textContent = err.message || 'Failed to load articles.';
-    toggleVisibility(dom.errorMessage, true);
+    if (dom.errorMessage) {
+      dom.errorMessage.textContent = err.message || 'Failed to load articles.';
+      toggleVisibility(dom.errorMessage, true);
+    }
   } finally {
     toggleVisibility(dom.loading, false);
   }
@@ -101,13 +109,7 @@ function setErrorUrl() {
 function setRootDomain() {
   const el = document.getElementById('root-domain');
   if (el) {
-    // Option 1: Hardcode your root domain
     const domain = 'madebydanny.uk';
-
-    // Option 2 (automatic): take from current hostname
-    // const parts = window.location.hostname.split('.');
-    // const domain = parts.slice(-2).join('.'); // e.g., "madebydanny.uk"
-
     el.textContent = domain;
   }
 }
@@ -116,40 +118,55 @@ function setRootDomain() {
  * Theme Toggle Functionality
  * ------------------------------------------------------------------ */
 function updateTheme() {
-    if (dom.body.classList.contains('light-mode')) {
-        dom.body.classList.remove('light-mode');
-        dom.body.classList.add('dark-mode');
-        dom.themeToggle.textContent = 'Switch to Light Mode';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        dom.body.classList.remove('dark-mode');
-        dom.body.classList.add('light-mode');
-        dom.themeToggle.textContent = 'Switch to Dark Mode';
-        localStorage.setItem('theme', 'light');
-    }
+  if (!dom.body || !dom.themeToggle) return;
+
+  if (dom.body.classList.contains('light-mode')) {
+    dom.body.classList.replace('light-mode', 'dark-mode');
+    dom.themeToggle.textContent = 'Switch to Light Mode';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    dom.body.classList.replace('dark-mode', 'light-mode');
+    dom.themeToggle.textContent = 'Switch to Dark Mode';
+    localStorage.setItem('theme', 'light');
+  }
 }
 
 /* ------------------------------------------------------------------ *
  * Initialise – run once now and then on an interval
  * ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
-    setErrorUrl();
-    setRootDomain(); // <-- dynamically sets your root domain
-    fetchPosts();
-    setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
+  // 1. Inject footer
+  initFooter();
 
-    // Initial theme setup based on localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        dom.body.classList.remove('dark-mode');
-        dom.body.classList.add('light-mode');
-        dom.themeToggle.textContent = 'Switch to Dark Mode';
-    } else {
-        dom.body.classList.remove('light-mode');
-        dom.body.classList.add('dark-mode');
-        dom.themeToggle.textContent = 'Switch to Light Mode';
-    }
+  // 2. Set current year
+  const yearEl = document.getElementById('current-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Event listener for the theme toggle button
-    dom.themeToggle.addEventListener('click', updateTheme);
+  // 3. Populate DOM references now that footer exists
+  dom = {
+    postList:     document.getElementById('post-list'),
+    loading:      document.getElementById('loading'),
+    errorMessage: document.getElementById('error-message'),
+    themeToggle:  document.getElementById('theme-toggle'),
+    body:         document.body
+  };
+
+  // 4. Initialise utilities
+  setErrorUrl();
+  setRootDomain();
+  fetchPosts();
+  setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
+
+  // 5. Initial theme setup based on localStorage
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    dom.body.classList.replace('dark-mode', 'light-mode');
+    if (dom.themeToggle) dom.themeToggle.textContent = 'Switch to Dark Mode';
+  } else {
+    dom.body.classList.replace('light-mode', 'dark-mode');
+    if (dom.themeToggle) dom.themeToggle.textContent = 'Switch to Light Mode';
+  }
+
+  // 6. Theme toggle button listener
+  if (dom.themeToggle) dom.themeToggle.addEventListener('click', updateTheme);
 });
