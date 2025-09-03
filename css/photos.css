@@ -137,3 +137,21 @@ i {
 .span-2-rows {
     grid-row: span 2;
 }
+/* Fullscreen Turnstile overlay */
+#turnstile-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.95); /* matches dark mode background */
+    z-index: 9999; /* ensure it sits above everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Light mode version */
+body.light-mode #turnstile-container {
+    background: rgba(224, 224, 224, 0.95);
+}

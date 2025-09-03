@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.getElementById('photo-gallery');
+    const downloadAllBtn = document.getElementById('downloadAllBtn');
+    const downloadMessage = document.getElementById('downloadMessage');
     // This array acts as our JavaScript database
     const images = [
         // --- mbdcdn ---
@@ -124,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "https://img.madebydanny.uk/img/upload-5/DSC_0097.avif",
         "https://img.madebydanny.uk/img/upload-5/DSC_0115.avif",
     ];
-    
+
     // Function to load gallery AFTER Turnstile passes
     function loadGallery() {
         images.forEach(imageUrl => {
