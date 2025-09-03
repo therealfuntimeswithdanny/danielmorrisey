@@ -1,11 +1,8 @@
-/* ------------------------------------------------------------------ *
- * Footer injection
- * ------------------------------------------------------------------ */
-export function initFooter() {
+// footer.js
+function initFooter() {
   const footer = document.querySelector("footer");
   if (!footer) return;
 
-  // Inject footer HTML
   footer.innerHTML = `
     <p>
       &copy; 2024-<span id="current-year"></span> Made by Danny UK,
@@ -14,6 +11,10 @@ export function initFooter() {
     </p>
   `;
 
-  // Set current year
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+  const yearEl = document.getElementById('current-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 }
+
+document.addEventListener("DOMContentLoaded", initFooter);
