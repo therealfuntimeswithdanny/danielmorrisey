@@ -10,7 +10,7 @@ const CONFIG = {
   FEED_URL:            'https://medium.com/feed/@danielmorrisey',
   PROXY_URL:           url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
   POSTS_TO_SHOW:      5,
-  REFRESH_INTERVAL_MS: 60_000, // 1 minute
+  REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
 
 /* ------------------------------------------------------------------ *
@@ -96,6 +96,23 @@ function setErrorUrl() {
 }
 
 /* ------------------------------------------------------------------ *
+ * Utility: set the root domain dynamically
+ * ------------------------------------------------------------------ */
+function setRootDomain() {
+  const el = document.getElementById('root-domain');
+  if (el) {
+    // Option 1: Hardcode your root domain
+    const domain = 'madebydanny.uk';
+
+    // Option 2 (automatic): take from current hostname
+    // const parts = window.location.hostname.split('.');
+    // const domain = parts.slice(-2).join('.'); // e.g., "madebydanny.uk"
+
+    el.textContent = domain;
+  }
+}
+
+/* ------------------------------------------------------------------ *
  * Theme Toggle Functionality
  * ------------------------------------------------------------------ */
 function updateTheme() {
@@ -117,6 +134,7 @@ function updateTheme() {
  * ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
     setErrorUrl();
+    setRootDomain(); // <-- dynamically sets your root domain
     fetchPosts();
     setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
 
