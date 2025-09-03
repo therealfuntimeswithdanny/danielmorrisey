@@ -203,7 +203,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Load gallery now
         loadGallery();
     };
-
-    // Footer year
-    document.getElementById('current-year').textContent = new Date().getFullYear();
 });
