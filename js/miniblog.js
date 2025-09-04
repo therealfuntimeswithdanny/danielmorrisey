@@ -3,9 +3,10 @@
  * ------------------------------------------------------------------ */
 const MICROBLOG_DATA = [
     {
-        "title": "Test",
-        "date": "September 3, 2025",
-        "content": "Starting a new microblog project. This is a place for short thoughts, quick links, and small updates. Using this as a test. It's built with simple HTML, CSS, and JS, just like the good old days."
+        "title": "EasyScribe is Live!",
+        "date": "September 4, 2025",
+        "content": "A simple easy to use Rich Text editor note-taking app, with suuport for local and cloud sync.",
+        "url": "https://easyscribe.madebydanny.uk" // Optional link
     }
 ];
 
@@ -26,11 +27,20 @@ function createPostItem(postData) {
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'text-bite-content';
-    contentDiv.innerHTML = postData.content; // Use innerHTML to render links
+    contentDiv.innerHTML = postData.content; // Supports <a> tags
 
     postDiv.appendChild(titleDiv);
     postDiv.appendChild(dateDiv);
     postDiv.appendChild(contentDiv);
+
+    // If "url" exists, add a "Read more" link
+    if (postData.url) {
+        const linkDiv = document.createElement('div');
+        linkDiv.className = 'text-bite-link';
+        linkDiv.innerHTML = `<a href="${postData.url}" target="_blank" rel="noopener noreferrer">Read more</a>`;
+        postDiv.appendChild(linkDiv);
+    }
+
     return postDiv;
 }
 
@@ -50,5 +60,4 @@ function renderPosts() {
 }
 
 // Initialise by rendering posts when the script is loaded
-// The "defer" attribute on the script tag ensures this runs after the DOM is ready.
 renderPosts();
