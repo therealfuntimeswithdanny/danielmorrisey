@@ -1,0 +1,104 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBD CDN - Free, Fast & Powered by Cloudflare</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="MBD CDN is a free-for-life content delivery network powered by Cloudflare's ultra-fast servers. Upload your files, get a shareable URL instantly, and deliver content globally." />
+  <meta name="keywords" content="MBD CDN, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload, Daniel Morrisey" />
+  <meta name="author" content="Daniel Morrisey" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cdn.madebydanny.uk/" />
+  <meta property="og:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+  <meta property="og:description" content="A free-for-life CDN built on Cloudflare's global edge network. Upload files instantly, get a shareable link, and deliver worldwide." />
+  <meta property="og:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://cdn.madebydanny.uk/" />
+  <meta name="twitter:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+  <meta name="twitter:description" content="Upload your files to MBD CDN for free and deliver them worldwide on Cloudflare's super fast edge servers." />
+  <meta name="twitter:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="icon" type="image/png" href="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-17_database-solid-full.svg" />
+</head>
+
+<body class="dark-mode">
+  <div class="center">
+    <p class="title">MBD CDN</p>
+    <p><a href="/"><i class="fa-solid fa-arrow-left"></i></a> | Made by Danny CDN</p>
+    <hr>
+
+    <p class="heading">Why Use MBD CDN?</p>
+    <p>MBD CDN gives you a fast and secure way to host and deliver your content globally. With performance powered by Cloudflare, your files reach users at lightning speed.</p>
+
+    <p class="heading">Free for Life</p>
+    <p>No hidden costs, no subscriptions. MBD CDN is completely free forever.</p>
+
+    <p class="heading">Powered by Cloudflare</p>
+    <p>We leverage Cloudflare’s global edge network to ensure your content is delivered quickly and reliably anywhere in the world.</p>
+
+    <hr>
+    <p class="heading">Upload Your File</p>
+    <input type="file" id="fileInput" />
+    <br><br>
+    <button id="uploadBtn">Upload & Get URL</button>
+    <p class="alt" id="result"></p>
+
+    <hr>
+    <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i> <button id="theme-toggle">Switch to Light Mode</button></p>
+    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="25" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+  </div>
+
+  <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    async function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const resultDiv = document.getElementById('result');
+      if (!fileInput.files.length) {
+        resultDiv.textContent = "Please select a file first.";
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      resultDiv.textContent = "Uploading...";
+
+      try {
+        const response = await fetch("https://cdn-upload.madebydanny.uk/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error("Upload failed. Status: " + response.status);
+        }
+
+        const data = await response.json();
+        if (data.url) {
+          navigator.clipboard.writeText(data.url);
+          resultDiv.innerHTML = `✅ Uploaded! URL copied:<br><a href="${data.url}" target="_blank">${data.url}</a>`;
+        } else {
+          resultDiv.textContent = "Upload succeeded but no URL returned.";
+        }
+      } catch (err) {
+        resultDiv.textContent = "Error: " + err.message;
+      }
+    }
+
+    document.getElementById("uploadBtn").addEventListener("click", uploadFile);
+  </script>
+</body>
+</html>
