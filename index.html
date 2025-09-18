@@ -24,48 +24,61 @@
     <script src="/js/theme.js" defer></script>
 </head>
 <body class="dark-mode">
-    <p class="title"><b>Hello World</b> I'm Daniel Morrisey</p>
-    <p>Writer @ <a href="https://medium.com/code-and-chaos" target="_blank">Code and Chaos</a> & HTML, CSS, Javascript & Python developer</p>
+    <div class="center">
+        <div class="profile-container">
+            <img src="https://public-danielmorrisey-com.danielmorrisey.com/media/icon.jpg" alt="Daniel Morrisey" class="profile-pic">
+            <div>
+                <p class="title"><b>Hi, I'm Daniel Morrisey 👋</b></p>
+                <p>I write at <a href="https://medium.com/code-and-chaos" target="_blank">Code and Chaos</a>. Here are my socials:</p>
+                <ul class="socials-list">
+                    <li><a href="https://bsky.app/profile/danielmorrisey.com" target="_blank"><i class="fa-brands fa-bluesky"></i> Bluesky</a></li>
+                    <li><a href="https://medium.com/@danielmorrisey" target="_blank"><i class="fa-brands fa-medium"></i> Medium</a></li>
+                    <li><a href="https://github.com/therealfuntimeswithdanny" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
+                    <li><a href="/src/email.html"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                    <li><a href="https://discord.gg/VM7MfJnGFF" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
+                    <li><a href="https://danielmorrisey.leaflet.pub"><i class="fa-solid fa-at"></i> Leaflet</a> (.pub)</li>
+                </ul>
+            </div>
+        </div>
     <hr>
-    <p class="heading">Things to do:</p>
-    <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - <i>(free for life)</i></p>
-    <p><a href="/src/photos.html"><i class="fa-solid fa-images"></i> View my Photos</a></p>
-    <p><a href="/src/blog/index.html"><i class="fa-solid fa-newspaper"></i> Blog</a></p>
+    <div class="cards-container">
+        <div class="card">
+            <p class="heading">My Projects</p>
+            <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - A free-for-life content delivery network.</p>
+            <p><a href="/src/photos.html"><i class="fa-solid fa-images"></i> My Photos</a> - A collection of my photography.</p>
+        </div>
+        <div class="card">
+            <p class="heading">My Skills</p>
+            <ul>
+                <li><i class="fa-brands fa-css3"></i> CSS</li>
+                <li><i class="fa-brands fa-js"></i> Javascript</li>
+                <li><i class="fa-brands fa-html5"></i> HTML</li>
+                <li><i class="fa-brands fa-python"></i> Python</li>
+                <li><i class="fa-brands fa-cloudflare"></i> Cloudflare <i>(Dashboard)</i></li>
+            </ul>
+        </div>
+    </div>
     <hr>
-    <p class="heading">Find me on:</p>
-    <ul>
-        <li><a href="https://bsky.app/profile/danielmorrisey.com" target="_blank"><i class="fa-brands fa-bluesky"></i> Bluesky</a></li>
-        <li><a href="https://medium.com/@danielmorrisey" target="_blank"><i class="fa-brands fa-medium"></i> Medium</a></li>
-        <li><a href="https://github.com/therealfuntimeswithdanny" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
-        <li><a href="/src/email.html"><i class="fa-solid fa-envelope"></i> Email</a></li>
-        <li><a href="https://discord.gg/VM7MfJnGFF" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
-        <li><a href="https://danielmorrisey.leaflet.pub"><i class="fa-solid fa-at"></i> Leaflet</a>(.pub)</li>
-    </ul>
+    <div class="card">
+        <p class="heading">Latest Posts</p>
+        <p><i>This list will auto refresh</i></p>
+        <ul id="post-list"></ul>
+        <div id="loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i>Loading…</div>
+        <div id="error-message" style="display:none;color:red;"></div>
+    </div>
     <hr>
-    <p class="heading">Skills:</p>
-    <ul>
-        <li><i class="fa-brands fa-css3"></i> CSS</li>
-        <li><i class="fa-brands fa-js"></i> Javascript</li>
-        <li><i class="fa-brands fa-html5"></i> HTML</li>
-        <li><i class="fa-brands fa-python"></i> Python</li>
-        <li><i class="fa-brands fa-cloudflare"></i> Cloudflare<i>(Dashboard)</i></li>
-    </ul>
-    <hr>
-    <p class="heading">Latest Posts by Daniel Morrisey</p>
-    <p><i>This list will auto refresh</i></p>
-    <ul id="post-list"></ul>
-    <div id="loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i>Loading…</div>
-    <div id="error-message" style="display:none;color:red;"></div>
-    <hr>
-    <p class="heading">Made Possible thanks to:</p>
-    <ul>
-        <li><a href="https://corsproxy.io/" target="_blank"><i class="fa-solid fa-globe"></i> CORS Proxy</a></li>
-        <li><a href="https://fontawesome.com/" target="_blank"><i class="fa-brands fa-font-awesome"></i> Font Awesome</a></li>
-        <li><a href="https://cloudflare.com" target="_blank"><i class="fa-brands fa-cloudflare"></i> Cloudflare</a></li>
-        <li><a href="https://github.com" traget="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
-        <li><a href="https://gemini.google.com" traget="_blank"><i class="fa-brands fa-google"></i> Google Gemini</a></li>
-    </ul>
+    <div class="card">
+        <p class="heading">Acknowledgements</p>
+        <ul>
+            <li><a href="https://corsproxy.io/" target="_blank"><i class="fa-solid fa-globe"></i> CORS Proxy</a></li>
+            <li><a href="https://fontawesome.com/" target="_blank"><i class="fa-brands fa-font-awesome"></i> Font Awesome</a></li>
+            <li><a href="https://cloudflare.com" target="_blank"><i class="fa-brands fa-cloudflare"></i> Cloudflare</a></li>
+            <li><a href="https://github.com" traget="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
+            <li><a href="https://gemini.google.com" traget="_blank"><i class="fa-brands fa-google"></i> Google Gemini</a></li>
+        </ul>
+    </div>
     <hr>
     <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i> <button id="theme-toggle">Switch to Light Mode</button></p>
     <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="25" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
-</html>
+    </div>
+</body>
