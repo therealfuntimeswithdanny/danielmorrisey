@@ -1,104 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MBD CDN - Free, Fast & Powered by Cloudflare</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBD CDN - Free, Fast & Powered by Cloudflare</title>
 
-  <!-- Basic SEO -->
-  <meta name="description" content="MBD CDN is a free-for-life content delivery network powered by Cloudflare's ultra-fast servers. Upload your files, get a shareable URL instantly, and deliver content globally." />
-  <meta name="keywords" content="MBD CDN, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload, Daniel Morrisey" />
-  <meta name="author" content="Daniel Morrisey" />
+    <!-- Basic SEO -->
+    <meta name="description" content="MBD CDN is a free-for-life content delivery network powered by Cloudflare's ultra-fast servers. Upload your files, get a shareable URL instantly, and deliver content globally." />
+    <meta name="keywords" content="MBD CDN, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload, Daniel Morrisey" />
+    <meta name="author" content="Daniel Morrisey" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://cdn.madebydanny.uk/" />
-  <meta property="og:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
-  <meta property="og:description" content="A free-for-life CDN built on Cloudflare's global edge network. Upload files instantly, get a shareable link, and deliver worldwide." />
-  <meta property="og:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cdn.madebydanny.uk/" />
+    <meta property="og:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+    <meta property="og:description" content="A free-for-life CDN built on Cloudflare's global edge network. Upload files instantly, get a shareable link, and deliver worldwide." />
+    <meta property="og:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://cdn.madebydanny.uk/" />
-  <meta name="twitter:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
-  <meta name="twitter:description" content="Upload your files to MBD CDN for free and deliver them worldwide on Cloudflare's super fast edge servers." />
-  <meta name="twitter:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://cdn.madebydanny.uk/" />
+    <meta name="twitter:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+    <meta name="twitter:description" content="Upload your files to MBD CDN for free and deliver them worldwide on Cloudflare's super fast edge servers." />
+    <meta name="twitter:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
 
-  <!-- Fonts & Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/blog.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-17_database-solid-full.svg" />
 
-  <link rel="icon" type="image/png" href="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-17_database-solid-full.svg" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Custom styles for a modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styling for file input */
+        .file-input-label {
+            transition: all 0.2s ease-in-out;
+        }
+        .file-input-label:hover {
+            border-color: #38bdf8; /* sky-400 */
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+        .file-input-label.dragover {
+             border-color: #38bdf8;
+             background-color: rgba(56, 189, 248, 0.1);
+        }
+    </style>
+
+    <script>
+        // Set theme on initial load
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+
+        // Custom Tailwind config
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+              },
+            }
+          }
+        }
+    </script>
 </head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased transition-colors duration-300">
 
-<body class="dark-mode">
-  <div class="center">
-    <p class="title">MBD CDN</p>
-    <p><a href="/"><i class="fa-solid fa-arrow-left"></i></a> | Made by Danny CDN</p>
-    <hr>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="container mx-auto px-6 pt-12 pb-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
+                MBD CDN
+            </h1>
+            <p class="mt-3 text-lg text-slate-600 dark:text-slate-400">
+                A Free, Fast & Secure Content Delivery Network
+            </p>
+        </header>
 
-    <p class="heading">Why Use MBD CDN?</p>
-    <p>MBD CDN gives you a fast and secure way to host and deliver your content globally. With performance powered by Cloudflare, your files reach users at lightning speed.</p>
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 flex-grow">
+            <!-- Features Section -->
+            <section id="features" class="grid md:grid-cols-3 gap-6 lg:gap-8 my-10">
+                <!-- Feature Card 1 -->
+                <div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-500/10 text-sky-500 dark:text-sky-400">
+                        <i class="fa-solid fa-bolt-lightning text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5 text-slate-900 dark:text-white">Blazing Fast Delivery</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">
+                        Leveraging Cloudflare’s global edge network to ensure your content is delivered quickly and reliably, anywhere in the world.
+                    </p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-500/10 text-sky-500 dark:text-sky-400">
+                        <i class="fa-solid fa-gift text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5 text-slate-900 dark:text-white">Free for Life</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">
+                        No hidden costs, no subscriptions, and no surprises. MBD CDN is completely free, forever.
+                    </p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-sky-500/10 text-sky-500 dark:text-sky-400">
+                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-5 text-slate-900 dark:text-white">Simple & Secure</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">
+                        Easily upload your files and get a secure, shareable URL instantly. All connections are protected with SSL.
+                    </p>
+                </div>
+            </section>
 
-    <p class="heading">Free for Life</p>
-    <p>No hidden costs, no subscriptions. MBD CDN is completely free forever.</p>
+            <!-- Upload Section -->
+            <section id="upload" class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 rounded-xl my-10 max-w-3xl mx-auto">
+                <div class="text-center">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Upload Your File</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">Get a shareable link in seconds.</p>
+                </div>
 
-    <p class="heading">Powered by Cloudflare</p>
-    <p>We leverage Cloudflare’s global edge network to ensure your content is delivered quickly and reliably anywhere in the world.</p>
+                <div class="mt-6">
+                    <label id="file-label" for="fileInput" class="file-input-label flex flex-col items-center justify-center w-full h-48 border-2 border-slate-300 dark:border-slate-700 border-dashed rounded-lg cursor-pointer bg-slate-50 dark:bg-slate-800">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <i class="fa-solid fa-cloud-arrow-up text-4xl text-slate-500 dark:text-slate-400"></i>
+                            <p class="my-2 text-sm text-slate-500 dark:text-slate-400"><span class="font-semibold text-sky-600 dark:text-sky-400">Click to upload</span> or drag and drop</p>
+                            <p id="file-name" class="text-xs text-slate-500 dark:text-slate-400"></p>
+                        </div>
+                        <input type="file" id="fileInput" class="hidden" />
+                    </label>
+                </div>
 
-    <hr>
-    <p class="heading">Upload Your File</p>
-    <input type="file" id="fileInput" />
-    <br><br>
-    <button id="uploadBtn">Upload & Get URL</button>
-    <p class="alt" id="result"></p>
+                <div class="mt-6">
+                    <button id="uploadBtn" class="w-full text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-md px-5 py-3 text-center transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="upload-btn-text">Upload & Get URL</span>
+                        <i id="upload-spinner" class="fa-solid fa-spinner fa-spin hidden"></i>
+                    </button>
+                    <div id="result" class="mt-4 text-center text-sm min-h-[20px]"></div>
+                </div>
+            </section>
 
-    <hr>
-    <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i> <button id="theme-toggle">Switch to Light Mode</button></p>
-    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="25" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
-  </div>
+        </main>
 
-  <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
+        <!-- Footer -->
+        <footer class="container mx-auto px-6 py-8 text-center text-slate-500 dark:text-slate-400 text-sm">
+            <div class="flex items-center justify-center space-x-4">
+                <p>&copy; 2024–<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i></p>
+                <button id="theme-toggle" class="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-sun text-slate-600 dark:text-slate-300 block dark:hidden"></i>
+                    <i class="fa-solid fa-moon text-slate-600 dark:text-slate-300 hidden dark:block"></i>
+                </button>
+            </div>
+            <div class="mt-4">
+                <iframe id="status-badge" src="https://status.madebydanny.uk/badge?theme=dark" width="220" height="30" frameborder="0" scrolling="no" class="inline-block rounded-md"></iframe>
+            </div>
+        </footer>
+    </div>
 
-    async function uploadFile() {
-      const fileInput = document.getElementById('fileInput');
-      const resultDiv = document.getElementById('result');
-      if (!fileInput.files.length) {
-        resultDiv.textContent = "Please select a file first.";
-        return;
-      }
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('file-label');
+        const fileNameDisplay = document.getElementById('file-name');
+        const resultDiv = document.getElementById('result');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadBtnText = document.getElementById('upload-btn-text');
+        const uploadSpinner = document.getElementById('upload-spinner');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const statusBadge = document.getElementById('status-badge');
 
-      const file = fileInput.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
+        // --- Theme Toggling ---
+        function updateTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                statusBadge.src = "https://status.madebydanny.uk/badge?theme=dark";
+            } else {
+                localStorage.setItem('theme', 'light');
+                statusBadge.src = "https://status.madebydanny.uk/badge?theme=light";
+            }
+        }
 
-      resultDiv.textContent = "Uploading...";
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            updateTheme();
+        });
+        
+        // Update status badge on initial load
+        updateTheme();
 
-      try {
-        const response = await fetch("https://cdn-upload.madebydanny.uk/upload", {
-          method: "POST",
-          body: formData
+
+        // --- File Upload Logic ---
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+
+        // Handle file selection and display name
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
         });
 
-        if (!response.ok) {
-          throw new Error("Upload failed. Status: " + response.status);
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileLabel.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
         }
 
-        const data = await response.json();
-        if (data.url) {
-          navigator.clipboard.writeText(data.url);
-          resultDiv.innerHTML = `✅ Uploaded! URL copied:<br><a href="${data.url}" target="_blank">${data.url}</a>`;
-        } else {
-          resultDiv.textContent = "Upload succeeded but no URL returned.";
-        }
-      } catch (err) {
-        resultDiv.textContent = "Error: " + err.message;
-      }
-    }
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileLabel.addEventListener(eventName, () => fileLabel.classList.add('dragover'), false);
+        });
 
-    document.getElementById("uploadBtn").addEventListener("click", uploadFile);
-  </script>
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileLabel.addEventListener(eventName, () => fileLabel.classList.remove('dragover'), false);
+        });
+
+        fileLabel.addEventListener('drop', (e) => {
+            fileInput.files = e.dataTransfer.files;
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        }, false);
+        
+        // Main upload function
+        async function uploadFile() {
+            if (!fileInput.files.length) {
+                resultDiv.innerHTML = `<span class="text-red-500">Please select a file first.</span>`;
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Update UI for loading state
+            resultDiv.textContent = "";
+            uploadBtn.disabled = true;
+            uploadBtnText.classList.add('hidden');
+            uploadSpinner.classList.remove('hidden');
+
+            try {
+                const response = await fetch("https://cdn-upload.madebydanny.uk/upload", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Upload failed with status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.url) {
+                    // Create a clickable link and a copy button
+                    resultDiv.innerHTML = `
+                        <div class="flex items-center justify-center bg-green-50 dark:bg-green-900/50 p-3 rounded-lg">
+                            <span class="text-green-600 dark:text-green-300 mr-2">✅ Success! URL copied.</span>
+                            <a href="${data.url}" target="_blank" class="text-sky-600 dark:text-sky-400 font-medium hover:underline truncate">${data.url}</a>
+                        </div>
+                    `;
+                    // Use execCommand for broader compatibility in sandboxed environments
+                    const tempInput = document.createElement('input');
+                    document.body.appendChild(tempInput);
+                    tempInput.value = data.url;
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+
+                } else {
+                    throw new Error("Upload succeeded but no URL was returned.");
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<span class="text-red-500">Error: ${err.message}</span>`;
+            } finally {
+                // Restore UI from loading state
+                uploadBtn.disabled = false;
+                uploadBtnText.classList.remove('hidden');
+                uploadSpinner.classList.add('hidden');
+            }
+        }
+
+        uploadBtn.addEventListener("click", uploadFile);
+
+    </script>
 </body>
 </html>
