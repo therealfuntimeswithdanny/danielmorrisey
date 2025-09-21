@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; 
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+        img-src 'self' https://public-cdn.madebydanny.uk data:; 
+        frame-src 'self' https://status.madebydanny.uk;
+        connect-src 'self' https://cdn-upload.madebydanny.uk;
+    ">
     <title>MBD CDN - Free, Fast & Powered by Cloudflare</title>
 
     <!-- Basic SEO -->
@@ -298,3 +308,4 @@
     </script>
 </body>
 </html>
+
