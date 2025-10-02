@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,113 +37,46 @@
 <body class="dark-mode">
   <div class="center">
     <div class="header">
-        <p class="title"><i class="fa-solid fa-database"></i> MBD CDN</p>
-        <p><a href="/"><i class="fa-solid fa-arrow-left"></i> Back to Home</a></p>
+      <p class="title"><i class="fa-solid fa-database"></i> MBD CDN</p>
+      <p><a href="/"><i class="fa-solid fa-arrow-left"></i> Back to Home</a></p>
     </div>
     <hr>
 
     <div class="features">
-        <div class="feature-card">
-            <h3><i class="fa-solid fa-bolt"></i> Fast & Global</h3>
-            <p>Powered by Cloudflare’s global edge network for lightning-fast delivery.</p>
-        </div>
-        <div class="feature-card">
-            <h3><i class="fa-solid fa-hand-holding-dollar"></i> Free for Life</h3>
-            <p>No hidden costs, no subscriptions. Completely free, forever.</p>
-        </div>
-        <div class="feature-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> Secure & Reliable</h3>
-            <p>Your files are served securely and reliably, anywhere in the world.</p>
-        </div>
+      <div class="feature-card">
+        <h3><i class="fa-solid fa-bolt"></i> Fast & Global</h3>
+        <p>Powered by Cloudflare’s global edge network for lightning-fast delivery.</p>
+      </div>
+      <div class="feature-card">
+        <h3><i class="fa-solid fa-hand-holding-dollar"></i> Free for Life</h3>
+        <p>No hidden costs, no subscriptions. Completely free, forever.</p>
+      </div>
+      <div class="feature-card">
+        <h3><i class="fa-solid fa-shield-halved"></i> Secure & Reliable</h3>
+        <p>Your files are served securely and reliably, anywhere in the world.</p>
+      </div>
     </div>
 
     <hr>
     <p class="heading">Upload Your File</p>
     <div id="drop-zone">
-        <p><i class="fa-solid fa-upload"></i> Drag & drop your file here, or click to select</p>
-        <input type="file" id="fileInput" hidden />
+      <p><i class="fa-solid fa-upload"></i> Drag & drop your file here, or click to select</p>
+      <input type="file" id="fileInput" hidden />
     </div>
+
+    <label style="display:block; margin-top:10px;">
+      <input type="checkbox" id="useImrs"> Use MBD IMRS (Image Optimization)
+    </label>
+
     <br>
     <button id="uploadBtn">Upload & Get URL</button>
     <p class="alt" id="result"></p>
 
     <hr>
-    <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i>
+    <p>&copy; 2024-<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i></p>
     <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="200" height="25" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
   </div>
 
-  <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('fileInput');
-    const uploadBtn = document.getElementById('uploadBtn');
-    const resultDiv = document.getElementById('result');
-
-    dropZone.addEventListener('click', () => fileInput.click());
-
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('drag-over');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('drag-over');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('drag-over');
-        const files = e.dataTransfer.files;
-        if (files.length) {
-            fileInput.files = files;
-            updateDropZoneText();
-        }
-    });
-    
-    fileInput.addEventListener('change', updateDropZoneText);
-
-    function updateDropZoneText() {
-        if (fileInput.files.length > 0) {
-            dropZone.querySelector('p').textContent = `✅ File selected: ${fileInput.files[0].name}`;
-        }
-    }
-
-    async function uploadFile() {
-      if (!fileInput.files.length) {
-        resultDiv.textContent = "Please select a file first.";
-        return;
-      }
-
-      const file = fileInput.files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-
-      resultDiv.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Uploading...';
-
-      try {
-        const response = await fetch("https://cdn-upload.madebydanny.uk/upload", {
-          method: "POST",
-          body: formData
-        });
-
-        if (!response.ok) {
-          throw new Error("Upload failed. Status: " + response.status);
-        }
-
-        const data = await response.json();
-        if (data.url) {
-          navigator.clipboard.writeText(data.url);
-          resultDiv.innerHTML = `✅ Uploaded! URL copied:<br><a href="${data.url}" target="_blank">${data.url}</a>`;
-        } else {
-          resultDiv.textContent = "Upload succeeded but no URL returned.";
-        }
-      } catch (err) {
-        resultDiv.textContent = "Error: " + err.message;
-      }
-    }
-
-    uploadBtn.addEventListener("click", uploadFile);
-  </script>
+  <script src="/js/cdn.js"></script>
 </body>
 </html>

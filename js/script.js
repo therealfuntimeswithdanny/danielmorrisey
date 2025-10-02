@@ -100,23 +100,81 @@ function setErrorUrl() {
 }
 
 /* ------------------------------------------------------------------ *
- * Initialise – run once now and then on an interval
+ * Main execution: runs when the DOM is ready
  * ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Grab all DOM elements ---
   dom = {
     postList: document.getElementById('post-list'),
     loading: document.getElementById('loading'),
     errorMessage: document.getElementById('error-message'),
-    body: document.body,
+    cdnFileInput: document.getElementById('cdn-file-input'),
+    cdnSelectBtn: document.getElementById('cdn-select-btn'),
+    cdnUploadBtn: document.getElementById('cdn-upload-btn'),
+    cdnFileName: document.getElementById('cdn-file-name'),
+    cdnStatus: document.getElementById('cdn-status'),
   };
 
-  // Set current year
-  const yearEl = document.getElementById('current-year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // Initialise utilities and start fetching posts
-  setErrorUrl();
-  setRootDomain();
+  // --- Set up RSS feed ---
   fetchPosts();
   setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
+
+  // --- Set up CDN Uploader ---
+  if (dom.cdnSelectBtn) {
+    dom.cdnSelectBtn.addEventListener('click', () => dom.cdnFileInput.click());
+  }
+
+  if (dom.cdnFileInput) {
+    dom.cdnFileInput.addEventListener('change', () => {
+      const file = dom.cdnFileInput.files[0];
+      if (file) {
+        dom.cdnFileName.textContent = `Selected: ${file.name}`;
+        toggleVisibility(dom.cdnUploadBtn, true);
+        toggleVisibility(dom.cdnSelectBtn, false);
+      }
+    });
+  }
+
+  if (dom.cdnUploadBtn) {
+    dom.cdnUploadBtn.addEventListener('click', async () => {
+      const file = dom.cdnFileInput.files[0];
+      if (!file) {
+        dom.cdnStatus.innerHTML = '<p style="color: red;">Please select a file first.</p>';
+        return;
+      }
+
+      dom.cdnStatus.innerHTML = '<p><i class="fa-solid fa-arrows-rotate fa-spin"></i> Uploading...</p>';
+      dom.cdnUploadBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('https://cdn-upload.madebydanny.uk/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          dom.cdnStatus.innerHTML = `<p style="color: green;">Success! <a href="https://imrs.madebydanny.uk/?url=${result.url}" target="_blank">View Image</a></p>`;
+        } else {
+          const errorText = await response.text();
+          dom.cdnStatus.innerHTML = `<p style="color: red;">Upload failed: ${errorText}</p>`;
+        }
+      } catch (error) {
+        dom.cdnStatus.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
+      } finally {
+        dom.cdnUploadBtn.disabled = false;
+        toggleVisibility(dom.cdnUploadBtn, false);
+        toggleVisibility(dom.cdnSelectBtn, true);
+        dom.cdnFileName.textContent = '';
+        dom.cdnFileInput.value = '';
+      }
+    });
+  }
+
+  // --- Other initializers ---
+  setRootDomain();
+  setErrorUrl();
 });
