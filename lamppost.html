@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lamppost - AI Image Generator</title>
+  <meta name="description" content="AI Image Generator powered by MBD AI, Cloudflare & Stable Diffusion">
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://madebydanny.uk"/>
+  <meta property="og:title" content="Lamppost - AI Image Generator"/>
+  <meta property="og:description" content="AI Image Generator powered by MBD AI, Cloudflare & Stable Diffusion"/>
+  <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-07%2F21-31-07_Untitled-6.png"/>
+  <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
+  <link rel="icon" href="https://public-cdn.madebydanny.uk/user-content/2025-10-07/21-32-35_lightbulb-solid-full-2.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --bg: rgba(0,0,0,0.6);
+      --accent: #ff4d4d;
+      --text: #fff;
+      --glass: rgba(255,255,255,0.1);
+      --radius: 16px;
+      --blur: 20px;
+    }
+
+    body {
+      font-family: "Fira Code", monospace;
+      background: url('https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-07%2F21-22-54_Untitled-5.png') no-repeat center center/cover;
+      color: var(--text);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--glass);
+      backdrop-filter: blur(var(--blur));
+      border-radius: var(--radius);
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a.active, nav a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      background: var(--glass);
+      backdrop-filter: blur(var(--blur));
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      margin-top: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.15);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    button, .btn {
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button:hover, .btn:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    #loading {
+      margin-top: 1rem;
+      display: none;
+      color: #ccc;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    #result img {
+      max-width: 100%;
+      border-radius: var(--radius);
+      margin-top: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .carousel {
+      margin-top: 2rem;
+      display: flex;
+      overflow: hidden;
+      border-radius: var(--radius);
+      max-width: 90%;
+      height: 180px;
+      border: 2px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .carousel img {
+      min-width: 100%;
+      object-fit: cover;
+      transition: transform 1s ease-in-out;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/index.html" target="_blank">Home</a>
+    <a class="active"href="/lamppost.html" target="_blank">Lamppost</a>
+    <a href="/src/cdn/index.html">MBD CDN</a>
+    <a href="/src/photos.html">Photos</a>
+  </nav>
+
+  <div class="container">
+    <h1><i class="fa-solid fa-lightbulb"></i> Lamppost</h1>
+    <p>AI Image Generator powered by MBD AI, Cloudflare & Stable Diffusion</p>
+
+    <form id="generateForm">
+      <input id="prompt" type="text" placeholder="Enter a prompt (e.g., 'cyberpunk cat in neon city')" required />
+      <button type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate</button>
+    </form>
+
+    <div id="loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i> Generating your image...</div>
+
+    <div id="result">
+      <img id="resultImg" alt="Generated Image" />
+      <div class="btn-group">
+        <a id="downloadBtn" class="btn" target="_blank"><i class="fa-solid fa-download"></i> Download</a>
+        <button id="copyBtn" class="btn"><i class="fa-regular fa-clipboard"></i> Copy Link</button>
+        <button id="shareBluesky" class="btn"><i class="fa-brands fa-bluesky"></i> Share</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    © 2024–<span id="year"></span> Made by Danny UK | Powered by Cloudflare + MBD AI
+  </footer>
+
+  <script>
+    const API_BASE = "https://lamp-post.madebydannyuk.workers.dev";
+    const form = document.getElementById("generateForm");
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
+    const img = document.getElementById("resultImg");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const prompt = document.getElementById("prompt").value.trim();
+      if (!prompt) return;
+
+      loading.style.display = "block";
+      result.style.display = "none";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/generate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt }),
+        });
+
+        const data = await res.json();
+        loading.style.display = "none";
+
+        if (data.url) {
+          result.style.display = "block";
+          img.src = `https://imrs.madebydanny.uk/?url=${encodeURIComponent(data.url)}`;
+          downloadBtn.href = data.url;
+
+          document.getElementById("copyBtn").onclick = () => {
+            navigator.clipboard.writeText(data.url);
+            alert("Copied image URL!");
+          };
+
+          document.getElementById("shareBluesky").onclick = () => {
+            const shareText = `Created with Lamppost AI: "${prompt}"\n${data.url}`;
+            const shareUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText)}`;
+            window.open(shareUrl, "_blank");
+          };
+        } else {
+          alert("Failed to generate image.");
+        }
+      } catch (err) {
+        loading.style.display = "none";
+        alert("Error generating image. Please try again.");
+      }
+    });
+
+    // Simple image carousel
+    const carousel = document.getElementById("carousel");
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % carousel.children.length;
+      carousel.style.transform = `translateX(-${index * 100}%)`;
+    }, 4000);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

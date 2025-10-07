@@ -170,6 +170,103 @@ nav a {
     border-radius: 4px;
 }
 
+#generateForm {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+#generateForm input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #2a2a2a;
+    color: #e0e0e0;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+}
+
+body.light-mode #generateForm input {
+    background: #ffffff;
+    color: #121212;
+    border: 1px solid #ddd;
+}
+
+#generateForm input:focus {
+    outline: 2px solid #f71900;
+    outline-offset: -2px;
+}
+
+#generateForm button,
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #f71900;
+    color: white;
+    cursor: pointer;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+#generateForm button:hover,
+.btn:hover {
+    background: #d41600;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+#loading {
+    text-align: center;
+    color: #f71900;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+#result {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#result img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode #result img {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.flex {
+    display: flex;
+}
+
+.gap-2 {
+    gap: 8px;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+nav a.active {
+    color: #f71900;
+    font-weight: 600;
+}
+
 @media (max-width: 600px) {
     body {
         margin: 20px;
@@ -187,5 +284,20 @@ nav a {
 
     .center {
         padding: 10px;
+    }
+
+    #generateForm {
+        flex-direction: column;
+    }
+
+    #generateForm button,
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #result .flex {
+        flex-direction: column;
+        width: 100%;
     }
 }
