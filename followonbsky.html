@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AT Profile Card</title>
+  <!-- Basic SEO -->
+  <meta name="description" content="Quick profile card to open an AT Protocol (Bluesky) profile in multiple clients." />
+  <meta name="keywords" content="Bluesky, AT Protocol, follow, profile card, madebydanny, Daniel Morrisey" />
+  <link rel="canonical" href="https://danielmorrisey.com/followonbsky.html" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Follow on Bluesky — {did}" />
+  <meta property="og:description" content="Open an AT Protocol profile in your preferred Bluesky client and follow." />
+  <meta property="og:url" content="https://danielmorrisey.com/followonbsky.html" />
+  <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-09%2F22-04-10_Screenshot%202025-10-09%20at%2018.02.18.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Follow on Bluesky — madebydanny.uk" />
+  <meta name="twitter:description" content="Open an AT Protocol profile in your preferred Bluesky client and follow." />
+  <meta name="twitter:image" content="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-09/21-47-54_bafkreiblkpgohlrv7utpv3iczw7p5ys7udlr2lpqxkvmdq2ovjztojukyi-fotor-bg-remover-20251009174522.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Follow on Bluesky",
+    "url": "https://danielmorrisey.com/followonbsky.html",
+    "description": "Quick profile card to open an AT Protocol profile in your preferred Bluesky client.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Daniel Morrisey",
+      "url": "https://danielmorrisey.com/"
+    }
+  }</script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg-light: #f5f5f5;
+      --text-light: #111;
+      --bg-dark: #0d0d0d;
+      --text-dark: #f9f9f9;
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1a1a1a;
+      --accent: #0070f3;
+    }
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+    }
+
+    .card {
+      background: var(--card-bg-light);
+      border-radius: 16px;
+      padding: 24px 32px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 320px;
+      text-align: center;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: var(--card-bg-dark);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    #info a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    #info a:hover { text-decoration: underline; }
+    #info {
+      margin-top: 16px;
+      font-size: 14px;
+      color: grey;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 2px solid var(--accent);
+    }
+
+    h2, p {
+      margin: 6px 0;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .links a img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .links a img:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 8px var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img id="avatar" class="avatar" src="" alt="Profile photo" />
+    <h2 id="displayName">Loading...</h2>
+    <p id="tagline"></p>
+
+    <div class="links">
+      <a id="bsky" target="_blank">
+        <img src="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-09%2F22-04-26_favicon-3.png" alt="Bluesky" />
+      </a>
+      <a id="deer" target="_blank">
+        <img src="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-09%2F21-47-54_bafkreiblkpgohlrv7utpv3iczw7p5ys7udlr2lpqxkvmdq2ovjztojukyi-fotor-bg-remover-20251009174522.png" alt="Deer Social" />
+      </a>
+      <a id="catsky" target="_blank">
+        <img src="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-09%2F21-50-50_favicon.png" alt="Catsky" />
+      </a>
+      <a id="blacksky" target="_blank">
+        <img src="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-09%2F21-52-03_favicon-2.png" alt="Blacksky" />
+      </a>
+    </div>
+    <p id="info" style="text-align: center;">by <a href="/followonbsky.html?did=did:plc:l37td5yhxl2irrzrgvei4qay">@madebydanny.uk</a>, add a client <a herf="https://tally.so/r/nrzQDl" target="_blank">here</a></p>
+  </div>
+
+  <script>
+    async function loadProfile() {
+      const params = new URLSearchParams(window.location.search);
+      const did = params.get("did");
+      if (!did) {
+        document.getElementById("displayName").textContent = "Missing ?did=";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${did}`);
+        const data = await res.json();
+
+        document.getElementById("tagline").textContent = "@" + (data.handle || did) + " is on the at protocol, pick your bluesky client to follow them!";
+        document.getElementById("avatar").src = data.avatar || "";
+        document.getElementById("displayName").textContent = data.displayName || "Unknown User";
+
+        // Set profile links for AT Protocol apps
+        document.getElementById("bsky").href = `https://bsky.app/profile/${data.handle}`;
+        document.getElementById("deer").href = `https://deer.social/profile/${data.handle}`;
+        document.getElementById("catsky").href = `https://catsky.app/profile/${data.handle}`;
+        document.getElementById("blacksky").href = `https://blacksky.app/profile/${data.handle}`;
+      } catch (err) {
+        document.getElementById("displayName").textContent = "Profile not found";
+      }
+    }
+
+    loadProfile();
+  </script>
+</body>
+</html>

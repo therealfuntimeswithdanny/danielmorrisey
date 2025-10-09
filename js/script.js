@@ -4,7 +4,7 @@
 const CONFIG = {
   FEED_URL: 'https://medium.com/feed/@danielmorrisey',
   PROXY_URL: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  POSTS_TO_SHOW: 5,
+  POSTS_TO_SHOW: 7,
   REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
 
@@ -33,7 +33,6 @@ function createPostItem({ title = '(no title)', link = '#' }) {
   a.textContent = title;
   a.target = '_blank';
 
-  icn.className = 'fa-solid fa-arrow-up-right-from-square';
   icn.style.marginLeft = '5px';
 
   p.appendChild(a);
