@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------ */
 const CONFIG = {
   FEED_URL: 'https://medium.com/feed/@danielmorrisey',
-  PROXY_URL: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  PROXY_URL: (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
   POSTS_TO_SHOW: 7,
   REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
@@ -176,4 +176,46 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Other initializers ---
   setRootDomain();
   setErrorUrl();
+  // --- Alt RSS feed ---
+  fetchAltFeed();
 });
+
+/* ------------------------------------------------------------------ */
+/* Fetch and render RSS feed from alternative source via corsproxy.io */
+/* ------------------------------------------------------------------ */
+async function fetchAltFeed() {
+  const container = document.getElementById('alt-feed');
+  if (!container) return;
+  const feedUrl = 'https://danielmorriseyaltq.leaflet.pub/rss';
+  container.innerHTML = '<p class="alt">Loading feed…</p>';
+
+  try {
+    const res = await fetch(CONFIG.PROXY_URL(feedUrl));
+    if (!res.ok) throw new Error(`Network error fetching feed: ${res.status}`);
+
+    const raw = await res.text();
+    // Parse as XML RSS/Atom
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(raw, 'application/xml');
+
+    const items = [...xml.querySelectorAll('item, entry')].slice(0, 7);
+    container.innerHTML = '';
+    if (items.length === 0) {
+      container.innerHTML = '<p class="alt">No items found in the feed.</p>';
+      return;
+    }
+
+    items.forEach((it) => {
+      const title = it.querySelector('title')?.textContent || '(no title)';
+      const link = it.querySelector('link')?.getAttribute('href') || it.querySelector('link')?.textContent || '#';
+
+      const el = document.createElement('div');
+      el.className = 'feed-item';
+      el.innerHTML = `<p class="feed-title"><a href="${link}" target="_blank">${title}</a></p>`;
+      container.appendChild(el);
+    });
+  } catch (err) {
+    console.error('Alt feed error', err);
+    container.innerHTML = '<p class="alt">Unable to load feed.</p>';
+  }
+}

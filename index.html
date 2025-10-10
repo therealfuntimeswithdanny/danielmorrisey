@@ -24,12 +24,6 @@
     <script src="/js/theme.js" defer></script>
 </head>
 <body class="dark-mode">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/src/cdn/index.html">MBD CDN</a>
-        <a href="/src/photos.html">Photos</a>
-        <a href="/lamppost/index.html" target="_blank">Lamppost</a>
-    </nav>
     <div class="center">
         <div class="hero-image">
             <img class="hero-banner" src="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fmedia%2Fbanner.jpg" alt="Daniel Morrisey Banner">
@@ -45,7 +39,7 @@
                     <a href="https://github.com/therealfuntimeswithdanny" target="_blank" class="btn secondary github"><i class="fa-brands fa-github"></i> Github</a>
                     <a href="/src/email.html" class="btn secondary email"><i class="fa-solid fa-envelope"></i> Email</a>
                     <a href="https://discord.gg/VM7MfJnGFF" target="_blank" class="btn secondary discord"><i class="fa-brands fa-discord"></i> Discord</a>
-                    <a href="http://danielmorriseyaltq.leaflet.pub" target="_blank" class="btn secondary leaf"><i class="fa-sold fas fa-leaf"></i> Leaflet</a>
+                    <a href="http://danielmorriseyaltq.leaflet.pub" target="_blank" class="btn secondary leaf"><i class="fa-solid fas fa-leaf"></i> Leaflet</a>
                 </div>
             </div>
         </div>
@@ -53,28 +47,23 @@
     <div class="cards-container">
          <div class="card">
             <p class="heading">My Projects</p>
-            <p><a href="/followonbsky.html"><i class="fa-solid far fa-at"></i> Follow on bsky</a> - Open an AT Protocol profile in your preferred Bluesky client and follow</p>
-            <p><a href="/src/cdn/index.html"><i class="fa-solid far fa-lightbulb"></i> Lmappost</a> - AI Image generation</p>
+            <p><a href="/followonbsky.html"><i class="fa-solid fa-at"></i> Follow on bsky</a> - Open an AT Protocol profile in your preferred Bluesky client and follow</p>
+            <p><a href="/lamppost.html"><i class="fa-solid fa-lightbulb"></i> Lamppost</a> - AI Image generation</p>
             <p><a href="/src/cdn/index.html"><i class="fa-solid fa-image"></i> imrs</a> - Image Optimization on the Edge</p>
             <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - A free-for-life content delivery network</p>
-            <p><a href="/src/photos.html"><i class="fa-solid fa-images"></i> My Photos</a> - A collection of my photography</p>
         </div>
         <div class="card">
-            <p class="heading">Latest Posts</p>
+            <p class="heading">Latest Medium Posts</p>
             <ul id="post-list"></ul>
             <div id="loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i>Loading…</div>
             <div id="error-message" style="display:none;color:red;"></div>
         </div>
         <div class="card">
-            <p class="heading">Some of my Photos</p>
-            <div class="photo-gallery">
-                <img src="https://img.madebydanny.uk/img/upload-3/DSC_3765.avif" alt="Photo 1">
-                <img src="https://img.madebydanny.uk/img/upload-3/DSC_3793.avif" alt="Photo 2">
-                <img src="https://img.madebydanny.uk/img/upload-3/DSC_3535.avif" alt="Photo 3">
-                <img src="https://img.madebydanny.uk/img/upload-2/DSC_2852.avif" alt="Photo 3">
-
+            <p class="heading">Latest Leaflet Post</p>
+            <div id="alt-feed">
+                <p class="alt">Loading feed…</p>
             </div>
-            <p><a href="/src/photos.html">View more...</a></p>
+            <p><a href="https://danielmorriseyaltq.leaflet.pub/" target="_blank">View full feed</a></p>
         </div>
         <div class="card">
             <p class="heading">MBD CDN</p>

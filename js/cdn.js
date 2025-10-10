@@ -53,24 +53,42 @@ async function uploadFile() {
       body: formData
     });
 
-    if (!response.ok) {
-      throw new Error("Upload failed. Status: " + response.status);
-    }
+    if (!response.ok) throw new Error("Upload failed. Status: " + response.status);
 
     const data = await response.json();
-    if (data.url) {
-      let finalUrl = data.url;
-
-      // If user enabled IMRS and it's an image
-      if (useImrsCheckbox.checked && file.type.startsWith("image/")) {
-        finalUrl = `https://imrs.madebydanny.uk?url=${encodeURIComponent(data.url)}`;
-      }
-
-      navigator.clipboard.writeText(finalUrl);
-      resultDiv.innerHTML = `✅ Uploaded! URL copied:<br><a href="${finalUrl}" target="_blank">${finalUrl}</a>`;
-    } else {
+    if (!data.url) {
       resultDiv.textContent = "Upload succeeded but no URL returned.";
+      return;
     }
+
+    let finalUrl = data.url;
+
+    // If IMRS is checked and file is an image
+    if (useImrsCheckbox.checked && file.type.startsWith("image/")) {
+      finalUrl = `https://imrs.madebydanny.uk?url=${encodeURIComponent(data.url)}`;
+    }
+
+    // Detect Office file types
+    const officeExtensions = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'];
+    const isOfficeFile = officeExtensions.some(ext =>
+      file.name.toLowerCase().endsWith(ext)
+    );
+
+    // Build readable text-based output
+    let outputHTML = `
+      <p>✅ Uploaded Successfully!</p>
+      <p><strong>CDN Link:</strong> <a href="${finalUrl}" target="_blank">${finalUrl}</a></p>
+    `;
+
+    if (isOfficeFile) {
+      const officeViewerUrl = `office.html?file=${encodeURIComponent(finalUrl)}`;
+      outputHTML += `
+        <p><strong>Office Viewer:</strong> <a href="${officeViewerUrl}" target="_blank">${officeViewerUrl}</a></p>
+      `;
+    }
+
+    resultDiv.innerHTML = outputHTML;
+
   } catch (err) {
     resultDiv.textContent = "Error: " + err.message;
   }

@@ -45,6 +45,11 @@ hr {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+.types {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #bbb;
+}
 #theme-toggle {
     background: none;
     border: none;

@@ -344,3 +344,48 @@ nav a.active {
         width: 100%;
     }
 }
+
+/* Bluesky feed */
+#bsky-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.bsky-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.bsky-item .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex: 0 0 48px;
+  object-fit: cover;
+}
+
+.bsky-item .body {
+  flex: 1;
+}
+
+.bsky-item .meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.bsky-item .text {
+  white-space: pre-wrap;
+}
+
+/* small responsive tweak */
+@media (max-width: 600px) {
+  .bsky-item { gap: 10px; }
+  .bsky-item .avatar { width:40px; height:40px; }
+}
