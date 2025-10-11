@@ -1,14 +1,17 @@
+// Update current year in footer
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
+// DOM elements
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('fileInput');
 const uploadBtn = document.getElementById('uploadBtn');
 const resultDiv = document.getElementById('result');
 const useImrsCheckbox = document.getElementById('useImrs');
 
+// --- Drag & Drop functionality ---
 dropZone.addEventListener('click', () => fileInput.click());
 
-dropZone.addEventListener('dragover', (e) => {
+dropZone.addEventListener('dragover', e => {
   e.preventDefault();
   dropZone.classList.add('drag-over');
 });
@@ -17,24 +20,27 @@ dropZone.addEventListener('dragleave', () => {
   dropZone.classList.remove('drag-over');
 });
 
-dropZone.addEventListener('drop', (e) => {
+dropZone.addEventListener('drop', e => {
   e.preventDefault();
   dropZone.classList.remove('drag-over');
-  const files = e.dataTransfer.files;
-  if (files.length) {
-    fileInput.files = files;
+  if (e.dataTransfer.files.length) {
+    fileInput.files = e.dataTransfer.files;
     updateDropZoneText();
   }
 });
 
+// Update drop zone text when file is selected
 fileInput.addEventListener('change', updateDropZoneText);
 
 function updateDropZoneText() {
-  if (fileInput.files.length > 0) {
-    dropZone.querySelector('p').textContent = `✅ File selected: ${fileInput.files[0].name}`;
+  if (fileInput.files.length) {
+    dropZone.querySelector('p').innerHTML = `✅ Selected: ${fileInput.files[0].name}`;
+  } else {
+    dropZone.querySelector('p').innerHTML = `<i class="fa-solid fa-upload"></i> Drag & drop your file here, or click to select`;
   }
 }
 
+// --- Upload function ---
 async function uploadFile() {
   if (!fileInput.files.length) {
     resultDiv.textContent = "Please select a file first.";
@@ -43,55 +49,36 @@ async function uploadFile() {
 
   const file = fileInput.files[0];
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append('file', file);
 
   resultDiv.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Uploading...';
 
   try {
-    const response = await fetch("https://cdn-upload.madebydanny.uk/upload", {
-      method: "POST",
+    const response = await fetch('https://cdn-upload.madebydanny.uk/upload', {
+      method: 'POST',
       body: formData
     });
 
-    if (!response.ok) throw new Error("Upload failed. Status: " + response.status);
-
     const data = await response.json();
-    if (!data.url) {
-      resultDiv.textContent = "Upload succeeded but no URL returned.";
-      return;
-    }
 
+    if (!response.ok) throw new Error(data.error || 'Upload failed');
+
+    // Construct final URL
     let finalUrl = data.url;
 
-    // If IMRS is checked and file is an image
-    if (useImrsCheckbox.checked && file.type.startsWith("image/")) {
-      finalUrl = `https://imrs.madebydanny.uk?url=${encodeURIComponent(data.url)}`;
+    // Apply IMRS if checked and file is an image (avoid .avif)
+    if (useImrsCheckbox.checked && file.type.startsWith('image/') && !file.name.endsWith('.avif')) {
+      finalUrl = `https://imrs.madebydanny.uk?url=${encodeURIComponent(finalUrl)}`;
     }
 
-    // Detect Office file types
-    const officeExtensions = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'];
-    const isOfficeFile = officeExtensions.some(ext =>
-      file.name.toLowerCase().endsWith(ext)
-    );
+    // Copy URL to clipboard
+    await navigator.clipboard.writeText(finalUrl);
 
-    // Build readable text-based output
-    let outputHTML = `
-      <p>✅ Uploaded Successfully!</p>
-      <p><strong>CDN Link:</strong> <a href="${finalUrl}" target="_blank">${finalUrl}</a></p>
-    `;
-
-    if (isOfficeFile) {
-      const officeViewerUrl = `office.html?file=${encodeURIComponent(finalUrl)}`;
-      outputHTML += `
-        <p><strong>Office Viewer:</strong> <a href="${officeViewerUrl}" target="_blank">${officeViewerUrl}</a></p>
-      `;
-    }
-
-    resultDiv.innerHTML = outputHTML;
-
+    resultDiv.innerHTML = `✅ Uploaded! URL copied:<br><a href="${finalUrl}" target="_blank">${finalUrl}</a>`;
   } catch (err) {
     resultDiv.textContent = "Error: " + err.message;
   }
 }
 
-uploadBtn.addEventListener("click", uploadFile);
+// Attach upload function to button
+uploadBtn.addEventListener('click', uploadFile);

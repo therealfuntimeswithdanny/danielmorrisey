@@ -198,7 +198,20 @@ async function fetchAltFeed() {
     const parser = new DOMParser();
     const xml = parser.parseFromString(raw, 'application/xml');
 
-    const items = [...xml.querySelectorAll('item, entry')].slice(0, 7);
+    let items = [...xml.querySelectorAll('item, entry')];
+
+    // Parse dates where available and sort newest-first
+    items = items.map((it) => {
+      const pub = it.querySelector('pubDate')?.textContent || it.querySelector('updated')?.textContent || it.querySelector('published')?.textContent || '';
+      const ts = pub ? Date.parse(pub) : 0;
+      return { node: it, ts };
+    });
+
+    items.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+
+    // Limit to first 7 after sorting
+    items = items.slice(0, 7).map(i => i.node);
+
     container.innerHTML = '';
     if (items.length === 0) {
       container.innerHTML = '<p class="alt">No items found in the feed.</p>';
