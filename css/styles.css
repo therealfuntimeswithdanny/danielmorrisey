@@ -74,10 +74,6 @@ img{
     gap: 0px;
     font-size: 20px;
 }
-img {
-    max-width: 100%;
-    height: auto;
-}
 .alt {
     font-size: 14px;
     color: var(--muted);
@@ -233,7 +229,7 @@ body.light-mode #generateForm input {
     padding: 10px 12px;
     border-radius: 10px;
     border: none;
-    background: #2a2a2a;
+    background: var(--panel);
     color: var(--text);
     font-family: 'Fira Code', monospace;
     font-size: 14px;
