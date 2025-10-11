@@ -178,6 +178,8 @@ nav a {
 .socials-list a.bluesky:hover { background: #0ea5e9; color: white; }
 .socials-list a.medium:hover { background: black; color: #fff; }
 .socials-list a.github:hover { background: black; color: #fff; }
+.socials-list a.threads:hover { background: black; color: #fff; }
+.socials-list a.insta:hover { background: rgb(238, 88, 196); color: #fff; }
 .socials-list a.email:hover { background: #ff6b6b; color: #fff; }
 .socials-list a.discord:hover { background: #5865f2; color: #fff; }
 .socials-list a.leaf:hover { background: #FFE577; color: #659736; }
@@ -449,4 +451,83 @@ nav a.active {
 @media (max-width: 600px) {
   .bsky-item { gap: 10px; }
   .bsky-item .avatar { width:40px; height:40px; }
+}/* --- MBD SEO Analyzer Additions --- */
+
+#seoForm {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+#seoForm input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+body.light-mode #seoForm input {
+  background: #ffffff;
+  color: #121212;
+  border: 1px solid #ddd;
+}
+
+#seoForm input:focus {
+  outline: 2px solid #f71900;
+  outline-offset: -2px;
+}
+
+#loading {
+  text-align: center;
+  color: var(--accent);
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+#result {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#og-image-preview img {
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+#og-image-preview img:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.card ul li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  #seoForm {
+    flex-direction: column;
+  }
+
+  #seoForm button {
+    width: 100%;
+  }
+
+  #og-image-preview img {
+    max-width: 100%;
+  }
 }
