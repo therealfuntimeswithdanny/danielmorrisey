@@ -118,6 +118,54 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchPosts();
   setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
 
+  // --- Mini Lamppost ---
+  const miniPrompt = document.getElementById('mini-prompt');
+  const miniBtn = document.getElementById('mini-generate');
+  if (miniBtn && miniPrompt) {
+    miniBtn.addEventListener('click', async () => {
+      const val = miniPrompt.value.trim();
+      if (!val) return;
+
+      const loadingEl = document.getElementById('mini-loading');
+      const resultEl = document.getElementById('mini-result');
+      const imgEl = document.getElementById('mini-img');
+      const dlBtn = document.getElementById('mini-download');
+      const copyBtn = document.getElementById('mini-copy');
+
+      loadingEl.style.display = '';
+      resultEl.style.display = 'none';
+
+      try {
+        const API_BASE = 'https://lamp-post.madebydannyuk.workers.dev';
+        const res = await fetch(`${API_BASE}/api/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: val }),
+        });
+
+        const data = await res.json();
+        loadingEl.style.display = 'none';
+
+        if (data?.url) {
+          imgEl.src = `https://imrs.madebydanny.uk/?url=${encodeURIComponent(data.url)}`;
+          dlBtn.href = data.url;
+          resultEl.style.display = '';
+
+          copyBtn.onclick = () => {
+            navigator.clipboard.writeText(data.url);
+          };
+        } else {
+          loadingEl.style.display = 'none';
+          alert('Failed to generate image.');
+        }
+      } catch (err) {
+        loadingEl.style.display = 'none';
+        console.error('Mini Lamppost error', err);
+        alert('Error generating image.');
+      }
+    });
+  }
+
   // --- Set up CDN Uploader ---
   if (dom.cdnSelectBtn) {
     dom.cdnSelectBtn.addEventListener('click', () => dom.cdnFileInput.click());

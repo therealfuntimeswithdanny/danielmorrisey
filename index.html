@@ -14,10 +14,14 @@
     <meta property="og:url" content="https://danielmorrisey.com/"/>
     <meta property="og:title" content="Daniel Morrisey - Home"/>
     <meta property="og:description" content="Writer @ Code and Chaos & HTML, CSS, Javascript & Python developer"/>
-    <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-11%2F1760201263848_Untitled(34).png"/>
+    <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760213121249_Untitled(35).png"/>
+    <!-- spooky <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760213121249_Untitled(35).png"/>-->
+    <!-- none   <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-11%2F1760201263848_Untitled(34).png"/>-->
     <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
     <link rel="me" href="https://mastodon.social/@danielmorrisey"/>
-    <link rel="icon" type="image/x-icon" href="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/media/icon.jpg">
+    <!--none    <link rel="icon" type="image/x-icon" href="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/media/icon.jpg">-->
+    <!-- spopky <link rel="icon" type="image/x-icon" href="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760212951300_bafkreicr3mkjy6y5d3ajlsbqwvzf4547v7mywqt6gmajd5a6nqszmddaue.jpg">-->
+    <link rel="icon" type="image/x-icon" href="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760212951300_bafkreicr3mkjy6y5d3ajlsbqwvzf4547v7mywqt6gmajd5a6nqszmddaue.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/script.js" defer></script>
@@ -76,6 +80,24 @@
                 </div>
                 <p id="cdn-file-name"></p>
                 <div id="cdn-status"></div>
+            </div>
+        </div>
+        <div class="card">
+            <p class="heading">Lamppost</p>
+            <p>Quickly generate images for free</p>
+            <div class="mini-lamppost">
+                <input type="text" id="mini-prompt" placeholder="e.g. neon fox in a rainstorm" />
+                <div class="button-group">
+                    <button id="mini-generate" class="btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate</button>
+                </div>
+                <div id="mini-loading" style="display:none; margin-top:0.5rem;"><i class="fa-solid fa-arrows-rotate fa-spin"></i> Generating…</div>
+                <div id="mini-result" style="display:none; margin-top:0.5rem;">
+                    <img id="mini-img" src="" alt="Generated" style="max-width:100%; border-radius:8px; display:block; margin-bottom:0.5rem;" />
+                    <div class="button-group">
+                        <a id="mini-download" class="btn" target="_blank"><i class="fa-solid fa-download"></i> Download</a>
+                        <button id="mini-copy" class="btn"><i class="fa-regular fa-clipboard"></i> Copy Link</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
