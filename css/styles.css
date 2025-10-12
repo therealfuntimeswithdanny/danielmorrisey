@@ -74,6 +74,10 @@ img{
     gap: 0px;
     font-size: 20px;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
 .alt {
     font-size: 14px;
     color: var(--muted);
@@ -174,8 +178,6 @@ nav a {
 .socials-list a.bluesky:hover { background: #0ea5e9; color: white; }
 .socials-list a.medium:hover { background: black; color: #fff; }
 .socials-list a.github:hover { background: black; color: #fff; }
-.socials-list a.threads:hover { background: black; color: #fff; }
-.socials-list a.insta:hover { background: rgb(238, 88, 196); color: #fff; }
 .socials-list a.email:hover { background: #ff6b6b; color: #fff; }
 .socials-list a.discord:hover { background: #5865f2; color: #fff; }
 .socials-list a.leaf:hover { background: #FFE577; color: #659736; }
@@ -214,67 +216,6 @@ body.light-mode #generateForm input {
 #generateForm input:focus {
     outline: 2px solid #f71900;
     outline-offset: -2px;
-}
-
-/* Mini Lamppost styling */
-.mini-lamppost {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.mini-lamppost input#mini-prompt {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: none;
-    background: var(--panel);
-    color: var(--text);
-    font-family: 'Fira Code', monospace;
-    font-size: 14px;
-}
-
-body.light-mode .mini-lamppost input#mini-prompt {
-    background: #fff;
-    color: #121212;
-    border: 1px solid #ddd;
-}
-
-.mini-lamppost input#mini-prompt:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: -2px;
-}
-
-#mini-loading {
-    color: var(--muted);
-    font-size: 13px;
-}
-
-#mini-result {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
-}
-
-#mini-result img#mini-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
-}
-
-/* Ensure mini buttons follow same visual style but slightly smaller */
-.mini-lamppost .button-group .btn {
-    padding: 8px 10px;
-    font-size: 13px;
-    border-radius: 8px;
-}
-
-@media (max-width: 600px) {
-    .mini-lamppost input#mini-prompt { font-size: 14px; }
-    .mini-lamppost .button-group .btn { width: 100%; }
 }
 
 #generateForm button,
@@ -402,128 +343,4 @@ nav a.active {
         flex-direction: column;
         width: 100%;
     }
-}
-
-/* Bluesky feed */
-#bsky-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.bsky-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  padding: 12px;
-  border-radius: 8px;
-}
-
-.bsky-item .avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  flex: 0 0 48px;
-  object-fit: cover;
-}
-
-.bsky-item .body {
-  flex: 1;
-}
-
-.bsky-item .meta {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-.bsky-item .text {
-  white-space: pre-wrap;
-}
-
-/* small responsive tweak */
-@media (max-width: 600px) {
-  .bsky-item { gap: 10px; }
-  .bsky-item .avatar { width:40px; height:40px; }
-}/* --- MBD SEO Analyzer Additions --- */
-
-#seoForm {
-  display: flex;
-  gap: 12px;
-  margin: 20px 0;
-}
-
-#seoForm input {
-  flex: 1;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: none;
-  background: #2a2a2a;
-  color: #e0e0e0;
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
-}
-
-body.light-mode #seoForm input {
-  background: #ffffff;
-  color: #121212;
-  border: 1px solid #ddd;
-}
-
-#seoForm input:focus {
-  outline: 2px solid #f71900;
-  outline-offset: -2px;
-}
-
-#loading {
-  text-align: center;
-  color: var(--accent);
-  margin: 20px 0;
-  font-size: 14px;
-}
-
-#result {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-#og-image-preview img {
-  max-width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-}
-
-#og-image-preview img:hover {
-  transform: scale(1.02);
-  transition: transform 0.2s ease;
-}
-
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: var(--accent);
-}
-
-.card ul li {
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  #seoForm {
-    flex-direction: column;
-  }
-
-  #seoForm button {
-    width: 100%;
-  }
-
-  #og-image-preview img {
-    max-width: 100%;
-  }
 }

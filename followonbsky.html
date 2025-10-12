@@ -1,162 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Follow on Bluesky — madebydanny.uk</title>
-
   <meta name="description" content="Quick profile card to open an AT Protocol (Bluesky) profile in multiple clients." />
   <meta name="robots" content="index, follow" />
 
   <style>
-    :root {
-      --bg: #0d0d0d;
-      --card-bg: #1a1a1a;
-      --text: #f5f5f5;
-      --accent: #0070f3;
+    :root{
+      --bg:#0d0d0d;
+      --card:#141414;
+      --muted:#bdbdbd;
+      --accent:#0070f3;
+      --glass:rgba(255,255,255,0.02);
+      --radius:14px;
+      --maxw:360px;
     }
 
-    body {
-      font-family: system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      background:linear-gradient(180deg,var(--bg),#050505);
+      color:#f7f7f7;
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 24px 32px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
-      max-width: 340px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.6s ease forwards;
+    .card{
+      width:100%;
+      max-width:var(--maxw);
+      background:linear-gradient(180deg,var(--card),#0f0f0f);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      text-align:center;
+      transition:transform .14s ease,box-shadow .14s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,0.7)}
+
+    .profile{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+    }
+    .avatar{
+      width:86px;height:86px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid var(--accent);
+      background:linear-gradient(180deg,#222,#0a0a0a);
+    }
+    .name{margin:8px 0 0;font-size:1.05rem;font-weight:600}
+    .tagline{margin:6px 0 0;color:var(--muted);font-size:.9rem}
+
+    .links{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .link{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-radius:10px;
+      text-decoration:none;
+      background:var(--glass);
+      color:inherit;
+      transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease;
+    }
+    .link img{width:28px;height:28px;border-radius:6px;flex:0 0 28px}
+    .link .label{font-weight:600;font-size:.95rem}
+    .link:hover{transform:translateY(-4px);background:#fff}
+
+    /* Brand hover colors */
+    .link.bsky:hover{color:#1083fd;box-shadow:0 0 12px rgba(2,133,255,0.4)}
+    .link.deer:hover{color:#749f7a;box-shadow:0 0 12px rgba(97,255,134,0.4)}
+    .link.catsky:hover{color:#cca6f7;box-shadow:0 0 12px rgba(162,0,255,0.4)}
+    .link.blacksky:hover{color:#000;box-shadow:0 0 12px rgba(255,255,255,0.2)}
+    .link.anisota:hover{color:#c28431;background:#000;box-shadow:0 0 12px rgba(255,69,0,0.4)}
+
+    .controls{
+      margin-top:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .control-row{display:flex;gap:8px;align-items:center}
+    .control-row input{
+      flex:1;
+      padding:9px 10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.04);
+      background:transparent;
+      color:inherit;
+      outline:none;
+    }
+    .control-row button{
+      padding:9px 12px;
+      border-radius:8px;
+      border:0;
+      cursor:pointer;
+      background:var(--accent);
+      color:white;
+      font-weight:600;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; transform: none; }
+    .meta{
+      margin-top:16px;
+      font-size:13px;
+      color:var(--muted);
+      text-align:left;
     }
+    .meta a{color:var(--accent);text-decoration:none}
+    .meta a:hover{text-decoration:underline}
 
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 12px;
-      border: 2px solid var(--accent);
+    @media(max-width:380px){
+      :root{--maxw:100%}
+      .links{grid-template-columns:1fr}
     }
-
-    h2, p { margin: 6px 0; }
-
-    .tagline { font-size: 0.9rem; margin-top: 8px; opacity: 0.9; }
-
-    .links { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
-
-    .link {
-      display: flex; align-items: center; justify-content: flex-start; width: 100%; background: rgba(255,255,255,0.02);
-      color: inherit; text-decoration: none; padding: 10px 14px; border-radius: 12px; transition: all 0.25s ease;
-    }
-
-    .link img { width: 28px; height: 28px; margin-right: 10px; border-radius: 6px; }
-    .link span { font-weight: 500; }
-
-    /* Brand Hover Colors */
-    .link.bsky:hover { background: #ffffff; color: #1083fd; transform: translateY(-3px); box-shadow: 0 0 12px rgba(2,133,255,0.4); }
-    .link.deer:hover { background: #ffffff; color: #749f7a; transform: translateY(-3px); box-shadow: 0 0 12px rgba(255,111,97,0.4); }
-    .link.catsky:hover { background: #ffffff; color: #cca6f7; transform: translateY(-3px); box-shadow: 0 0 12px rgba(255,183,0,0.4); }
-    .link.blacksky:hover { background: #ffffff; color: #000000; transform: translateY(-3px); box-shadow: 0 0 12px rgba(255,255,255,0.2); }
-
-    #info { margin-top: 16px; font-size: 13px; color: #bdbdbd; }
-    #info a { color: var(--accent); text-decoration: none; }
-    #info a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-   <div class="card">
-    <img id="avatar" class="avatar" src="" alt="Profile photo" />
-    <h2 id="displayName">Loading...</h2>
-    <p id="tagline" class="tagline"></p>
+  <main class="card" role="main" aria-labelledby="displayName">
+    <section class="profile" aria-live="polite">
+      <img id="avatar" class="avatar" src="" alt="Profile avatar" />
+      <h2 id="displayName" class="name">Loading…</h2>
+      <div id="tagline" class="tagline"></div>
+    </section>
 
-    <div class="links" id="links"></div>
+    <nav id="links" class="links" aria-label="Open in client"></nav>
 
-    <p id="info">
+    <section class="controls" aria-label="Actions">
+      <div class="control-row">
+        <input id="try-handle" type="text" placeholder="yourhandle.com or did:plc:..." aria-label="Try with your profile" />
+        <button id="try-button" type="button">Try</button>
+      </div>
+      <div class="control-row">
+        <input id="custom-client" type="url" placeholder="https://client.example" aria-label="Custom client base URL" />
+        <button id="custom-open" type="button">Open</button>
+      </div>
+    </section>
+
+    <p class="meta" style="text-align: center;">
       by <a href="/followonbsky.html?did=did:plc:l37td5yhxl2irrzrgvei4qay">@madebydanny.uk</a>,
-      add a client <a href="https://tally.so/r/nrzQDl" target="_blank">here</a>
+      add a client <a href="https://tally.so/r/nrzQDl" target="_blank" rel="noopener">here</a>
     </p>
-  </div>
+  </main>
 
   <script>
-    const clients = [
-      {
-        name: "Bluesky",
-        url: "https://bsky.app/profile/",
-        icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/bsky.png",
-        class: "bsky"
-      },
-      {
-        name: "Deer Social",
-        url: "https://deer.social/profile/",
-        icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/deer-social.png",
-        class: "deer"
-      },
-      {
-        name: "Catsky",
-        url: "https://catsky.social/profile/",
-        icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/catsky.png",
-        class: "catsky"
-      },
-      {
-        name: "Blacksky",
-        url: "https://blacksky.community/profile/",
-        icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/black-sky.png",
-        class: "blacksky"
+    (function () {
+      const clients = [
+        { name: "Bluesky", base: "https://bsky.app/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/bsky.png", cls: "bsky" },
+        { name: "Deer Social", base: "https://deer.social/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/deer-social.png", cls: "deer" },
+        { name: "Catsky", base: "https://catsky.social/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/catsky.png", cls: "catsky" },
+        { name: "Blacksky", base: "https://blacksky.community/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/black-sky.png", cls: "blacksky" },
+        { name: "anisota", base: "https://anisota.net/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760219737665_bafkreico43sttmdhwk5vu5veou3bu6amu3s2cgvvqwpav6mrnpv5gz5icq.jpg", cls: "anisota" },
+        { name: "Deer (ayla fork)", base: "https://deer.aylac.top/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760222708511_bafkreihiorp2tzyfjovyne3pv6tsxdy4vilfunodi7z2u4fancgvyo25xe.jpg", cls: "deer" }
+      ];
+
+      const avatarEl = document.getElementById('avatar');
+      const nameEl = document.getElementById('displayName');
+      const tagEl = document.getElementById('tagline');
+      const linksRoot = document.getElementById('links');
+      const tryInput = document.getElementById('try-handle');
+      const tryBtn = document.getElementById('try-button');
+      const customInput = document.getElementById('custom-client');
+      const customBtn = document.getElementById('custom-open');
+
+      function setText(el, txt){ el.textContent = txt ?? ''; }
+
+      function makeClientLink(c, handle){
+        const a = document.createElement('a');
+        a.className = 'link ' + (c.cls || '');
+        a.href = c.base + encodeURIComponent(handle);
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', `Open ${c.name} for ${handle}`);
+
+        const img = document.createElement('img');
+        img.src = c.icon;
+        img.alt = c.name + ' icon';
+        img.loading = 'lazy';
+
+        const span = document.createElement('span');
+        span.className = 'label';
+        span.textContent = c.name;
+
+        a.append(img, span);
+        return a;
       }
-    ];
 
-    async function loadProfile() {
-      const params = new URLSearchParams(window.location.search);
-      const did = params.get("did");
-      if (!did) {
-        document.getElementById("displayName").textContent = "Missing ?did=";
-        return;
+      function openCustom(handle){
+        let url = (customInput.value || '').trim();
+        if(!url)return;
+        if(!/^https?:\/\//i.test(url))url='https://'+url;
+        url=url.replace(/\/+$/,'')+'/profile/'+encodeURIComponent(handle);
+        window.open(url,'_blank','noopener');
       }
 
-      try {
-        const res = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${did}`);
-        const data = await res.json();
-        const handle = encodeURIComponent(data.handle || did);
-        const avatarUrl = data.avatar
-          ? `https://imrs.madebydanny.uk?url=${encodeURIComponent(data.avatar)}`
-          : "https://public-cdn.madebydanny.uk/default-avatar.png";
-
-        document.getElementById("avatar").src = avatarUrl;
-        document.getElementById("displayName").textContent = data.displayName || "Unknown User";
-        document.getElementById("tagline").textContent = "@" + (data.handle || did) + " is on the AT Protocol — pick your client to follow them!";
-
-        const linksContainer = document.getElementById("links");
-        linksContainer.innerHTML = clients.map(client => `
-          <a class="link ${client.class}" href="${client.url}${handle}" target="_blank">
-            <img src="${client.icon}" alt="${client.name}" />
-            <span>${client.name}</span>
-          </a>
-        `).join("");
-
-      } catch (err) {
-        document.querySelector(".card").innerHTML = `
-          <h2>Error loading profile</h2>
-          <p>Check your DID and try again.</p>`;
+      function tryProfile(){
+        const value=(tryInput.value||'').trim();
+        if(!value)return;
+        const u=new URL(location.href);
+        u.searchParams.set('did',value);
+        location.href=u.toString();
       }
-    }
 
-    loadProfile();
+      async function loadProfile(){
+        const params=new URLSearchParams(location.search);
+        const did=params.get('did');
+        if(!did){
+          setText(nameEl,'Missing ?did=');
+          setText(tagEl,'Add a DID or handle to view a profile.');
+          return;
+        }
+        try{
+          const res=await fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${encodeURIComponent(did)}`);
+          if(!res.ok)throw new Error('fetch failed');
+          const data=await res.json();
+          const handle=data.handle||did;
+          const avatar=data.avatar?`https://imrs.madebydanny.uk?url=${encodeURIComponent(data.avatar)}`:'https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760220038748_cloudflare-brands-solid-full.svg';
+
+          avatarEl.src=avatar;
+          avatarEl.alt=`${data.displayName||handle} avatar`;
+          setText(nameEl,data.displayName||handle);
+          setText(tagEl,`@${handle} is on the AT Protocol — pick a client to follow them!`);
+
+          linksRoot.innerHTML='';
+          clients.forEach(c=>linksRoot.appendChild(makeClientLink(c,handle)));
+
+          customBtn.onclick=()=>openCustom(handle);
+          customInput.onkeydown=e=>{if(e.key==='Enter')openCustom(handle)};
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
+        }catch(e){
+          nameEl.textContent='Error loading profile';
+          tagEl.textContent='Check your DID or try again.';
+          linksRoot.innerHTML='';
+        }
+      }
+      document.addEventListener('DOMContentLoaded',loadProfile);
+    })();
   </script>
 </body>
 </html>
