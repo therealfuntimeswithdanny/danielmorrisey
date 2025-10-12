@@ -52,6 +52,27 @@
     <script src="/js/script.js" defer></script>
     <script src="/js/theme.js" defer></script>
     <script src="/js/time.js" defer></script>
+    <style>
+      .fun-hover {
+        transition: all 0.3s ease;
+      }
+      .fun-hover:hover {
+        color: hsl(calc(360 * var(--random-hue, 0)), 70%, 50%);
+        transform: scale(1.1) rotate(-3deg);
+        text-shadow: 0 0 8px hsl(calc(360 * var(--random-hue, 0)), 70%, 70%);
+      }
+
+      .btn.secondary {
+        transition: all 0.3s ease;
+      }
+
+      .btn.secondary:hover {
+        background-color: hsl(calc(360 * var(--random-hue, 0)), 70%, 50%);
+        color: #fff;
+        transform: scale(1.1) rotate(-3deg);
+        box-shadow: 0 0 8px hsl(calc(360 * var(--random-hue, 0)), 70%, 70%);
+      }
+    </style>
 </head>
 <body class="dark-mode">
     <div class="center">
@@ -134,31 +155,37 @@
     </div>
     <hr>
     <p><b>Made possible thanks to:</b> <i>
-      <a href="https://www.youtube.com/c/LinusTechTips" target="_blank">Linus Tech Tips</a>,
-      <a href="https://www.w3schools.com/" target="_blank">W3Schools</a>,
-      <a href="https://cloudflare.com" target="_blank">Cloudflare</a>,
+      <a href="https://www.youtube.com/c/LinusTechTips" target="_blank" class="fun-hover">Linus Tech Tips</a>,
+      <a href="https://www.w3schools.com/" target="_blank" class="fun-hover">W3Schools</a>,
+      <a href="https://cloudflare.com" target="_blank" class="fun-hover">Cloudflare</a>,
       <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>,
-      <a href="https://corsproxy.io/" target="_blank">CORS Proxy</a>,
+      <a href="https://corsproxy.io/" target="_blank" class="fun-hover">CORS Proxy</a>,
       <a href="https://www.apple.com/" target="_blank">Apple</a>,
       <a href="https://www.google.com/" target="_blank">Google</a>,
-      <a href="https://ubuntu.com/" target="_blank">Ubuntu</a>,
+      <a href="https://ubuntu.com/" target="_blank" class="fun-hover">Ubuntu</a>,
       <a href="https://music.apple.com/" target="_blank">Apple Music</a>,
-      <a href="https://www.youtube.com/" target="_blank">YouTube</a>,
+      <a href="https://www.youtube.com/" target="_blank">YouTube</a>
       <a href="https://gemini.google.com/" target="_blank">Google Gemini</a>,
-      <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>,
+      <a href="https://chat.openai.com/" target="_blank" class="fun-hover">ChatGPT</a>,
       <a href="https://www.reddit.com/" target="_blank">Reddit</a>,
       <a href="https://www.raspberrypi.com/" target="_blank">Raspberry Pi</a>,
-      <a href="https://github.com/" target="_blank">GitHub</a>,
+      <a href="https://github.com/" target="_blank" class="fun-hover">GitHub</a>,
       <a href="https://www.betterstack.com/" target="_blank">Better Stack</a>,
-      <a href="https://beehiiv.com/" target="_blank">Beehiiv</a>,
+      <a href="https://beehiiv.com/" target="_blank" class="fun-hover">Beehiiv</a>,
       <a href="https://medium.com/" target="_blank">Medium</a>,
-      <a href="https://proton.me/" target="_blank">Proton</a>,
-      <a href="/followonbsky.html?did=fry69.dev" target="_blank">@fry69.dev</a>,
-      <a href="/followonbsky.html?did=vielle.dev" target="_blank">@vielle.dev</a>,
-      <a href="/followonbsky.html?did=baileytownsend.dev" target="_blank">@baileytownsend.dev</a>,
-      <a href="/followonbsky.html?did=j4ck.xyz" target="_blank">@j4ck.xyz</a>,
-      <a href="/followonbsky.html?did=altq.net" target="_blank">@altq.net</a>,
-      <a style="color: green;" href="/followonbsky.html?did=altq.net" target="_blank">@altq.net</a>
+      <a href="https://proton.me/" target="_blank" class="fun-hover">Proton</a>,
+      <a href="https://code.visualstudio.com" class="fun-hover">VS Code</a>
+      <a href="https://www.youtube.com/@HardwareHaven" class="fun-hover">Hardware Haven</a>
+      <a href="https://www.youtube.com/@JeffGeerling" class="fun-hover">Jeff Geerling</a>
+      <a href="https://www.youtube.com/@TechnoTim" class="fun-hover">Techno Tim</a>
+      <a href="/followonbsky.html?did=leaflet.pub" class="fun-hover">Leaflet</a>
+      <a href="/followonbsky.html?did=fry69.dev" target="_blank" class="fun-hover">@fry69.dev</a>,
+      <a href="/followonbsky.html?did=vielle.dev" target="_blank" class="fun-hover">@vielle.dev</a>,
+      <a href="/followonbsky.html?did=baileytownsend.dev" target="_blank" class="fun-hover">@baileytownsend.dev</a>,
+      <a href="/followonbsky.html?did=j4ck.xyz" target="_blank" class="fun-hover">@j4ck.xyz</a>,
+      <a style="color: #1DA1F2;" href="/followonbsky.html?did=j4ck.xyz" target="_blank" class="fun-hover">@j4ck.xyz</a>,
+      <a href="/followonbsky.html?did=altq.net" target="_blank" class="fun-hover">@altq.net</a>,
+      <a style="color: green;" href="/followonbsky.html?did=altq.net" target="_blank" class="fun-hover">@altq.net</a>
     </i> <b>& you!</b></p>
     <hr>
     <p>&copy; 2024‑<span id="current-year"></span> Made by Danny UK, by <i>Daniel Morrisey</i> <button id="theme-toggle">Switch to Light Mode</button></p>
