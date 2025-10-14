@@ -178,6 +178,7 @@ nav a {
 .socials-list a.bluesky:hover { background: #0ea5e9; color: white; }
 .socials-list a.medium:hover { background: black; color: #fff; }
 .socials-list a.github:hover { background: black; color: #fff; }
+.socials-list a.insta:hover { background: rgb(251, 82, 242); color: #fff; }
 .socials-list a.email:hover { background: #ff6b6b; color: #fff; }
 .socials-list a.discord:hover { background: #5865f2; color: #fff; }
 .socials-list a.leaf:hover { background: #FFE577; color: #659736; }

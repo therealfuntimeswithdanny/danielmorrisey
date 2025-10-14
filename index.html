@@ -53,15 +53,6 @@
     <script src="/js/theme.js" defer></script>
     <script src="/js/time.js" defer></script>
     <style>
-      .fun-hover {
-        transition: all 0.3s ease;
-      }
-      .fun-hover:hover {
-        color: hsl(calc(360 * var(--random-hue, 0)), 70%, 50%);
-        transform: scale(1.1) rotate(-3deg);
-        text-shadow: 0 0 8px hsl(calc(360 * var(--random-hue, 0)), 70%, 70%);
-      }
-
       .btn.secondary {
         transition: all 0.3s ease;
       }
@@ -86,9 +77,9 @@
                 <p class="hero-subtitle">I write at <a href="https://medium.com/code-and-chaos" target="_blank">Code and Chaos</a>. Here are my socials:</p>
                 <div class="socials-list">
                     <a href="/followonbsky.html?did=did:plc:l37td5yhxl2irrzrgvei4qay" class="btn secondary bluesky"><i class="fa-brands fa-bluesky"></i> Bluesky</a>
-                    <a href="https://threads.com/@madebydanny_uk" class="btn secondary github"><i class="fa-brands fa-threads"></i> Threads</a>
-                    <a href="https://instagram.com/madebydanny_uk" class="btn secondary insta"><i class="fa-brands fab fa-instagram"></i> Instagram</a>
-                    <a href="https://medium.com/@danielmorrisey" target="_blank" class="btn secondary medium"><i class="fa-brands fa-medium"></i> Medium</a>
+                    <a href="https://threads.com/@madebydanny.uk" class="btn secondary github"><i class="fa-brands fa-threads"></i> Threads</a>
+                    <a href="https://instagram.com/madebydanny.uk" class="btn secondary insta"><i class="fa-brands fab fa-instagram"></i> Instagram</a>
+                    <a href="https://medium.com/@danielmorrisey" target="_blank" class="btn secondary github"><i class="fa-brands fa-medium"></i> Medium</a>
                     <a href="https://github.com/therealfuntimeswithdanny" target="_blank" class="btn secondary github"><i class="fa-brands fa-github"></i> Github</a>
                     <a href="/src/email.html" class="btn secondary email"><i class="fa-solid fa-envelope"></i> Email</a>
                     <a href="https://discord.gg/VM7MfJnGFF" target="_blank" class="btn secondary discord"><i class="fa-brands fa-discord"></i> Discord</a>
@@ -98,8 +89,8 @@
         </div>
          <hr>
     <div class="cards-container">
-         <div class="card">
-            <p class="heading">My Projects</p>
+        <div class="card">
+            <p class="heading"><i class="fa-solid fa-screwdriver-wrench"></i> My Projects</p>
             <p><a href="https://preview.madebydanny.uk"><i class="fa-solid fa-tower-cell"></i> Preview<i> (live server)</i></a> - Preview changes made to my site in real time before they are published</p>
             <p><a href="https://good-example.com" target="_blank"><i class="fa-solid fa-circle-check"></i> Good Example<i>(.com)</i></a> - example.com but better</p>
             <p><a href="https://seo-tester.madebydanny.uk" target="_blank"><i class="fa-solid fa-magnifying-glass"></i> SEO Tester</a> - Check site SEO and get social media previews</p>
@@ -109,20 +100,31 @@
             <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - A free-for-life content delivery network</p>
         </div>
         <div class="card">
-            <p class="heading">Latest Medium Posts</p>
+            <p class="heading"><i class="fa-brands fa-medium"></i> Latest Medium Posts</p>
             <ul id="post-list"></ul>
             <div id="loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i>Loading…</div>
             <div id="error-message" style="display:none;color:red;"></div>
         </div>
         <div class="card">
-            <p class="heading">Latest Leaflet Posts</p>
+            <p class="heading"><i class="fa-solid fas fa-leaf"></i> Latest Leaflet Posts</p>
             <div id="alt-feed">
                 <p class="alt">Loading feed…</p>
             </div>
             <p><a href="https://danielmorriseyaltq.leaflet.pub/" target="_blank">View full feed</a></p>
         </div>
         <div class="card">
-            <p class="heading">MBD CDN</p>
+            <p class="heading"><i class="fa-solid fa-camera-retro"></i> Photos</p>
+            <p>Photos taken on Nikon D3200 & iPhone 14</p>
+            <div class="photo-gallery">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3765.jpg" alt="Photo 1">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/20240622_234015800_iOS.jpg" alt="Photo 2">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3692.jpg" alt="Photo 3">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/Unknown.jpeg" alt="Photo 4">
+            </div>
+            <p style="margin-top:10px;"><a href="/followonbsky.html?did=photos.madebydanny" target="_blank" class="btn"><i class="fa-solid fa-images"></i> View All</a></p>
+        </div>
+        <div class="card">
+            <p class="heading"><i class="fa-solid fa-database"></i> MBD CDN</p>
             <p>Speed up image loading times, using <a href="/src/cdn/index.html">MBD CDN</a> & <a href="/src/cdn/index.html#imrs">MBD imrs</a></p>
             <div id="cdn-uploader">
                 <input type="file" id="cdn-file-input" accept="image/*" hidden>
@@ -135,10 +137,11 @@
             </div>
         </div>
         <div class="card">
-            <p class="heading">Lamppost</p>
+            <p class="heading"><i class="fa-solid fa-lightbulb"></i> Lamppost</p>
             <p>Quickly generate images for free</p>
             <div class="mini-lamppost">
                 <input type="text" id="mini-prompt" placeholder="e.g. neon fox in a rainstorm" />
+                <p></p>
                 <div class="button-group">
                     <button id="mini-generate" class="btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate</button>
                 </div>
