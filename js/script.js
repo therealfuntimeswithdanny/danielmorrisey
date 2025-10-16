@@ -241,7 +241,7 @@ function bskyRenderImages(imagesEmbed) {
     imagesEmbed.images.forEach(image => {
         imagesHtml += `
             <a href="${image.fullsize}" target="_blank" rel="noopener noreferrer">
-                <img src="${image.thumb}" alt="${image.alt || 'Embedded image'}">
+                <img src="https://imrs.madebydanny.uk/?url=${image.thumb}" alt="${image.alt || 'Embedded image'}">
             </a>`;
     });
     imagesHtml += '</div>';
@@ -258,7 +258,7 @@ function bskyRenderQuote(record) {
     return `
         <div class="bsky-embed-quote">
             <div class="bsky-author" style="gap: 0.5rem;">
-                <img src="${quoteAuthor.avatar}" alt="${quoteAuthor.displayName}'s avatar" class="bsky-avatar">
+                <img src="https://imrs.madebydanny.uk/?url=${quoteAuthor.avatar}" alt="${quoteAuthor.displayName}'s avatar" class="bsky-avatar">
                 <div>
                     <span class="bsky-display-name">${quoteAuthor.displayName}</span>
                     <span class="bsky-handle">@${quoteAuthor.handle}</span>
@@ -274,7 +274,7 @@ function bskyRenderExternal(external) {
     const hostname = new URL(external.uri).hostname;
     return `
         <a href="${external.uri}" target="_blank" rel="noopener noreferrer" class="bsky-embed-external">
-            ${external.thumb ? `<img src="${external.thumb}" alt="${external.title || 'Link preview'}">` : ''}
+            ${external.thumb ? `<img src="https://imrs.madebydanny.uk/?url=${external.thumb}" alt="${external.title || 'Link preview'}">` : ''}
             <div class="bsky-embed-external-content">
                 <div class="bsky-external-title">${external.title || ''}</div>
                 <div class="bsky-external-desc line-clamp-2">${external.description || ''}</div>
@@ -336,7 +336,7 @@ async function fetchBlueskyPosts() {
 
                 postEl.innerHTML = `
                     <div class="bsky-author">
-                        <img src="${post.author.avatar}" alt="${post.author.displayName}'s avatar" class="bsky-avatar">
+                        <img src="https://imrs.madebydanny.uk/?url=${post.author.avatar}" alt="${post.author.displayName}'s avatar" class="bsky-avatar">
                         <div class="bsky-author-info">
                             <div>
                                 <span class="bsky-display-name">${post.author.displayName}</span>
