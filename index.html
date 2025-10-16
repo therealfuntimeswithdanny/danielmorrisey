@@ -89,15 +89,11 @@
         </div>
          <hr>
     <div class="cards-container">
-        <div class="card">
-            <p class="heading"><i class="fa-solid fa-screwdriver-wrench"></i> My Projects</p>
-            <p><a href="https://preview.madebydanny.uk"><i class="fa-solid fa-tower-cell"></i> Preview<i> (live server)</i></a> - Preview changes made to my site in real time before they are published</p>
-            <p><a href="https://good-example.com" target="_blank"><i class="fa-solid fa-circle-check"></i> Good Example<i>(.com)</i></a> - example.com but better</p>
-            <p><a href="https://seo-tester.madebydanny.uk" target="_blank"><i class="fa-solid fa-magnifying-glass"></i> SEO Tester</a> - Check site SEO and get social media previews</p>
-            <p><a href="/followonbsky.html"><i class="fa-solid fa-at"></i> Follow on bsky</a> - Open an AT Protocol profile in your preferred Bluesky client and follow</p>
-            <p><a href="/lamppost/index.html"><i class="fa-solid fa-lightbulb"></i> Lamppost</a> - AI Image generation</p>
-            <p><a href="/src/cdn/index.html"><i class="fa-solid fa-image"></i> imrs</a> - Image Optimization on the Edge</p>
-            <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - A free-for-life content delivery network</p>
+         <div class="card">
+            <p class="heading"><i class="fa-brands fa-bluesky"></i> Latest on Bluesky</p>
+            <div id="bluesky-posts-container"></div>
+            <div id="bluesky-loading"><i class="fa-solid fa-arrows-rotate fa-spin"></i> Loading...</div>
+            <div id="bluesky-error-message" style="display:none;color:red;"></div>
         </div>
         <div class="card">
             <p class="heading"><i class="fa-brands fa-medium"></i> Latest Medium Posts</p>
@@ -111,16 +107,15 @@
                 <p class="alt">Loading feed…</p>
             </div>
         </div>
-        <div class="card">
-            <p class="heading"><i class="fa-solid fa-camera-retro"></i> Photos</p>
-            <p>Photos taken on Nikon D3200 & iPhone 14</p>
-            <div class="photo-gallery">
-              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3765.jpg" alt="Photo 1">
-              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/20240622_234015800_iOS.jpg" alt="Photo 2">
-              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3692.jpg" alt="Photo 3">
-              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/Unknown.jpeg" alt="Photo 4">
-            </div>
-            <p style="margin-top:10px;"><a href="/followonbsky.html?did=photos.madebydanny" target="_blank" class="btn"><i class="fa-solid fa-images"></i> View All</a></p>
+       <div class="card">
+            <p class="heading"><i class="fa-solid fa-screwdriver-wrench"></i> My Projects</p>
+            <p><a href="https://preview.madebydanny.uk"><i class="fa-solid fa-tower-cell"></i> Preview<i> (live server)</i></a> - Preview changes made to my site in real time before they are published</p>
+            <p><a href="https://good-example.com" target="_blank"><i class="fa-solid fa-circle-check"></i> Good Example<i>(.com)</i></a> - example.com but better</p>
+            <p><a href="https://seo-tester.madebydanny.uk" target="_blank"><i class="fa-solid fa-magnifying-glass"></i> SEO Tester</a> - Check site SEO and get social media previews</p>
+            <p><a href="/followonbsky.html"><i class="fa-solid fa-at"></i> Follow on bsky</a> - Open an AT Protocol profile in your preferred Bluesky client and follow</p>
+            <p><a href="/lamppost/index.html"><i class="fa-solid fa-lightbulb"></i> Lamppost</a> - AI Image generation</p>
+            <p><a href="/src/cdn/index.html"><i class="fa-solid fa-image"></i> imrs</a> - Image Optimization on the Edge</p>
+            <p><a href="/src/cdn/index.html"><i class="fa-solid fa-database"></i> MBD CDN</a> - A free-for-life content delivery network</p>
         </div>
         <div class="card">
             <p class="heading"><i class="fa-solid fa-database"></i> MBD CDN</p>
@@ -134,6 +129,17 @@
                 <p id="cdn-file-name"></p>
                 <div id="cdn-status"></div>
             </div>
+        </div>
+        <div class="card">
+            <p class="heading"><i class="fa-solid fa-camera-retro"></i> Photos</p>
+            <p>Photos taken on Nikon D3200 & iPhone 14</p>
+            <div class="photo-gallery">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3765.jpg" alt="Photo 1">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/20240622_234015800_iOS.jpg" alt="Photo 2">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/DSC_3692.jpg" alt="Photo 3">
+              <img src="https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/photos-upload-1/Unknown.jpeg" alt="Photo 4">
+            </div>
+            <p style="margin-top:10px;"><a href="/followonbsky.html?did=photos.madebydanny" target="_blank" class="btn"><i class="fa-solid fa-images"></i> View All</a></p>
         </div>
         <div class="card">
             <p class="heading"><i class="fa-solid fa-lightbulb"></i> Lamppost</p>

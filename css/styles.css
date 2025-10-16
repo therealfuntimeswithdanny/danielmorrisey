@@ -345,3 +345,147 @@ nav a.active {
         width: 100%;
     }
 }
+
+/* --- Bluesky Feed Styles --- */
+#bluesky-posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+#bluesky-loading {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Base post styling (with bottom separator) */
+.bsky-post {
+    padding-bottom: 1.25rem;
+    padding: 0;
+}
+.bsky-post:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Post with an embed (Quote/Record) - Give it a distinct box */
+.bsky-post-with-embed {
+    padding: 1rem;
+    border: 1px solid #444;
+    border-radius: var(--radius);
+    background-color: #242424; /* Slightly lighter background for the main post box */
+    margin-bottom: 1.25rem; /* Replace the bottom border spacing */
+}
+.bsky-post-with-embed:last-child {
+    margin-bottom: 0;
+}
+.bsky-post-with-embed + .bsky-post:not(.bsky-post-with-embed) {
+    margin-top: 1.25rem;
+}
+
+.bsky-author {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+.bsky-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: 2px solid #444;
+    flex-shrink: 0;
+}
+.bsky-author-info {
+    flex: 1;
+    min-width: 0;
+}
+.bsky-display-name {
+    font-weight: bold;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
+.bsky-handle {
+    color: var(--muted);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+}
+.bsky-date {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+.bsky-text {
+    margin-top: 0.75rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    font-size: 0.95rem;
+}
+.bsky-embed-images {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+}
+.bsky-embed-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+.bsky-embed-quote {
+    margin-top: 1rem;
+    border: 1px solid #333;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    background-color: rgba(255, 255, 255, 0.05); /* slightly lighter background */
+}
+.bsky-embed-quote .bsky-author { align-items: center; }
+.bsky-embed-quote .bsky-avatar { width: 20px; height: 20px; }
+.bsky-embed-quote .bsky-display-name, .bsky-embed-quote .bsky-handle { font-size: 0.8rem; }
+.bsky-embed-quote .bsky-text { font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem; }
+
+.bsky-embed-external {
+    margin-top: 1rem;
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+}
+.bsky-embed-external:hover {
+    border-color: var(--accent);
+}
+.bsky-embed-external img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+}
+.bsky-embed-external-content {
+    padding: 0.75rem;
+}
+.bsky-external-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+.bsky-external-desc, .bsky-external-host {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
+}
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+

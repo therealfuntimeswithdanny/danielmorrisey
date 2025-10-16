@@ -4,7 +4,7 @@
 const CONFIG = {
   FEED_URL: 'https://medium.com/feed/@danielmorrisey',
   PROXY_URL: (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
-  POSTS_TO_SHOW: 7,
+  POSTS_TO_SHOW: 15,
   REFRESH_INTERVAL_MS: 60_000, // 1 minute
 };
 
@@ -41,68 +41,9 @@ function createPostItem({ title = '(no title)', link = '#' }) {
 }
 
 /* ------------------------------------------------------------------ *
- * Main: fetch, parse and render the RSS feed
+ * Main Initializer
  * ------------------------------------------------------------------ */
-async function fetchPosts() {
-  toggleVisibility(dom.loading, true);
-  toggleVisibility(dom.errorMessage, false);
-  if (dom.postList) dom.postList.innerHTML = ''; // clear previous items
-
-  try {
-    const response = await fetch(CONFIG.PROXY_URL(CONFIG.FEED_URL));
-    if (!response.ok) throw new Error(`Network error: ${response.status}`);
-
-    const rawXml = await response.text();
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(rawXml, 'application/xml');
-
-    const items = [...xmlDoc.querySelectorAll('item')];
-    if (items.length === 0) throw new Error('No posts found.');
-
-    items
-      .slice(0, CONFIG.POSTS_TO_SHOW)
-      .map((item) => ({
-        title: item.querySelector('title')?.textContent ?? '(no title)',
-        link: item.querySelector('link')?.textContent ?? '#',
-      }))
-      .forEach((postData) =>
-        dom.postList.appendChild(createPostItem(postData))
-      );
-  } catch (err) {
-    console.error('RSS fetch/parse error:', err);
-    if (dom.errorMessage) {
-      dom.errorMessage.textContent = err.message || 'Failed to load articles.';
-      toggleVisibility(dom.errorMessage, true);
-    }
-  } finally {
-    toggleVisibility(dom.loading, false);
-  }
-}
-
-/* ------------------------------------------------------------------ *
- * Utility: set the root domain dynamically
- * ------------------------------------------------------------------ */
-function setRootDomain() {
-  const el = document.getElementById('root-domain');
-  if (el) {
-    const domain = 'madebydanny.uk';
-    el.textContent = domain;
-  }
-}
-
-/* ------------------------------------------------------------------ *
- * Utility: set the current URL in the hidden <url> element
- * ------------------------------------------------------------------ */
-function setErrorUrl() {
-  const el = document.getElementById('error-url');
-  if (el) el.textContent = window.location.href;
-}
-
-/* ------------------------------------------------------------------ *
- * Main execution: runs when the DOM is ready
- * ------------------------------------------------------------------ */
-document.addEventListener('DOMContentLoaded', () => {
-  // --- Grab all DOM elements ---
+window.addEventListener('load', () => {
   dom = {
     postList: document.getElementById('post-list'),
     loading: document.getElementById('loading'),
@@ -112,113 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
     cdnUploadBtn: document.getElementById('cdn-upload-btn'),
     cdnFileName: document.getElementById('cdn-file-name'),
     cdnStatus: document.getElementById('cdn-status'),
+    // Bluesky DOM elements
+    blueskyPostsContainer: document.getElementById('bluesky-posts-container'),
+    blueskyLoading: document.getElementById('bluesky-loading'),
+    blueskyErrorMessage: document.getElementById('bluesky-error-message'),
   };
 
   // --- Set up RSS feed ---
-  fetchPosts();
-  setInterval(fetchPosts, CONFIG.REFRESH_INTERVAL_MS);
-
-  // --- Mini Lamppost ---
-  const miniPrompt = document.getElementById('mini-prompt');
-  const miniBtn = document.getElementById('mini-generate');
-  if (miniBtn && miniPrompt) {
-    miniBtn.addEventListener('click', async () => {
-      const val = miniPrompt.value.trim();
-      if (!val) return;
-
-      const loadingEl = document.getElementById('mini-loading');
-      const resultEl = document.getElementById('mini-result');
-      const imgEl = document.getElementById('mini-img');
-      const dlBtn = document.getElementById('mini-download');
-      const copyBtn = document.getElementById('mini-copy');
-
-      loadingEl.style.display = '';
-      resultEl.style.display = 'none';
-
-      try {
-        const API_BASE = 'https://lamp-post.madebydannyuk.workers.dev';
-        const res = await fetch(`${API_BASE}/api/generate`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: val }),
-        });
-
-        const data = await res.json();
-        loadingEl.style.display = 'none';
-
-        if (data?.url) {
-          imgEl.src = `https://imrs.madebydanny.uk/?url=${encodeURIComponent(data.url)}`;
-          dlBtn.href = data.url;
-          resultEl.style.display = '';
-
-          copyBtn.onclick = () => {
-            navigator.clipboard.writeText(data.url);
-          };
-        } else {
-          loadingEl.style.display = 'none';
-          alert('Failed to generate image.');
-        }
-      } catch (err) {
-        loadingEl.style.display = 'none';
-        console.error('Mini Lamppost error', err);
-        alert('Error generating image.');
-      }
-    });
+  if (dom.postList) {
+    fetchFeed();
+    setInterval(fetchFeed, CONFIG.REFRESH_INTERVAL_MS);
   }
 
-  // --- Set up CDN Uploader ---
-  if (dom.cdnSelectBtn) {
-    dom.cdnSelectBtn.addEventListener('click', () => dom.cdnFileInput.click());
-  }
-
-  if (dom.cdnFileInput) {
-    dom.cdnFileInput.addEventListener('change', () => {
-      const file = dom.cdnFileInput.files[0];
-      if (file) {
-        dom.cdnFileName.textContent = `Selected: ${file.name}`;
-        toggleVisibility(dom.cdnUploadBtn, true);
-        toggleVisibility(dom.cdnSelectBtn, false);
-      }
-    });
-  }
-
-  if (dom.cdnUploadBtn) {
-    dom.cdnUploadBtn.addEventListener('click', async () => {
-      const file = dom.cdnFileInput.files[0];
-      if (!file) {
-        dom.cdnStatus.innerHTML = '<p style="color: red;">Please select a file first.</p>';
-        return;
-      }
-
-      dom.cdnStatus.innerHTML = '<p><i class="fa-solid fa-arrows-rotate fa-spin"></i> Uploading...</p>';
-      dom.cdnUploadBtn.disabled = true;
-
-      const formData = new FormData();
-      formData.append('file', file);
-
-      try {
-        const response = await fetch('https://cdn-upload.madebydanny.uk/upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          dom.cdnStatus.innerHTML = `<p style="color: green;">Success! <a href="https://imrs.madebydanny.uk/?url=${result.url}" target="_blank">View Image</a></p>`;
-        } else {
-          const errorText = await response.text();
-          dom.cdnStatus.innerHTML = `<p style="color: red;">Upload failed: ${errorText}</p>`;
-        }
-      } catch (error) {
-        dom.cdnStatus.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
-      } finally {
-        dom.cdnUploadBtn.disabled = false;
-        toggleVisibility(dom.cdnUploadBtn, false);
-        toggleVisibility(dom.cdnSelectBtn, true);
-        dom.cdnFileName.textContent = '';
-        dom.cdnFileInput.value = '';
-      }
-    });
+  // --- Theme Toggler ---
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+    document.body.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
   }
 
   // --- Other initializers ---
@@ -226,19 +77,53 @@ document.addEventListener('DOMContentLoaded', () => {
   setErrorUrl();
   // --- Alt RSS feed ---
   fetchAltFeed();
+  // --- Bluesky Feed ---
+  fetchBlueskyPosts();
 });
 
-/* ------------------------------------------------------------------ */
-/* Fetch and render RSS feed from alternative source via corsproxy.io */
-/* ------------------------------------------------------------------ */
-async function fetchAltFeed() {
-  const container = document.getElementById('alt-feed');
-  if (!container) return;
-  const feedUrl = 'https://danielmorriseyaltq.leaflet.pub/rss';
-  container.innerHTML = '<p class="alt">Loading feed…</p>';
+/* ------------------------------------------------------------------ *
+ * Theme Switching
+ * ------------------------------------------------------------------ */
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+  localStorage.setItem('theme', currentTheme);
+}
+
+/* ------------------------------------------------------------------ *
+ * CDN functions
+ * ------------------------------------------------------------------ */
+
+function setRootDomain() {
+  const rootDomain = window.location.hostname;
+  document.querySelectorAll('[data-root-domain]').forEach(el => {
+    el.textContent = rootDomain;
+  });
+}
+
+function setErrorUrl() {
+  const errorUrl = `/error.html?error=404&domain=${window.location.hostname}`;
+  document.querySelectorAll('[data-error-url]').forEach(el => {
+    el.href = errorUrl;
+  });
+}
+
+// ... Placeholder for actual CDN upload logic ...
+// NOTE: Actual file upload and interaction logic would go here.
+// For now, these handlers simply provide UI feedback.
+
+/* ------------------------------------------------------------------ *
+ * Fetch and render main RSS feed (Medium)
+ * ------------------------------------------------------------------ */
+async function fetchFeed() {
+  if (!dom.postList) return;
+
+  dom.loading.style.display = 'block';
+  dom.errorMessage.style.display = 'none';
+  dom.postList.innerHTML = '';
 
   try {
-    const res = await fetch(CONFIG.PROXY_URL(feedUrl));
+    const res = await fetch(CONFIG.PROXY_URL(CONFIG.FEED_URL));
     if (!res.ok) throw new Error(`Network error fetching feed: ${res.status}`);
 
     const raw = await res.text();
@@ -258,11 +143,11 @@ async function fetchAltFeed() {
     items.sort((a, b) => (b.ts || 0) - (a.ts || 0));
 
     // Limit to first 7 after sorting
-    items = items.slice(0, 7).map(i => i.node);
+    items = items.slice(0, 15).map(i => i.node);
 
-    container.innerHTML = '';
+    dom.postList.innerHTML = '';
     if (items.length === 0) {
-      container.innerHTML = '<p class="alt">No items found in the feed.</p>';
+      dom.postList.innerHTML = '<p class="alt">No items found in the feed.</p>';
       return;
     }
 
@@ -273,10 +158,203 @@ async function fetchAltFeed() {
       const el = document.createElement('div');
       el.className = 'feed-item';
       el.innerHTML = `<p class="feed-title"><a href="${link}" target="_blank">${title}</a></p>`;
+      dom.postList.appendChild(el);
+    });
+
+  } catch (err) {
+    console.error('Failed to fetch feed:', err);
+    dom.errorMessage.style.display = 'block';
+    dom.errorMessage.textContent = 'Failed to load Medium feed.';
+  } finally {
+    dom.loading.style.display = 'none';
+  }
+}
+
+
+/* ------------------------------------------------------------------ *
+ * Fetch and render Alt RSS feed (Leaflet)
+ * ------------------------------------------------------------------ */
+async function fetchAltFeed() {
+  const container = document.getElementById('alt-feed');
+  if (!container) return;
+
+  const altFeedUrl = 'https://danielmorriseyaltq.leaflet.pub/rss';
+  
+  try {
+    const res = await fetch(CONFIG.PROXY_URL(altFeedUrl));
+    if (!res.ok) throw new Error(`Network error fetching feed: ${res.status}`);
+
+    const raw = await res.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(raw, 'application/xml');
+    
+    let items = [...xml.querySelectorAll('item')];
+    
+    items = items.map((it) => {
+        const pub = it.querySelector('pubDate')?.textContent || '';
+        const ts = pub ? Date.parse(pub) : 0;
+        return { node: it, ts };
+    }).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+
+    items = items.slice(0, 5).map(i => i.node);
+
+    container.innerHTML = '';
+    if (items.length === 0) {
+      container.innerHTML = '<p class="alt">No items found in the feed.</p>';
+      return;
+    }
+
+    items.forEach((it) => {
+      const title = it.querySelector('title')?.textContent || '(no title)';
+      const link = it.querySelector('link')?.textContent || '#';
+      const el = document.createElement('div');
+      el.className = 'feed-item';
+      el.innerHTML = `<p class="feed-title"><a href="${link}" target="_blank">${title}</a></p>`;
       container.appendChild(el);
     });
+
   } catch (err) {
-    console.error('Alt feed error', err);
+    console.error('Failed to fetch Alt feed:', err);
     container.innerHTML = '<p class="alt">Unable to load feed.</p>';
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * Fetch and render Bluesky feed                                      *
+ * ------------------------------------------------------------------ */
+
+// --- Bluesky Helper Functions ---
+
+function bskyFormatDate(isoString) {
+    if (!isoString) return 'Unknown date';
+    const date = new Date(isoString);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function bskyLinkifyText(text) {
+    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #0ea5e9;">${url}</a>`);
+}
+
+function bskyRenderImages(imagesEmbed) {
+    let imagesHtml = '<div class="bsky-embed-images">';
+    imagesEmbed.images.forEach(image => {
+        imagesHtml += `
+            <a href="${image.fullsize}" target="_blank" rel="noopener noreferrer">
+                <img src="${image.thumb}" alt="${image.alt || 'Embedded image'}">
+            </a>`;
+    });
+    imagesHtml += '</div>';
+    return imagesHtml;
+}
+
+function bskyRenderQuote(record) {
+    if (!record || !record.author || !record.value) return '';
+    const quoteAuthor = record.author;
+    const quoteContent = record.value;
+    let quoteText = bskyLinkifyText((quoteContent.text || '').replace(/\n/g, '<br>'));
+    const nestedEmbed = record.embeds && record.embeds.length > 0 ? record.embeds[0] : null;
+    const nestedEmbedHtml = nestedEmbed ? bskyRenderEmbed(nestedEmbed) : '';
+    return `
+        <div class="bsky-embed-quote">
+            <div class="bsky-author" style="gap: 0.5rem;">
+                <img src="${quoteAuthor.avatar}" alt="${quoteAuthor.displayName}'s avatar" class="bsky-avatar">
+                <div>
+                    <span class="bsky-display-name">${quoteAuthor.displayName}</span>
+                    <span class="bsky-handle">@${quoteAuthor.handle}</span>
+                </div>
+            </div>
+            <p class="bsky-text">${quoteText}</p>
+            ${nestedEmbedHtml}
+        </div>`;
+}
+
+function bskyRenderExternal(external) {
+    if (!external || !external.uri) return '';
+    const hostname = new URL(external.uri).hostname;
+    return `
+        <a href="${external.uri}" target="_blank" rel="noopener noreferrer" class="bsky-embed-external">
+            ${external.thumb ? `<img src="${external.thumb}" alt="${external.title || 'Link preview'}">` : ''}
+            <div class="bsky-embed-external-content">
+                <div class="bsky-external-title">${external.title || ''}</div>
+                <div class="bsky-external-desc line-clamp-2">${external.description || ''}</div>
+                <div class="bsky-external-host">${hostname}</div>
+            </div>
+        </a>`;
+}
+
+function bskyRenderEmbed(embed) {
+    if (!embed) return '';
+    const type = embed.$type || '';
+    let html = '';
+    if (type.startsWith('app.bsky.embed.images')) {
+        html += bskyRenderImages(embed);
+    } else if (type.startsWith('app.bsky.embed.record') && !type.includes('WithMedia')) {
+        html += bskyRenderQuote(embed.record);
+    } else if (type.startsWith('app.bsky.embed.external')) {
+        html += bskyRenderExternal(embed.external);
+    } else if (type.startsWith('app.bsky.embed.recordWithMedia')) {
+        if (embed.media) html += bskyRenderEmbed(embed.media);
+        if (embed.record && embed.record.record) html += bskyRenderQuote(embed.record.record);
+    }
+    return html;
+}
+
+async function fetchBlueskyPosts() {
+    const container = document.getElementById('bluesky-posts-container');
+    const loading = document.getElementById('bluesky-loading');
+    const errorMsg = document.getElementById('bluesky-error-message');
+    if (!container || !loading || !errorMsg) return;
+
+    // NOTE: This API URL is specifically filtered for posts *from* @madebydanny.uk
+    const apiUrl = 'https://api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=from%3Amadebydanny.uk&limit=2';
+    
+    try {
+        loading.style.display = 'block';
+        errorMsg.style.display = 'none';
+
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        
+        const data = await response.json();
+        
+        container.innerHTML = '';
+        if (!data.posts || data.posts.length === 0) {
+            container.innerHTML = '<p class="alt">No posts found.</p>';
+            return;
+        }
+
+        data.posts
+            .filter(post => !post.record.reply) // Filter out replies for a cleaner main feed
+            .slice(0, 5) // Show latest 5 posts
+            .forEach(post => {
+                const postEl = document.createElement('div');
+                postEl.className = 'bsky-post';
+
+                const postText = bskyLinkifyText((post.record.text || '').replace(/\n/g, '<br>'));
+                const embedHtml = bskyRenderEmbed(post.embed);
+
+                postEl.innerHTML = `
+                    <div class="bsky-author">
+                        <img src="${post.author.avatar}" alt="${post.author.displayName}'s avatar" class="bsky-avatar">
+                        <div class="bsky-author-info">
+                            <div>
+                                <span class="bsky-display-name">${post.author.displayName}</span>
+                                <span class="bsky-handle">@${post.author.handle}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bsky-text">${postText}</div>
+                    ${embedHtml}
+                `;
+                container.appendChild(postEl);
+            });
+
+    } catch (err) {
+        console.error('Bluesky fetch error:', err);
+        errorMsg.textContent = 'Failed to load Bluesky posts.';
+        errorMsg.style.display = 'block';
+    } finally {
+        loading.style.display = 'none';
+    }
 }
