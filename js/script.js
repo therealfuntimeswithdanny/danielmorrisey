@@ -307,7 +307,7 @@ async function fetchBlueskyPosts() {
     if (!container || !loading || !errorMsg) return;
 
     // NOTE: This API URL is specifically filtered for posts *from* @madebydanny.uk
-    const apiUrl = 'https://api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=from%3Amadebydanny.uk&limit=2';
+    const apiUrl = 'https://api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=from%3Amadebydanny.uk&limit=3';
     
     try {
         loading.style.display = 'block';
