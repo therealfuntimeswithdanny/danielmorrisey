@@ -108,63 +108,9 @@ function setErrorUrl() {
   });
 }
 
-/* ------------------------------------------------------------------ *
- * CDN Upload Logic
- * ------------------------------------------------------------------ */
-
-if (dom.cdnSelectBtn && dom.cdnFileInput && dom.cdnUploadBtn) {
-  // Open file picker when the "Select" button is clicked
-  dom.cdnSelectBtn.addEventListener('click', () => {
-    dom.cdnFileInput.click();
-  });
-
-  // Show the selected filename
-  dom.cdnFileInput.addEventListener('change', () => {
-    const file = dom.cdnFileInput.files[0];
-    dom.cdnFileName.textContent = file ? file.name : 'No file selected';
-    toggleVisibility(dom.cdnUploadBtn, !!file);
-    dom.cdnStatus.textContent = '';
-  });
-
-  // Handle upload button
-  dom.cdnUploadBtn.addEventListener('click', async () => {
-    const file = dom.cdnFileInput.files[0];
-    if (!file) return alert('Please select a file first.');
-
-    dom.cdnStatus.textContent = 'Uploading…';
-    dom.cdnUploadBtn.disabled = true;
-    dom.cdnSelectBtn.disabled = true;
-
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const res = await fetch('https://cdn-upload.madebydanny.uk/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error(`Upload failed (${res.status})`);
-      const data = await res.json();
-
-      // Expecting a response like: { url: "https://cdn.madebydanny.uk/path/to/file.png" }
-      if (data.url) {
-        dom.cdnStatus.innerHTML = `
-          ✅ Uploaded successfully: 
-          <a href="${data.url}" target="_blank" rel="noopener">${data.url}</a>
-        `;
-      } else {
-        throw new Error('Unexpected server response.');
-      }
-    } catch (err) {
-      console.error('CDN upload error:', err);
-      dom.cdnStatus.textContent = '❌ Upload failed: ' + err.message;
-    } finally {
-      dom.cdnUploadBtn.disabled = false;
-      dom.cdnSelectBtn.disabled = false;
-    }
-  });
-}
+// ... Placeholder for actual CDN upload logic ...
+// NOTE: Actual file upload and interaction logic would go here.
+// For now, these handlers simply provide UI feedback.
 
 /* ------------------------------------------------------------------ *
  * Fetch and render main RSS feed (Medium)
