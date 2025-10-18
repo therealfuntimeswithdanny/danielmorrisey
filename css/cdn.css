@@ -13,6 +13,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   margin: 40px;
+  line-height: 1.6;
 }
 
 .center {
@@ -30,6 +31,16 @@ p {
   color: var(--muted);
 }
 
+ul, ol {
+  color: var(--text);
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* Card */
 .card {
   background-color: var(--panel);
   padding: 22px;
@@ -67,51 +78,6 @@ p {
 .drop-zone p {
   margin: 0;
   color: var(--muted);
-}
-
-/* Location Buttons */
-.location-buttons {
-  margin-bottom: 18px;
-  background: #2a2a2a;
-  border-radius: var(--radius);
-  padding: 14px;
-  text-align: center;
-}
-
-.loc-label {
-  margin: 0 0 10px 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.loc-btn {
-  background: #1b1b1b;
-  color: var(--text);
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-family: 'Fira Code', monospace;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.loc-btn:hover {
-  background: #252525;
-  border-color: var(--accent);
-}
-
-.loc-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  box-shadow: 0 0 8px rgba(247,25,0,0.5);
 }
 
 /* Checkbox + Button */
@@ -153,9 +119,88 @@ p {
   color: var(--accent);
 }
 
+/* Stats Section */
+.stats {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.stat-box {
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  min-width: calc(33% - 3rem);
+}
+.stat-box p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.stat-box h1 {
+  margin: 4px 0 0 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* Features / Docs Section */
+.features-card ul,
+.docs-card ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.features-card li,
+.docs-card li {
+  margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+}
 hr {
   border: 0;
   height: 1px;
   background: #333;
   margin: 30px 0;
+}
+
+/* Optional responsive tweaks */
+@media (max-width: 600px) {
+  body {
+    margin: 20px;
+  }
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+  .stat-box {
+    min-width: unset;
+    width: 80%;
+  }
+}
+header2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+}
+header2 h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--accent);
+}
+nav a {
+  color: #eaeaea;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+nav a:hover {
+  color: var(--accent);
 }

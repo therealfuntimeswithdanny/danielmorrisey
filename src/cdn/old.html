@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBD CDN - Free, Fast & Powered by Cloudflare</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="MBD CDN is a free-for-life content delivery network powered by Cloudflare's ultra-fast servers. Upload your files, get a shareable URL instantly, and deliver content globally." />
+  <meta name="keywords" content="MBD CDN, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload, Daniel Morrisey" />
+  <meta name="author" content="Daniel Morrisey" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://madebydanny.uk/cdn/" />
+  <meta property="og:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+  <meta property="og:description" content="A free-for-life CDN built on Cloudflare's global edge network. Upload files instantly, get a shareable link, and deliver worldwide." />
+  <meta property="og:image" content="https://public-madebydanny.uk/cdn/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://madebydanny.uk/cdn" />
+  <meta name="twitter:title" content="MBD CDN - Free, Fast & Powered by Cloudflare" />
+  <meta name="twitter:description" content="Upload your files to MBD CDN for free and deliver them worldwide on Cloudflare's super fast edge servers." />
+  <meta name="twitter:image" content="https://public-madebydanny.uk/cdn/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="icon" type="image/png" href="https://public-madebydanny.uk/cdn/user-content/2025-09-13/20-45-17_database-solid-full.svg" />
+  <link rel="stylesheet" href="/css/cdn.css">
+  <script src="/js/cdn.js" defer></script>
+</head>
+<body>
+  <div class="center">
+    <h1><i class="fa-solid fa-database"></i> MBD CDN</h1>
+    <p>Upload your files to the MBD CDN, a free-for-life content delivery network powered by Cloudflare.</p>
+    
+    <div class="card upload-card">
+      <p class="heading"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</p>
+
+      <!-- Drop Zone -->
+      <div id="drop-zone" class="drop-zone">
+        <p><i class="fa-solid fa-upload"></i> Drag & drop your file here, or click to select</p>
+      </div>
+
+      <input type="file" id="fileInput" hidden>
+
+      <!-- Location Buttons -->
+      <div class="location-buttons">
+        <p class="loc-label"><i class="fa-solid fa-map-location-dot"></i> Location Hint (optional)</p>
+        <div class="button-row">
+          <button class="loc-btn active" data-region="">Auto</button>
+          <button class="loc-btn" data-region="asia">Asia</button>
+          <button class="loc-btn" data-region="east_eu">Eastern Europe</button>
+          <button class="loc-btn" data-region="east_na">Eastern North America</button>
+          <button class="loc-btn" data-region="west_eu">Western Europe</button>
+          <button class="loc-btn" data-region="west_na">Western North America</button>
+        </div>
+      </div>
+
+     <!-- IMRS Option -->
+      <label class="checkbox-label">
+        <input type="checkbox" id="useImrs" checked>
+        Use <strong>imrs.madebydanny.uk</strong> for image optimization
+      </label>
+
+      <!-- Office Viewer Option -->
+      <label class="checkbox-label">
+        <input type="checkbox" id="useOfficeViewer">
+        Get Microsoft Office files in <strong>madebydanny.uk/src/cdn/office</strong>
+      </label>
+
+      <button id="uploadBtn" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+      <div id="result" class="result"></div>
+    </div>
+
+    <hr>
+    <p>&copy; 2024-<span id="current-year"></span> Made by Danny UK</p>
+  </div>
+</body>
+</html>
