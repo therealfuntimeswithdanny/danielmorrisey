@@ -196,7 +196,7 @@ async function fetchAltFeed() {
         return { node: it, ts };
     }).sort((a, b) => (b.ts || 0) - (a.ts || 0));
 
-    items = items.slice(0, 5).map(i => i.node);
+    items = items.slice(0, 7).map(i => i.node);
 
     container.innerHTML = '';
     if (items.length === 0) {
