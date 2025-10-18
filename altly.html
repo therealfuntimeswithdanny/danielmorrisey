@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALTly - ALT Text Generator</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="ALTly is a free-for-life ALT text generator powered by Cloudflare Workers AI used for Social media with a free public API" />
+  <meta name="keywords" content="ALTly, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload, Daniel Morrisey" />
+  <meta name="author" content="Daniel Morrisey" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://madebydanny.uk/altly.html" />
+  <meta property="og:title" content="ALTly - ALT Text Generator" />
+  <meta property="og:description" content="ALTly is a free-for-life ALT text generator powered by Cloudflare Workers AI used for Social media with a free public API" />
+  <meta property="og:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-18%2F1760746998794_Untitled%20from%20Figma%20(1).png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://madebydanny.uk/altly.html" />
+  <meta name="twitter:title" content="ALTly - ALT Text Generator" />
+  <meta name="twitter:description" content="ALTly is a free-for-life ALT text generator powered by Cloudflare Workers AI used for Social media with a free public API" />
+  <meta name="twitter:image" content="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-18%2F1760746998794_Untitled%20from%20Figma%20(1).png" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="icon" type="image/png" href="https://imrs.madebydanny.uk/?url=https%3A%2F%2Fpublic-cdn.madebydanny.uk%2Fuser-content%2F2025-10-18%2F1760746717147_Alt%20Icon%20Font%20Awesome.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/cdn.css">
+  <style>
+    .drop-zone { cursor: pointer; }
+    .result img { max-width: 100%; border-radius: 8px; margin-top: 12px; }
+    .copy-btn {
+      background: #2a2a2a;
+      color: var(--accent);
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: 'Fira Code', monospace;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    i a { color: #4c4c4c; text-decoration: none; }
+    #info i { color:#333}
+  </style>
+</head>
+<body>
+  <div class="center">
+    <h1><i class="fa-solid fa-eye"></i> ALTly - ALT Text Generator</h1>
+    <p>ALTly is a free-for-life ALT text generator powered by Cloudflare Workers AI used for Social media with a free public API</p>
+
+    <div class="card upload-card">
+      <p class="heading"><i class="fa-solid fa-image"></i> Upload Image</p>
+
+      <!-- Drop Zone -->
+      <div id="drop-zone" class="drop-zone">
+        <p><i class="fa-solid fa-upload"></i> Drag & drop your image here, or click to select</p>
+      </div>
+      <input type="file" id="fileInput" hidden accept="image/*">
+
+      <button id="uploadBtn" class="btn"><i class="fa-solid fa-brain"></i> Generate Alt Text</button>
+      <div id="result" class="result"></div>
+      <p id="info"><i>Your image will be stored on <a href="/cdn.html">MBD CDN, defualt region</a></i></p>
+    </div>
+
+    <hr>
+    <p>&copy; 2024-<span id="year"></span> Made by Danny UK</p>
+  </div>
+
+  <script>
+    const API_URL = "https://corsproxy.io/?url=https://alt-text.madebydannyuk.workers.dev/api";
+    const CDN_PATH = "https://corsproxy.io/?url=https://public-cdn.madebydanny.uk/alt-text";
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const result = document.getElementById('result');
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    dropZone.onclick = () => fileInput.click();
+    dropZone.ondragover = e => { e.preventDefault(); dropZone.classList.add('drag-over'); };
+    dropZone.ondragleave = () => dropZone.classList.remove('drag-over');
+    dropZone.ondrop = e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      fileInput.files = e.dataTransfer.files;
+    };
+
+    uploadBtn.onclick = async () => {
+      const file = fileInput.files[0];
+      if (!file) return alert("Please select an image first.");
+      const form = new FormData();
+      form.append("file", file);
+      result.innerHTML = "⏳ Uploading & generating alt text...";
+
+      try {
+        const res = await fetch(API_URL, { method: "POST", body: form });
+        const data = await res.json();
+
+        if (data.success) {
+          const relativeKey = data.url.replace(CDN_PATH + "/", "");
+          result.innerHTML = `
+            <img src="${data.url}" alt="${data.alt}">
+            <p><strong>Alt Text:</strong> "${data.alt}"</p>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('${data.alt}')">
+              <i class="fa-solid fa-copy"></i> Copy Alt Text
+            </button>
+            <p><a href="${data.url}" target="_blank">View on CDN</a></p>
+            <p style="color:var(--muted);font-size:13px;">Stored at: <code>${relativeKey}</code></p>
+          `;
+        } else {
+          result.innerHTML = "⚠️ " + (data.error || "Unknown error occurred.");
+        }
+      } catch (err) {
+        result.innerHTML = "❌ Network error: " + err.message;
+      }
+    };
+  </script>
+</body>
+</html>
