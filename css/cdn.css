@@ -40,6 +40,10 @@ li {
   margin-bottom: 6px;
 }
 
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
 /* Card */
 .card {
   background-color: var(--panel);
