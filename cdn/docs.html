@@ -41,6 +41,7 @@
 <body>
   <h1>MBD CDN API Documentation</h1>
   <p>Welcome to the official documentation for the MBD CDN API. This API allows file uploads, statistics retrieval, and regional content serving.</p>
+  <p>All API routes are found at <strong><code>https://cdn.madebydanny.uk/</code></strong></p>
 
   <section>
     <h2>1. Upload Files</h2>
@@ -100,7 +101,7 @@ https://asia-public-cdn.madebydanny.uk/user-content/2025-10-18/123456_file.png
 const formData = new FormData();
 formData.append('file', fileInput.files[0]);
 
-fetch('https://your-worker-url/upload', {
+fetch('https://cdn.madebydanny.uk/upload', {
   method: 'POST',
   body: formData
 })
