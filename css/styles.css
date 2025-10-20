@@ -34,6 +34,14 @@ a {
 a:hover {
   text-decoration: underline;
   background-color: #ffb347;
+  color: #71afff;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #333;
+  margin: 20px 0;
 }
 
 img {
@@ -44,9 +52,18 @@ img {
 /* -------------------------------------------------- *
  * Typography
  * -------------------------------------------------- */
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 .heading {
   font-size: 20px;
   margin: 20px 0 10px;
+}
+.alt {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: left;
 }
 
 /* -------------------------------------------------- *
@@ -57,33 +74,52 @@ img {
   margin: 0 auto;
   padding: 24px;
 }
-
-/* -------------------------------------------------- *
- * Profile / Hero
- * -------------------------------------------------- */
-.profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+.flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.gap-2 {
+  gap: 8px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.hero {
+/* -------------------------------------------------- *
+ * Theme Toggle
+ * -------------------------------------------------- */
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: 'Fira Code', monospace;
+  cursor: pointer;
+  padding: 0;
+}
+#theme-toggle:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------- *
+ * Profile
+ * -------------------------------------------------- */
+.profile-container {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
 }
-
-.hero-banner {
-  margin-bottom: 18px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-.hero-banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 /* -------------------------------------------------- *
@@ -105,6 +141,13 @@ img {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+.card ul {
+  padding-left: 20px;
+  list-style: none;
+}
+.card ul li {
+  margin-bottom: 10px;
+}
 body.light-mode .card {
   background-color: #f0f0f0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -114,8 +157,100 @@ body.light-mode .card:hover {
 }
 
 /* -------------------------------------------------- *
- * Buttons / Socials
+ * Navigation
  * -------------------------------------------------- */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+}
+body.light-mode nav {
+  background-color: #f0f0f0;
+}
+nav a.active {
+  color: #ffc871;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------- *
+ * Socials
+ * -------------------------------------------------- */
+.socials-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.socials-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+}
+.socials-list a.bluesky:hover { background: #0ea5e9; color: #fff; }
+.socials-list a.medium:hover,
+.socials-list a.github:hover { background: black; color: #fff; }
+.socials-list a.insta:hover { background: rgb(251, 82, 242); color: #fff; }
+.socials-list a.email:hover { background: #ff6b6b; color: #fff; }
+.socials-list a.discord:hover { background: #5865f2; color: #fff; }
+.socials-list a.leaf:hover { background: #ffe577; color: #659736; }
+
+/* -------------------------------------------------- *
+ * Blog / Text Bites
+ * -------------------------------------------------- */
+.blog {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+.text-bite-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.text-bite-date {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.text-bite-content {
+  margin-bottom: 20px;
+}
+
+/* -------------------------------------------------- *
+ * Forms & Buttons
+ * -------------------------------------------------- */
+#generateForm {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+#generateForm input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+body.light-mode #generateForm input {
+  background: #fff;
+  color: #121212;
+  border: 1px solid #ddd;
+}
+#generateForm input:focus {
+  outline: 2px solid #71afff;
+  outline-offset: -2px;
+}
+#generateForm button,
 .btn {
   background: var(--accent);
   color: white;
@@ -130,30 +265,77 @@ body.light-mode .card:hover {
   gap: 8px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+#generateForm button:hover,
 .btn:hover {
-  background: #d41600;
+  background: #71afff;
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   text-decoration: none;
-}
-
-.socials-list {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  color: #ffc871;
 }
 
 /* -------------------------------------------------- *
- * Bluesky Feed
+ * CDN Uploader
  * -------------------------------------------------- */
-#bluesky-posts-container {
+#cdn-uploader {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 10px;
 }
-#bluesky-loading {
+#cdn-select-btn,
+#cdn-upload-btn {
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+#cdn-file-name {
   color: var(--muted);
   font-size: 14px;
+}
+
+/* -------------------------------------------------- *
+ * Loading / Results
+ * -------------------------------------------------- */
+#loading {
+  display: none;
+  text-align: center;
+  color: #71afff;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.loading-visible {
+  display: block !important;
+}
+#result {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#result img {
+  max-width: 640px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+body.light-mode #result img {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------------------------------------- *
+ * Hero Banner
+ * -------------------------------------------------- */
+.hero-banner {
+  margin-bottom: 18px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 /* -------------------------------------------------- *
@@ -170,6 +352,175 @@ body.light-mode .card:hover {
   object-fit: cover;
   border-radius: 8px;
   display: block;
+}
+
+/* -------------------------------------------------- *
+ * Bluesky Feed
+ * -------------------------------------------------- */
+#bluesky-posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+#bluesky-loading {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Base Post */
+.bsky-post {
+  padding: 0;
+  padding-bottom: 1.25rem;
+}
+.bsky-post:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Embedded Post */
+.bsky-post-with-embed {
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: var(--radius);
+  background-color: #242424;
+  margin-bottom: 1.25rem;
+}
+.bsky-post-with-embed:last-child {
+  margin-bottom: 0;
+}
+.bsky-post-with-embed + .bsky-post:not(.bsky-post-with-embed) {
+  margin-top: 1.25rem;
+}
+
+/* Author */
+.bsky-author {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.bsky-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 2px solid #444;
+  flex-shrink: 0;
+}
+.bsky-author-info {
+  flex: 1;
+  min-width: 0;
+}
+.bsky-display-name {
+  font-weight: bold;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.bsky-handle {
+  color: var(--muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.bsky-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.bsky-text {
+  margin-top: 0.75rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+}
+
+/* Embeds */
+.bsky-embed-images {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+.bsky-embed-images img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+.bsky-embed-quote {
+  margin-top: 1rem;
+  border: 1px solid #333;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.bsky-embed-quote .bsky-author {
+  align-items: center;
+}
+.bsky-embed-quote .bsky-avatar {
+  width: 20px;
+  height: 20px;
+}
+.bsky-embed-quote .bsky-display-name,
+.bsky-embed-quote .bsky-handle {
+  font-size: 0.8rem;
+}
+.bsky-embed-quote .bsky-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.bsky-embed-external {
+  margin-top: 1rem;
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+.bsky-embed-external:hover {
+  border-color: var(--accent);
+}
+.bsky-embed-external img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+.bsky-embed-external-content {
+  padding: 0.75rem;
+}
+.bsky-external-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.bsky-external-desc,
+.bsky-external-host {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* View Link */
+.bsky-view-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #71afff;
+  text-decoration: none;
+}
+.bsky-view-link:hover {
+  text-decoration: underline;
 }
 
 /* -------------------------------------------------- *
@@ -192,15 +543,27 @@ body.light-mode .card:hover {
   body {
     margin: 20px;
   }
-  .center {
-    padding: 10px;
-  }
-  .hero {
+  .profile-container {
     flex-direction: column;
     text-align: center;
   }
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .center {
+    padding: 10px;
+  }
+  #generateForm {
+    flex-direction: column;
+  }
+  #generateForm button,
   .btn {
     width: 100%;
     justify-content: center;
+  }
+  #result .flex {
+    flex-direction: column;
+    width: 100%;
   }
 }
