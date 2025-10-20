@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Follow on Bluesky — madebydanny.uk</title>
+  <title>Follow on Bluesky</title>
   <meta name="description" content="Quick profile card to open an AT Protocol (Bluesky) profile in multiple clients." />
   <meta name="robots" content="index, follow" />
 
@@ -81,11 +81,12 @@
     .link:hover{transform:translateY(-4px);background:#fff}
 
     /* Brand hover colors */
-    .link.bsky:hover{color:#1083fd;box-shadow:0 0 12px rgba(2,133,255,0.4)}
-    .link.deer:hover{color:#749f7a;box-shadow:0 0 12px rgba(97,255,134,0.4)}
+    .link.bsky:hover{color:#1083fd;background:black;box-shadow:0 0 12px rgb(14, 118, 255)}
+    .link.deer:hover{color:#749f7a;background:rgb(0, 0, 0);box-shadow:0 0 12px rgb(97,255,134,0.4)}
     .link.catsky:hover{color:#cca6f7;background:#000;box-shadow:0 0 12px rgba(204,166,247,1)}
     .link.blacksky:hover{color:#000000;background:#ffffff;box-shadow:0 0 12px rgb(255, 255, 255)}
     .link.anisota:hover{color:#c28431;background:#000;box-shadow:0 0 12px rgba(255,69,0,0.4)}
+    .link.tangled:hover{color:white;background:black;box-shadow:0 0 12px rgba(255, 255, 255, 0.4)}
 
     .controls{
       margin-top:16px;
@@ -163,7 +164,8 @@
         { name: "Catsky", base: "https://catsky.social/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/catsky.png", cls: "catsky" },
         { name: "Blacksky", base: "https://blacksky.community/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/black-sky.png", cls: "blacksky" },
         { name: "anisota", base: "https://anisota.net/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760219737665_bafkreico43sttmdhwk5vu5veou3bu6amu3s2cgvvqwpav6mrnpv5gz5icq.jpg", cls: "anisota" },
-        { name: "Deer (ayla fork)", base: "https://deer.aylac.top/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760222708511_bafkreihiorp2tzyfjovyne3pv6tsxdy4vilfunodi7z2u4fancgvyo25xe.jpg", cls: "deer" }
+        { name: "Deer (ayla fork)", base: "https://deer.aylac.top/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760222708511_bafkreihiorp2tzyfjovyne3pv6tsxdy4vilfunodi7z2u4fancgvyo25xe.jpg", cls: "deer" },
+        { name: "Tangled", base: "https://tangled.org/", icon: "https://imrs.madebydanny.uk/?url=https%3A%2F%2Fcdn.madebydanny.uk%2Fuser-content%2F2025-10-19%2F1760916775018_did%20plc%20wshs7t2adsemcrrd4snkeqli%20avatar.jpeg", cls: "tangled" }
       ];
 
       const avatarEl = document.getElementById('avatar');
@@ -206,12 +208,27 @@
         window.open(url,'_blank','noopener');
       }
 
-      function tryProfile(){
-        const value=(tryInput.value||'').trim();
-        if(!value)return;
-        const u=new URL(location.href);
-        u.searchParams.set('did',value);
-        location.href=u.toString();
+      // ✅ Improved DID/handle entry support
+      function tryProfile() {
+        let value = (tryInput.value || '').trim();
+        if (!value) return;
+
+        // Strip leading @
+        if (value.startsWith('@')) value = value.slice(1);
+
+        // Extract handle from URLs like https://bsky.app/profile/handle
+        try {
+          const parsed = new URL(value);
+          const parts = parsed.pathname.split('/').filter(Boolean);
+          if (parts.length && (parts[0] === 'profile' || parts[0] === 'actor')) {
+            value = parts[1];
+          }
+        } catch (_) { /* not a URL */ }
+
+        // Update query param and reload
+        const u = new URL(location.href);
+        u.searchParams.set('did', value);
+        location.href = u.toString();
       }
 
       async function loadProfile(){
@@ -220,6 +237,8 @@
         if(!did){
           setText(nameEl,'Missing ?did=');
           setText(tagEl,'Add a DID or handle to view a profile.');
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
           return;
         }
         try{
@@ -245,8 +264,11 @@
           nameEl.textContent='Error loading profile';
           tagEl.textContent='Check your DID or try again.';
           linksRoot.innerHTML='';
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
         }
       }
+
       document.addEventListener('DOMContentLoaded',loadProfile);
     })();
   </script>

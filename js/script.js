@@ -53,31 +53,25 @@ window.addEventListener('load', () => {
     cdnUploadBtn: document.getElementById('cdn-upload-btn'),
     cdnFileName: document.getElementById('cdn-file-name'),
     cdnStatus: document.getElementById('cdn-status'),
-    // Bluesky DOM elements
     blueskyPostsContainer: document.getElementById('bluesky-posts-container'),
     blueskyLoading: document.getElementById('bluesky-loading'),
     blueskyErrorMessage: document.getElementById('bluesky-error-message'),
   };
 
-  // --- Set up RSS feed ---
   if (dom.postList) {
     fetchFeed();
     setInterval(fetchFeed, CONFIG.REFRESH_INTERVAL_MS);
   }
 
-  // --- Theme Toggler ---
   const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
     document.body.classList.toggle('light-mode', localStorage.getItem('theme') === 'light');
   }
 
-  // --- Other initializers ---
   setRootDomain();
   setErrorUrl();
-  // --- Alt RSS feed ---
   fetchAltFeed();
-  // --- Bluesky Feed ---
   fetchBlueskyPosts();
 });
 
@@ -93,7 +87,6 @@ function toggleTheme() {
 /* ------------------------------------------------------------------ *
  * CDN functions
  * ------------------------------------------------------------------ */
-
 function setRootDomain() {
   const rootDomain = window.location.hostname;
   document.querySelectorAll('[data-root-domain]').forEach(el => {
@@ -107,10 +100,6 @@ function setErrorUrl() {
     el.href = errorUrl;
   });
 }
-
-// ... Placeholder for actual CDN upload logic ...
-// NOTE: Actual file upload and interaction logic would go here.
-// For now, these handlers simply provide UI feedback.
 
 /* ------------------------------------------------------------------ *
  * Fetch and render main RSS feed (Medium)
@@ -127,13 +116,11 @@ async function fetchFeed() {
     if (!res.ok) throw new Error(`Network error fetching feed: ${res.status}`);
 
     const raw = await res.text();
-    // Parse as XML RSS/Atom
     const parser = new DOMParser();
     const xml = parser.parseFromString(raw, 'application/xml');
 
     let items = [...xml.querySelectorAll('item, entry')];
 
-    // Parse dates where available and sort newest-first
     items = items.map((it) => {
       const pub = it.querySelector('pubDate')?.textContent || it.querySelector('updated')?.textContent || it.querySelector('published')?.textContent || '';
       const ts = pub ? Date.parse(pub) : 0;
@@ -141,8 +128,6 @@ async function fetchFeed() {
     });
 
     items.sort((a, b) => (b.ts || 0) - (a.ts || 0));
-
-    // Limit to first 7 after sorting
     items = items.slice(0, 15).map(i => i.node);
 
     dom.postList.innerHTML = '';
@@ -169,7 +154,6 @@ async function fetchFeed() {
     dom.loading.style.display = 'none';
   }
 }
-
 
 /* ------------------------------------------------------------------ *
  * Fetch and render Alt RSS feed (Leaflet)
@@ -220,10 +204,8 @@ async function fetchAltFeed() {
 }
 
 /* ------------------------------------------------------------------ *
- * Fetch and render Bluesky feed                                      *
+ * Fetch and render Bluesky feed
  * ------------------------------------------------------------------ */
-
-// --- Bluesky Helper Functions ---
 
 function bskyFormatDate(isoString) {
     if (!isoString) return 'Unknown date';
@@ -306,7 +288,6 @@ async function fetchBlueskyPosts() {
     const errorMsg = document.getElementById('bluesky-error-message');
     if (!container || !loading || !errorMsg) return;
 
-    // NOTE: This API URL is specifically filtered for posts *from* @madebydanny.uk
     const apiUrl = 'https://api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=from%3Amadebydanny.uk&limit=3';
     
     try {
@@ -325,14 +306,18 @@ async function fetchBlueskyPosts() {
         }
 
         data.posts
-            .filter(post => !post.record.reply) // Filter out replies for a cleaner main feed
-            .slice(0, 5) // Show latest 5 posts
+            .filter(post => !post.record.reply)
+            .slice(0, 5)
             .forEach(post => {
                 const postEl = document.createElement('div');
                 postEl.className = 'bsky-post';
 
                 const postText = bskyLinkifyText((post.record.text || '').replace(/\n/g, '<br>'));
                 const embedHtml = bskyRenderEmbed(post.embed);
+
+                const postUri = post.uri || '';
+                const postId = postUri.split('/').pop();
+                const postLink = `https://bsky.app/profile/${post.author.handle}/post/${postId}`;
 
                 postEl.innerHTML = `
                     <div class="bsky-author">
@@ -346,6 +331,11 @@ async function fetchBlueskyPosts() {
                     </div>
                     <div class="bsky-text">${postText}</div>
                     ${embedHtml}
+                    <div class="bsky-footer">
+                        <a href="${postLink}" target="_blank" rel="noopener noreferrer" class="bsky-view-link">
+                            View on Bluesky →
+                        </a>
+                    </div>
                 `;
                 container.appendChild(postEl);
             });
@@ -358,3 +348,19 @@ async function fetchBlueskyPosts() {
         loading.style.display = 'none';
     }
 }
+
+/* ------------------------------------------------------------------ *
+ * Optional CSS (for nice link styling)
+ * ------------------------------------------------------------------ */
+/*
+.bsky-view-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #0ea5e9;
+  text-decoration: none;
+}
+.bsky-view-link:hover {
+  text-decoration: underline;
+}
+*/
