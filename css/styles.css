@@ -615,3 +615,14 @@ body.light-mode .site-down-banner {
   background: #ff4d4d;
   color: #fff;
 }
+
+/* Custom text highlight */
+::selection {
+  background: #ff6b6b; /* highlight background */
+  color: #ffffff;         /* highlight text color */
+}
+/* For Firefox */
+::-moz-selection {
+  background: #ff6b6b;
+  color: #ffffff;
+}
