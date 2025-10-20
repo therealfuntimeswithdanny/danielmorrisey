@@ -567,3 +567,51 @@ body.light-mode #result img {
     width: 100%;
   }
 }
+/* -------------------------------------------------- *
+ * Site Down Banner Down
+ * -------------------------------------------------- */
+.site-down-banner {
+  background: #ff6b6b;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { background-color: #ff6b6b; }
+  50% { background-color: #ff8787; }
+}
+
+body.light-mode .site-down-banner {
+  background: #ff4d4d;
+  color: #fff;
+}
+/* -------------------------------------------------- *
+ * Site Down Banner OK
+ * -------------------------------------------------- */
+.site-down-banner-ok {
+  background: #ff6b6b;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { background-color: #87ffafbb; }
+  50% { background-color: #87ffaf38; }
+}
+
+body.light-mode .site-down-banner {
+  background: #ff4d4d;
+  color: #fff;
+}
