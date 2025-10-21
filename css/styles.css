@@ -626,3 +626,16 @@ body.light-mode .site-down-banner {
   background: #ff6b6b;
   color: #ffffff;
 }
+/* Example starter style — you can override everything */
+.status-widget {
+  display: inline-flex;
+  gap: 0.5em;
+  color: #ffffff;
+  padding: 0.5em 0.8em;
+  border-radius: 10px;
+  font-family: system-ui, sans-serif;
+  font-size: 1em;
+}
+.status-widget .mood {
+  font-size: 1.2em;
+}
