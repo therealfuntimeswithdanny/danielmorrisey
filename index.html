@@ -466,6 +466,7 @@
   <p>You can contact me via <a href="https://madebydanny.uk/followonbsky?did=madebydanny.uk">Bluesky DMs</a>, <a href="/src/discord.html">Discord</a> or <a href="/src/email.html">Email Me</a></p>
   <hr>
   <p>&copy; 2024-25 Daniel Morrisey, Hosted on <i><a href="https://cloudflare.com/pages" target="_blank">Cloudflare Pages</a></i> | Site Last Updated on <i><span id="lastUpdated"></span></i> | Clear <a href="/index.html">#section</a> from URL</p>
+  <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="250" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
 </div>
 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up" style="color: #63E6BE;"></i></button>
 <script src="https://feed.madebydannyuk.workers.dev/embed.js"></script>
@@ -624,7 +625,7 @@ async function fetchLatestPost() {
           postHTML += `
             <div style="opacity: 0.7; border-left: 3px solid #9999ff; padding-left: 15px; margin-bottom: 15px;">
               <div class="post-header">
-                <img src="${parentAuthor.avatar || ''}" alt="Avatar" class="post-avatar">
+                <img src="https://imrs.madebydanny.uk?url=${parentAuthor.avatar || ''}" alt="Avatar" class="post-avatar">
                 <div class="post-user-info">
                   <div class="post-display-name">${parentAuthor.displayName || parentAuthor.handle}</div>
                   <div class="post-handle">@${parentAuthor.handle}</div>
@@ -650,7 +651,7 @@ async function fetchLatestPost() {
     // Build main post HTML
     postHTML += `
       <div class="post-header">
-        <img src="${author.avatar || ''}" alt="Avatar" class="post-avatar">
+        <img src="https://imrs.madebydanny.uk?url=${author.avatar || ''}" alt="Avatar" class="post-avatar">
         <div class="post-user-info">
           <div class="post-display-name">${author.displayName || author.handle}</div>
           <div class="post-handle">@${author.handle}</div>
