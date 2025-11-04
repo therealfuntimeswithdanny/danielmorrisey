@@ -5,46 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daniel Morrisey - Home</title>
   <meta name="description" content="Hey, I'm Daniel Morrisey — a writer and developer who loves creating on the web and posting on Bluesky. Explore my projects, blog posts, and creative work.">
-  <meta name="keywords" content="Daniel Morrisey, MadeByDanny, Bluesky, Writer, Developer, Blog, Projects, AI, CDN, Lamppost, ALTly, MBD CDN, Cloudflare">
-  <meta name="author" content="Daniel Morrisey">
-  <meta name="robots" content="index, follow">
-
-  <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="Daniel Morrisey">
-  <meta property="og:description" content="Hi, I'm Daniel Morrisey , I love to write ✍️ and listen 🎧 to music 🎵">
-  <meta property="og:image" content="https://western-na-cdn.madebydanny.uk/user-content/2025-10-27/1761573646969_aesthetic-cityscape-rooftop-view-desktop-wallpaper-preview.jpg">
-  <meta property="og:url" content="https://madebydanny.uk">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Daniel Morrisey">
-  <meta name="twitter:description" content="Hi, I'm Daniel Morrisey , I love to write ✍️ and listen 🎧 to music 🎵">
-  <meta name="twitter:image" content="https://western-na-cdn.madebydanny.uk/user-content/2025-10-27/1761573646969_aesthetic-cityscape-rooftop-view-desktop-wallpaper-preview.jpg">
   <script src="https://kit.fontawesome.com/0ca27f8db1.js" crossorigin="anonymous"></script>
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://madebydanny.uk">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://madebydanny.uk/favicon.ico" type="image/x-icon">
-
-  <!-- Structured Data (JSON-LD for SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Daniel Morrisey",
-    "url": "https://madebydanny.uk",
-    "image": "https://western-na-cdn.madebydanny.uk/user-content/2025-10-27/1761573646969_aesthetic-cityscape-rooftop-view-desktop-wallpaper-preview.jpg",
-    "sameAs": [
-      "https://madebydanny.uk/followonbsky?did=madebydanny.uk",
-      "https://threads.net/@madebydanny.uk",
-      "https://medium.com/@danielmorrisey"
-    ],
-    "jobTitle": "Writer & Developer",
-    "description": "Hi, I'm Daniel Morrisey , I love to write ✍️ and listen 🎧 to music 🎵"
-  }
-  </script>
   <style>
     body {
       background-color: black;
@@ -54,30 +15,21 @@
       background-position: center center;
       background-size: cover;
       background-attachment: fixed;
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
-    fav img {
-      top: 10px;
-      left: 10px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 2px solid white;
-      z-index: 1000;
-    }
-    /* Main content container */
+    
+    /* Main content container with improved contrast */
     .center {
       margin: auto;
       width: 65%;
       max-width: 900px;
-      padding: 20px;
-      backdrop-filter: blur(6px);
-      background-color: rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
+
     }
-    /* Navigation */
+    
+    /* Navigation with better contrast */
     nav ul {
       list-style-type: none;
       margin: 0;
@@ -85,33 +37,57 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
     }
     nav ul li {
-      padding: 2px;
+      padding: 0;
     }
     nav ul li a {
       display: block;
-      color: white;
+      color: #ffffff;
       text-align: center;
-      padding: 10px 14px;
+      padding: 12px 18px;
       text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.3s ease;
+      border-radius: 6px;
+      background-color: rgba(153, 153, 255, 0.2);
+      border: 1px solid rgba(153, 153, 255, 0.4);
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
     nav ul li a:hover {
-      color: #9999ff;
-      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      background-color: rgba(153, 153, 255, 0.4);
+      border-color: #9999ff;
+      transform: translateY(-2px);
     }
+    
+    /* Links with better visibility */
     a {
-      color: white;
+      color: #b3b3ff;
+      text-decoration: none;
+      transition: color 0.2s ease;
     }
+    a:hover {
+      color: #d4d4ff;
+      text-decoration: underline;
+    }
+    
     hr {
-      background-color: #9999ff;
+      background: linear-gradient(to right, transparent, #9999ff, transparent);
       border: none;
-      height: 1px;
-      margin: 20px 0;
+      height: 2px;
+      margin: 30px 0;
     }
+    
+    /* Headings with better contrast */
+    h3 {
+      color: #ffffff;
+      font-size: 1.4em;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
     /* Scroll to top button */
     #myBtn {
       display: none;
@@ -126,20 +102,25 @@
       color: white;
       cursor: pointer;
       padding: 15px;
-      border-radius: 4px;
-      transition: background 0.3s ease, color 0.3s ease;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(153, 153, 255, 0.4);
     }
     #myBtn:hover {
-      background-color: white;
-      color: #9999ff;
+      background-color: #b3b3ff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(153, 153, 255, 0.6);
     }
     
-    /* Bluesky Profile Header Styles */
+    /* Bluesky Profile Header with better contrast */
     .bsky-profile-header {
       margin: 20px 0;
-      backdrop-filter: blur(6px);
       border-radius: 12px;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      background-color: rgba(183, 180, 180, 0.4);
+      box-sizing: border-box;
+      box-shadow: 0 8px 32px rgba(233, 233, 233, 0.5);
     }
     #banner {
       width: 100%;
@@ -148,7 +129,7 @@
       display: none;
     }
     .bsky-header-content {
-      padding: 20px;
+      padding: 25px;
       position: relative;
     }
     #pfp {
@@ -159,6 +140,7 @@
       display: none;
       margin: -60px 0 15px 0;
       border: 4px solid #9999ff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
     .bsky-info {
       margin-top: 10px;
@@ -167,28 +149,28 @@
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 5px;
-      color: white;
+      color: #ffffff;
     }
     #handle {
       font-size: 16px;
-      color: #999;
+      color: #b3b3ff;
       margin-bottom: 15px;
     }
     #bio {
-      color: #ddd;
-      line-height: 1.6;
+      color: #e6e6e6;
+      line-height: 1.7;
       white-space: pre-wrap;
       margin-bottom: 15px;
       font-size: 15px;
     }
     #stats {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       font-size: 14px;
-      color: #ccc;
+      color: #d0d0d0;
     }
     #stats span {
-      color: white;
+      color: #ffffff;
       font-weight: bold;
     }
     .bsky-loading {
@@ -197,16 +179,182 @@
       padding: 40px 20px;
     }
     
-    /* Remove old Bluesky Profile section styles */
-    .bsky-profile {
-      display: none;
+    .bsky-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #9999ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(153, 153, 255, 0.3);
+    }
+    .bsky-button:hover {
+      background-color: #b3b3ff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(153, 153, 255, 0.5);
+    }
+    
+    /* Latest Bluesky Post with better contrast */
+    #latest-bsky-post {
+      backdrop-filter: blur(10px);
+      background-color: rgba(183, 180, 180, 0.4);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 8px 32px rgba(233, 233, 233, 0.5);
+    }
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+    
+    .post-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #9999ff;
+    }
+    
+    .post-user-info {
+      flex: 1;
+    }
+    
+    .post-display-name {
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 16px;
+    }
+    
+    .post-handle {
+      color: #b3b3ff;
+      font-size: 14px;
+    }
+    
+    .post-timestamp {
+      color: #cccccc;
+      font-size: 13px;
+    }
+    
+    .post-text {
+      color: #e6e6e6;
+      line-height: 1.7;
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+      font-size: 15px;
+    }
+    
+    .post-embed {
+      margin-top: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .post-embed img {
+      width: 100%;
+      max-width: 350px;
+      display: block;
+      border-radius: 8px;
+    }
+    
+    .post-embed-external img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .post-embed-external {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid rgba(153, 153, 255, 0.2);
+      border-radius: 8px;
+    }
+    
+    .post-embed-text {
+      flex: 1;
+    }
+    
+    .post-embed-title {
+      color: #ffffff;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    
+    .post-embed-description {
+      color: #d0d0d0;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    
+    .post-embed-url {
+      color: #9999ff;
+      font-size: 12px;
+    }
+    
+    .post-stats {
+      display: flex;
+      gap: 25px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(153, 153, 255, 0.3);
+      font-size: 14px;
+      color: #d0d0d0;
+    }
+    
+    .post-stats i {
+      margin-right: 6px;
+      color: #9999ff;
+    }
+    
+    .view-post-link {
+      display: inline-block;
+      margin-top: 12px;
+      color: #b3b3ff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .view-post-link:hover {
+      color: #d4d4ff;
+      text-decoration: underline;
+    }
+    
+    /* Projects list styling */
+    ul {
+      padding-left: 20px;
+    }
+    
+    ul li {
+      margin-bottom: 12px;
+      color: #e6e6e6;
+    }
+    
+    ul li i {
+      color: #cccccc;
+    }
+    
+    /* Footer styling */
+    .center > p:last-of-type {
+      color: #cccccc;
+      font-size: 14px;
+      margin-top: 20px;
     }
     
     /* Responsive design */
     @media (max-width: 900px) {
       .center {
         width: 90%;
-        padding: 15px;
+        padding: 20px;
       }
     }
     @media (max-width: 600px) {
@@ -215,8 +363,8 @@
       }
       .center {
         width: 95%;
-        padding: 10px;
-        backdrop-filter: blur(4px);
+        padding: 15px;
+        backdrop-filter: blur(8px);
       }
       nav ul {
         flex-direction: column;
@@ -226,18 +374,14 @@
         width: 100%;
         padding: 12px;
       }
-      h1 {
-        font-size: 1.8em;
+      h3 {
+        font-size: 1.3em;
         text-align: center;
-      }
-      p, li {
-        font-size: 1em;
-        line-height: 1.5;
       }
       #myBtn {
         right: 15px;
         bottom: 15px;
-        padding: 10px;
+        padding: 12px;
         font-size: 16px;
       }
       #banner {
@@ -261,162 +405,13 @@
       #stats {
         font-size: 13px;
         flex-wrap: wrap;
+        gap: 15px;
       }
-    }
-    .bsky-button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #9999ff;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-top: 10px;
-    }
-
-    .bsky-button:hover {
-      background-color: #7777dd;
-      transform: translateY(-2px);
-    }
-    
-    /* Latest Bluesky Post Styles */
-    #latest-bsky-post {
-      backdrop-filter: blur(6px);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    
-    .post-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-    }
-    
-    .post-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid #9999ff;
-    }
-    
-    .post-user-info {
-      flex: 1;
-    }
-    
-    .post-display-name {
-      font-weight: bold;
-      color: white;
-      font-size: 16px;
-    }
-    
-    .post-handle {
-      color: #999;
-      font-size: 14px;
-    }
-    
-    .post-timestamp {
-      color: #999;
-      font-size: 13px;
-    }
-    
-    .post-text {
-      color: #ddd;
-      line-height: 1.6;
-      margin-bottom: 15px;
-      white-space: pre-wrap;
-      font-size: 15px;
-    }
-    
-    .post-embed {
-      margin-top: 15px;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    
-     /* Shrink embedded media images in posts */
-    .post-embed img {
-      width: 100%;
-      max-width: 350px; /* adjust smaller/bigger as you wish */
-      margin: left;
-      display: block;
-      border-radius: 8px;
-    }
-
-    /* Shrink external embed thumbnails */
-    .post-embed-external img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    
-    .post-embed-external {
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 12px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    
-    .post-embed-text {
-      flex: 1;
-    }
-    
-    .post-embed-title {
-      color: white;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-    
-    .post-embed-description {
-      color: #ccc;
-      font-size: 13px;
-    }
-    
-    .post-embed-url {
-      color: #9999ff;
-      font-size: 12px;
-    }
-    
-    .post-stats {
-      display: flex;
-      gap: 20px;
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(153, 153, 255, 0.2);
-      font-size: 14px;
-      color: #ccc;
-    }
-    
-    .post-stats i {
-      margin-right: 6px;
-      color: #9999ff;
-    }
-    
-    .view-post-link {
-      display: inline-block;
-      margin-top: 12px;
-      color: #9999ff;
-      text-decoration: none;
-      font-size: 14px;
-    }
-    
-    .view-post-link:hover {
-      text-decoration: underline;
     }
 </style>
 </head>
 <body>
 <div class="center">
-  <nav>
-      <ul>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#feed">Latest Leaflets</a></li>
-      </ul>
-  </nav>
   <div class="bsky-profile-header">
     <img id="banner" alt="Profile banner">
     <div class="bsky-loading">Loading profile...</div>
@@ -427,7 +422,6 @@
         <div id="handle"></div>
         <div id="bio"></div>
         <div id="stats"></div>
-        <!-- Add this HTML where you want the button -->
         <a href="/followonbsky.html?did=did:plc:l37td5yhxl2irrzrgvei4qay" target="_blank" class="bsky-button">
           View on Bluesky
         </a>
@@ -440,14 +434,6 @@
     <div class="bsky-loading">Loading latest post...</div>
   </div>
   <hr>
-  <h3 id="projects">Projects:</h3>
-  <p>My current projects I still work on and use:</p>
-  <ul>
-      <li><a href="/cdn/index.html">MBD CDN</a> - <i>A Fast, Free, Public CDN anyone can use</i></li>
-      <li><a href="/altly/index.html">ALTly</a> - <i>Make ALT text for images using AI</i></li>
-      <li><a href="/lamppost/index.html">Lamppost</a> - <i>Make images using AI</i></li>
-  </ul>
-  <hr>
   <h3 id="feed">Latest Leaflets</h3>
   <div id="rss"></div>
   <hr>
@@ -457,14 +443,12 @@
   <p>&copy; 2024-25 Daniel Morrisey, Hosted on <i><a href="https://cloudflare.com/pages" target="_blank">Cloudflare Pages</a></i> | Site Last Updated on <i><span id="lastUpdated"></span></i> | Clear <a href="/index.html">#section</a> from URL</p>
   <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="250" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
 </div>
-<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up" style="color: #63E6BE;"></i></button>
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
 <script src="https://feed.madebydannyuk.workers.dev/embed.js"></script>
 
 <script>
-// Get the button
 let mybutton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
@@ -475,13 +459,11 @@ function scrollFunction() {
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
 function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
 
-// Fetch last updated date from GitHub API
 async function fetchLastUpdated() {
   const repo = "therealfuntimeswithdanny/danielmorrisey";
   const apiUrl = `https://api.github.com/repos/${repo}`;
@@ -489,7 +471,6 @@ async function fetchLastUpdated() {
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error("GitHub API error");
     const data = await response.json();
-    // Format the date nicely
     const updated = new Date(data.pushed_at);
     const formatted = updated.toLocaleString("en-US", {
       year: "numeric",
@@ -507,7 +488,6 @@ async function fetchLastUpdated() {
   }
 }
 
-// Fetch Bluesky profile
 async function fetchBlueskyProfile() {
   const did = 'did:plc:l37td5yhxl2irrzrgvei4qay';
   const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${did}`;
@@ -518,7 +498,6 @@ async function fetchBlueskyProfile() {
     
     const data = await response.json();
     
-    // Hide loading message
     document.querySelector('.bsky-loading').style.display = 'none';
     
     const bannerElement = document.getElementById('banner');
@@ -544,7 +523,6 @@ async function fetchBlueskyProfile() {
     handleElement.textContent = '@' + data.handle;
     bioElement.textContent = data.description || 'No bio available';
     
-    // Add stats
     statsElement.innerHTML = `
       <div><span>${data.postsCount || 0}</span> Posts</div>
       <div><span>${data.followersCount || 0}</span> Followers</div>
@@ -557,7 +535,6 @@ async function fetchBlueskyProfile() {
   }
 }
 
-// Helper function to format time ago
 function formatTimeAgo(date) {
   const now = new Date();
   const diffMs = now - date;
@@ -571,7 +548,6 @@ function formatTimeAgo(date) {
   return `${diffDays}d ago`;
 }
 
-// Fetch latest Bluesky post with reply context
 async function fetchLatestPost() {
   const did = 'did:plc:l37td5yhxl2irrzrgvei4qay';
   const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${did}&limit=1`;
@@ -594,7 +570,6 @@ async function fetchLatestPost() {
     
     let postHTML = '';
     
-    // Check if this is a reply and fetch parent post
     if (record.reply && record.reply.parent) {
       try {
         const parentUri = record.reply.parent.uri;
@@ -606,13 +581,11 @@ async function fetchLatestPost() {
           const parentAuthor = parentPost.author;
           const parentRecord = parentPost.record;
           
-          // Format parent post timestamp
           const parentDate = new Date(parentPost.indexedAt);
           const parentTimeAgo = formatTimeAgo(parentDate);
           
-          // Add parent post
           postHTML += `
-            <div style="opacity: 0.7; border-left: 3px solid #9999ff; padding-left: 15px; margin-bottom: 15px;">
+            <div style="opacity: 0.8; border-left: 3px solid #9999ff; padding-left: 15px; margin-bottom: 15px;">
               <div class="post-header">
                 <img src="https://imrs.madebydanny.uk?url=${parentAuthor.avatar || ''}" alt="Avatar" class="post-avatar">
                 <div class="post-user-info">
@@ -623,7 +596,7 @@ async function fetchLatestPost() {
               </div>
               <div class="post-text">${parentRecord.text || ''}</div>
             </div>
-            <div style="color: #9999ff; font-size: 13px; margin-bottom: 10px;">
+            <div style="color: #b3b3ff; font-size: 13px; margin-bottom: 10px;">
               <i class="fa-solid fa-reply"></i> Replying to @${parentAuthor.handle}
             </div>
           `;
@@ -633,11 +606,9 @@ async function fetchLatestPost() {
       }
     }
     
-    // Format timestamp
     const postDate = new Date(post.indexedAt);
     const timeAgo = formatTimeAgo(postDate);
     
-    // Build main post HTML
     postHTML += `
       <div class="post-header">
         <img src="https://imrs.madebydanny.uk?url=${author.avatar || ''}" alt="Avatar" class="post-avatar">
@@ -650,7 +621,6 @@ async function fetchLatestPost() {
       <div class="post-text">${record.text || ''}</div>
     `;
     
-    // Handle embeds (images, external links, etc.)
     if (post.embed) {
       if (post.embed.$type === 'app.bsky.embed.images#view') {
         postHTML += '<div class="post-embed">';
@@ -675,7 +645,6 @@ async function fetchLatestPost() {
       }
     }
     
-    // Add stats
     postHTML += `
       <div class="post-stats">
         <div><i class="fa-regular fa-comment"></i>${post.replyCount || 0}</div>
@@ -693,7 +662,6 @@ async function fetchLatestPost() {
   }
 }
 
-// Run all functions on page load
 fetchLastUpdated();
 fetchBlueskyProfile();
 fetchLatestPost();
