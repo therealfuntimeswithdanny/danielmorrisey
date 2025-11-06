@@ -280,11 +280,24 @@
       font-weight: bold;
       color: #ffffff;
       font-size: 16px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    
+    .post-display-name:hover {
+      color: #b3b3ff;
     }
     
     .post-handle {
       color: #b3b3ff;
       font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    
+    .post-handle:hover {
+      color: #d4d4ff;
+      text-decoration: underline;
     }
     
     .post-timestamp {
@@ -298,6 +311,18 @@
       margin-bottom: 15px;
       white-space: pre-wrap;
       font-size: 15px;
+      word-wrap: break-word;
+    }
+    
+    .post-text a {
+      color: #b3b3ff;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .post-text a:hover {
+      color: #d4d4ff;
+      text-decoration: underline;
     }
     
     .post-embed {
@@ -328,6 +353,16 @@
       align-items: center;
       border: 1px solid rgba(153, 153, 255, 0.2);
       border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .post-embed-external:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-color: rgba(153, 153, 255, 0.5);
+      transform: translateY(-2px);
     }
     
     .post-embed-text {
@@ -595,6 +630,22 @@ function formatTimeAgo(date) {
   return `${diffDays}d ago`;
 }
 
+function linkifyText(text) {
+  if (!text) return '';
+  
+  // URL regex pattern
+  const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  
+  return text.replace(urlPattern, (url) => {
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+  });
+}
+
+function createProfileLink(handle, displayName) {
+  const did = handle; // You can convert handle to DID if needed
+  return `<a href="/followonbsky.html?did=${did}" target="_blank" style="text-decoration: none; color: inherit;">${displayName}</a>`;
+}
+
 async function fetchLatestPost() {
   const did = 'did:plc:l37td5yhxl2irrzrgvei4qay';
   const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${did}&limit=1`;
@@ -634,17 +685,27 @@ async function fetchLatestPost() {
           postHTML += `
             <div style="opacity: 0.8; border-left: 3px solid #9999ff; padding-left: 15px; margin-bottom: 15px;">
               <div class="post-header">
-                <img src="https://imrs.madebydanny.uk?url=${parentAuthor.avatar || ''}" alt="Avatar" class="post-avatar">
+                <a href="/followonbsky.html?did=${parentAuthor.handle}" target="_blank" style="text-decoration: none;">
+                  <img src="https://imrs.madebydanny.uk?url=${parentAuthor.avatar || ''}" alt="Avatar" class="post-avatar">
+                </a>
                 <div class="post-user-info">
-                  <div class="post-display-name">${parentAuthor.displayName || parentAuthor.handle}</div>
-                  <div class="post-handle">@${parentAuthor.handle}</div>
+                  <div class="post-display-name">
+                    <a href="/followonbsky.html?did=${parentAuthor.handle}" target="_blank" style="text-decoration: none; color: inherit;">
+                      ${parentAuthor.displayName || parentAuthor.handle}
+                    </a>
+                  </div>
+                  <div class="post-handle">
+                    <a href="/followonbsky.html?did=${parentAuthor.handle}" target="_blank" style="text-decoration: none; color: inherit;">
+                      @${parentAuthor.handle}
+                    </a>
+                  </div>
                 </div>
                 <div class="post-timestamp">${parentTimeAgo}</div>
               </div>
-              <div class="post-text">${parentRecord.text || ''}</div>
+              <div class="post-text">${linkifyText(parentRecord.text || '')}</div>
             </div>
             <div style="color: #b3b3ff; font-size: 13px; margin-bottom: 10px;">
-              <i class="fa-solid fa-reply"></i> Replying to @${parentAuthor.handle}
+              <i class="fa-solid fa-reply"></i> Replying to <a href="/followonbsky.html?did=${parentAuthor.handle}" target="_blank" style="color: inherit;">@${parentAuthor.handle}</a>
             </div>
           `;
         }
@@ -658,14 +719,24 @@ async function fetchLatestPost() {
     
     postHTML += `
       <div class="post-header">
-        <img src="https://imrs.madebydanny.uk?url=${author.avatar || ''}" alt="Avatar" class="post-avatar">
+        <a href="/followonbsky.html?did=${author.handle}" target="_blank" style="text-decoration: none;">
+          <img src="https://imrs.madebydanny.uk?url=${author.avatar || ''}" alt="Avatar" class="post-avatar">
+        </a>
         <div class="post-user-info">
-          <div class="post-display-name">${author.displayName || author.handle}</div>
-          <div class="post-handle">@${author.handle}</div>
+          <div class="post-display-name">
+            <a href="/followonbsky.html?did=${author.handle}" target="_blank" style="text-decoration: none; color: inherit;">
+              ${author.displayName || author.handle}
+            </a>
+          </div>
+          <div class="post-handle">
+            <a href="/followonbsky.html?did=${author.handle}" target="_blank" style="text-decoration: none; color: inherit;">
+              @${author.handle}
+            </a>
+          </div>
         </div>
         <div class="post-timestamp">${timeAgo}</div>
       </div>
-      <div class="post-text">${record.text || ''}</div>
+      <div class="post-text">${linkifyText(record.text || '')}</div>
     `;
     
     if (post.embed) {
@@ -679,14 +750,14 @@ async function fetchLatestPost() {
         const ext = post.embed.external;
         postHTML += `
           <div class="post-embed">
-            <div class="post-embed-external">
+            <a href="${ext.uri}" target="_blank" rel="noopener noreferrer" class="post-embed-external">
               ${ext.thumb ? `<img src="${ext.thumb}" alt="Link thumbnail">` : ''}
               <div class="post-embed-text">
                 <div class="post-embed-title">${ext.title || ''}</div>
                 <div class="post-embed-description">${ext.description || ''}</div>
                 <div class="post-embed-url">${ext.uri || ''}</div>
               </div>
-            </div>
+            </a>
           </div>
         `;
       }
