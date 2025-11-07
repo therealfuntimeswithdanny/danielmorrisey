@@ -1,0 +1,23 @@
+{
+  "lexicon": 1,
+  "id": "uk.madebydanny.text",
+  "defs": {
+    "main": {
+      "type": "record",
+      "record": {
+        "key": "literal",
+        "literal": "self"
+      },
+      "properties": {
+        "content": { "type": "string" },
+        "format": { "type": "string" },
+        "langs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "datetime" }
+      },
+      "required": ["content", "createdAt"]
+    }
+  }
+}
