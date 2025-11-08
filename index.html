@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Daniel Morrisey - Home</title>
-<meta name="description" id="meta-description" content="Posting everything into the endless jet stream of posts">
+<meta name="description" id="meta-description" content="Loading...">
 
 <!-- ✅ SEO Keywords -->
 <meta name="keywords" content="Daniel Morrisey, developer, writer, blog, projects, Bluesky, web development, creative work">
@@ -20,14 +20,14 @@
 <link rel="canonical" href="https://madebydanny.uk/">
 
 <!-- ✅ Favicon -->
-<link rel="icon" id="favicon" href="https://altq.net/xrpc/com.atproto.sync.getBlob?did=did:plc:l37td5yhxl2irrzrgvei4qay&cid=bafkreibnauwgdhmqejzc3nrp463gx672fsrbcv4yjy6s7dmcpenuw7pbei">
+<link rel="icon" id="favicon" href="">
 
 <!-- ✅ Open Graph -->
 <meta property="og:title" content="Daniel Morrisey - Home">
-<meta property="og:description" id="og-description" content="Posting everything into the endless jet stream of posts">
+<meta property="og:description" id="og-description" content="Loading...">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://madebydanny.uk/">
-<meta property="og:image" id="og-image" content="https://altq.net/xrpc/com.atproto.sync.getBlob?did=did:plc:l37td5yhxl2irrzrgvei4qay&cid=bafkreichle4gy3xvjsygacml7ab3m6pf3bwzjmlqdpxjolo4bvv23qro2m">
+<meta property="og:image" id="og-image" content="">
 
 <!-- ✅ Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -643,6 +643,9 @@
 </head>
 <body>
 <div class="center">
+  <div class="white-card" id="current-status" style="margin-bottom: 20px; text-align: center;">
+  <b>Current Status:</b> Loading...
+</div>
   <div class="top-section">
     <div class="bsky-profile-header">
       <img id="banner" alt="Profile banner">
@@ -768,6 +771,10 @@ async function fetchBlueskyProfile() {
     const statsElement = document.getElementById('stats');
     
     // Update SEO meta tags
+    const metaDescription = document.getElementById('meta-description');
+    const ogDescription = document.getElementById('og-description');
+    const favicon = document.getElementById('favicon');
+    const ogImage = document.getElementById('og-image');
     
     if (data.description) {
       metaDescription.setAttribute('content', data.description);
@@ -1070,6 +1077,28 @@ async function fetchProjects() {
   }
 }
 
+async function fetchCurrentStatus() {
+  const statusElement = document.getElementById('current-status');
+  if (!statusElement) return;
+
+  const apiUrl = 'https://altq.net/xrpc/com.atproto.repo.getRecord?repo=did:plc:l37td5yhxl2irrzrgvei4qay&collection=uk.madebydanny.status&rkey=3m53jj6shtn2b';
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error('Failed to fetch current status');
+
+    const data = await response.json();
+    if (data.value && data.value.status) {
+      statusElement.innerHTML = `<b>Current Status:</b> ${data.value.status}`;
+    } else {
+      statusElement.innerHTML = '<b>Current Status:</b> No status available';
+    }
+  } catch (error) {
+    console.error('Error fetching current status:', error);
+    statusElement.innerHTML = '<b>Current Status:</b> Error loading status';
+  }
+}
+
 fetchLastUpdated();
 fetchBlueskyProfile();
 fetchLatestPost();
@@ -1077,6 +1106,7 @@ fetchAbout();
 fetchTexts();
 fetchFooter();
 fetchProjects();
+fetchCurrentStatus();
 </script>
 
 </body>
