@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBD CDN 2.0 - Free, Fast & Powered by Cloudflare</title>
+
+  <!-- SEO & Social -->
+  <meta name="description" content="MBD CDN is a free-for-life content delivery network powered by Cloudflare's ultra-fast servers. Upload your files, get a shareable URL instantly, and deliver content globally." />
+  <meta name="keywords" content="MBD CDN, Made by Danny, Free CDN, Cloudflare CDN, File Hosting, Fast CDN, CDN Upload" />
+  <meta property="og:title" content="MBD CDN 2.0 - Free, Fast & Powered by Cloudflare" />
+  <meta property="og:description" content="Upload files instantly and deliver worldwide with MBD CDN." />
+  <meta property="og:image" content="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-31_Untitled(13).png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="cdn.css">
+
+  <link rel="icon" type="image/png" href="https://public-cdn.madebydanny.uk/user-content/2025-09-13/20-45-17_database-solid-full.svg" />
+  <script src="cdn-v2.js" defer></script>
+</head>
+<body>
+  <header2>
+    <h1><i class="fa-solid fa-database"></i> MBD CDN <i>2.0</i></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/cdn/docs.html">Docs</a>
+    </nav>
+  </header2>
+  <header class="center">
+    <p>Upload your files to the MBD CDN — free for life, powered by Cloudflare’s global edge network.</p>
+  </header>
+
+  <!-- Upload Section -->
+  <section class="center">
+    <div class="card upload-card">
+      <p class="heading"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</p>
+
+      <div id="drop-zone" class="drop-zone">
+        <p><i class="fa-solid fa-upload"></i> Drag & drop your file here, or click to select</p>
+      </div>
+
+      <input type="file" id="fileInput" hidden>
+
+      <label class="checkbox-label">
+        <input type="checkbox" id="useImrs">
+        Use <a href="#imrs"><strong>imrs</strong></a> for image optimization
+      </label>
+
+      <button id="uploadBtn" class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+      <div id="result" class="result"></div>
+    </div>
+  </section>
+
+
+  <!-- Features Section -->
+  <section class="center">
+    <div class="card features-card">
+      <p class="heading"><i class="fa-solid fa-star"></i> Why MBD CDN?</p>
+      <ul>
+        <li><i class="fa-solid fa-bolt" style="color: #ff0000;"></i> Faster than a blink of an eye, thanks to Cloudflare's network with data centers in over 330 cities across 125 countries.</li>
+        <li><i class="fa-solid fa-hand-holding-dollar" style="color: #ff0000;"></i> Free-for-Life, you never have to spend a dime.</li>
+        <li><i class="fa-solid fa-code" style="color: #ff0000;"></i> Free to use API.</li>
+     </ul>
+    </div>
+  </section>
+
+  <section class="center" id="imrs">
+    <div class="card docs-card">
+      <p class="heading"><i class="fa-solid fa-image"></i> What is IMRS?</p>
+      <p>IMRS, or image media reduction system, transforms images from PNG, JPEG, WEBP, etc. to AVIF, an image type that's smaller and loads quicker but keeps the same high-quality image.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="center">
+    <hr>
+    <p>&copy; 2024–<span id="current-year"></span> Made by Danny UK</p>
+    <iframe src="https://status.madebydanny.uk/badge?theme=dark" width="185" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+  </footer>
+  <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="223534" async="async" type="text/javascript"></script>
+</body>
+</html>

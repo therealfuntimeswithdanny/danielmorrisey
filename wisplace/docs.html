@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBD CDN API Documentation</title>
+  <style>
+    body {
+      font-family: 'Fira Code', monospace;
+      background-color: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    h1, h2, h3 {
+      color: #f71900;
+    }
+    code {
+      background: #1e1e1e;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    a {
+      color: #f71900;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>MBD CDN API Documentation</h1>
+  <p>Welcome to the official documentation for the MBD CDN API. This API allows file uploads, statistics retrieval, and regional content serving.</p>
+  <p>All API routes are found at <strong><code>https://cdn.madebydanny.uk/</code></strong></p>
+
+  <section>
+    <h2>1. Upload Files</h2>
+    <p><strong>Endpoint:</strong> <code>POST /upload</code></p>
+    <p><strong>Description:</strong> Upload a file to all regions. Maximum file size: 100 MB.</p>
+    <p><strong>Form data parameter:</strong></p>
+    <ul>
+      <li><code>file</code> — The file to upload.</li>
+    </ul>
+    <p><strong>Response:</strong> JSON with a universal URL and file key.</p>
+    <pre><code>{
+  "url": "https://cdn.madebydanny.uk/user-content/2025-10-18/123456_file.png",
+  "key": "user-content/2025-10-18/123456_file.png"
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>2. Retrieve Stats</h2>
+    <p><strong>Endpoint:</strong> <code>GET /stats</code></p>
+    <p><strong>Description:</strong> Fetch global statistics about uploaded files and bandwidth.</p>
+    <p><strong>Response:</strong> JSON object:</p>
+    <pre><code>{
+  "filesUploaded": 10,
+  "totalBandwidth": 1.23,  // in GB
+  "regionsSupported": 6
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>3. Serve Content</h2>
+    <p><strong>Endpoint:</strong> <code>GET /user-content/{path}</code></p>
+    <p><strong>Description:</strong> Redirects to the nearest regional copy of the file based on the user's location.</p>
+    <p><strong>Example:</strong></p>
+    <pre><code>GET /user-content/2025-10-18/123456_file.png
+Redirects to:
+https://asia-public-cdn.madebydanny.uk/user-content/2025-10-18/123456_file.png
+</code></pre>
+  </section>
+
+  <section>
+    <h2>4. CORS Support</h2>
+    <p>All endpoints support CORS. Preflight requests (<code>OPTIONS</code>) are handled automatically.</p>
+  </section>
+
+  <section>
+    <h2>5. Error Responses</h2>
+    <ul>
+      <li><code>400</code> — Bad request (e.g., no file uploaded or file too large).</li>
+      <li><code>404</code> — Endpoint not found.</li>
+      <li><code>500</code> — Internal server error.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>6. Example Upload Request (JavaScript)</h2>
+    <pre><code>const fileInput = document.querySelector('#file');
+const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+
+fetch('https://cdn.madebydanny.uk/upload', {
+  method: 'POST',
+  body: formData
+})
+.then(res => res.json())
+.then(console.log)
+.catch(console.error);
+</code></pre>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MBD CDN</p>
+  </footer>
+</body>
+</html>

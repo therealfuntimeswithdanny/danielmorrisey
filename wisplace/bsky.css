@@ -78,7 +78,8 @@
     .link.anisota:hover{color:#c28431;background:#000;box-shadow:0 0 12px rgba(255,69,0,0.4)}
     .link.tangled:hover{color:white;background:black;box-shadow:0 0 12px rgba(255, 255, 255, 0.4)}
     .link.nooki:hover{color:#FDC417;background:black;box-shadow:0 0 12px rgba(253, 196, 23, 1)}
-    .link.splace:hover{color:#ffffff;background:#000000;box-shadow:0 0 12px rgba(37, 150, 190)}
+    .link.splace:hover{color:#ffffff;background:#000000;box-shadow:0 0 12px rgba(248, 186, 202)}
+    .link.bitch:hover{color:#402c44;background:black;box-shadow:0 0 12px rgb(64, 43, 68)}
 
     .controls{
       margin-top:16px;

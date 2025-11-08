@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Follow on Bluesky</title>
+  <meta name="description" content="Quick profile card to open an AT Protocol (Bluesky) profile in multiple clients." />
+  <link rel="stylesheet" href="bsky.css">
+  <meta name="robots" content="index, follow" />
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="displayName">
+    <section class="profile" aria-live="polite">
+      <img id="avatar" class="avatar" src="" alt="Profile avatar" />
+      <h2 id="displayName" class="name">Loading…</h2>
+      <div id="tagline" class="tagline"></div>
+    </section>
+
+    <nav id="links" class="links" aria-label="Open in client"></nav>
+
+    <section class="controls" aria-label="Actions">
+      <div class="control-row">
+        <input id="try-handle" type="text" placeholder="yourhandle.com or did:plc:..." aria-label="Try with your profile" />
+        <button id="try-button" type="button">Try</button>
+      </div>
+      <div class="control-row">
+        <input id="custom-client" type="url" placeholder="https://client.example" aria-label="Custom client base URL" />
+        <button id="custom-open" type="button">Open</button>
+      </div>
+    </section>
+
+    <p class="meta" style="text-align: center;">
+      by <a href="/followonbsky.html?did=did:plc:l37td5yhxl2irrzrgvei4qay">@madebydanny.uk</a>,
+      add a client <a href="https://tally.so/r/nrzQDl" target="_blank" rel="noopener">here</a>
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      const clients = [
+        { name: "Bluesky", base: "https://bsky.app/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/bsky.png", cls: "bsky" },
+        { name: "Deer Social", base: "https://deer.social/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/deer-social.png", cls: "deer" },
+        { name: "Catsky", base: "https://catsky.social/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/catsky.png", cls: "catsky" },
+        { name: "Blacksky", base: "https://blacksky.community/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/followonbluesky/black-sky.png", cls: "blacksky" },
+        { name: "anisota", base: "https://anisota.net/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760219737665_bafkreico43sttmdhwk5vu5veou3bu6amu3s2cgvvqwpav6mrnpv5gz5icq.jpg", cls: "anisota" },
+        { name: "Deer (ayla fork)", base: "https://deer.aylac.top/profile/", icon: "https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760222708511_bafkreihiorp2tzyfjovyne3pv6tsxdy4vilfunodi7z2u4fancgvyo25xe.jpg", cls: "deer" },
+        { name: "Tangled", base: "https://tangled.org/", icon: "https://imrs.madebydanny.uk/?url=https%3A%2F%2Fcdn.madebydanny.uk%2Fuser-content%2F2025-10-19%2F1760916775018_did%20plc%20wshs7t2adsemcrrd4snkeqli%20avatar.jpeg", cls: "tangled" },
+        { name: "SkySpace", base: "https://skyspace.me/?", icon: "https://imrs.madebydanny.uk/?url=https%3A%2F%2Fcdn.madebydanny.uk%2Fuser-content%2F2025-10-20%2F1760974273575_SkySpace%20Deer.jpg", cls: "bsky" },
+        { name: "Nooki", base: "https://nooki.me/user/", icon: "https://imrs.madebydanny.uk/?url=https%3A%2F%2Fcdn.madebydanny.uk%2Fuser-content%2F2025-11-08%2F1762617628615_nooki.png", cls: "nooki" },
+        { name: "Streamplace", base: "https://stream.place/", icon: "https://cdn.madebydanny.uk/user-content/2025-11-08/1762618009699_favicon.ico", cls: "splace" },
+        { name: "Bitchsky", base: "https://bitchsky.app/profile/", icon: "https://cdn.madebydanny.uk/user-content/2025-11-08/1762619931978_android_base.svg", cls: "bitch" }
+      ];
+
+      const avatarEl = document.getElementById('avatar');
+      const nameEl = document.getElementById('displayName');
+      const tagEl = document.getElementById('tagline');
+      const linksRoot = document.getElementById('links');
+      const tryInput = document.getElementById('try-handle');
+      const tryBtn = document.getElementById('try-button');
+      const customInput = document.getElementById('custom-client');
+      const customBtn = document.getElementById('custom-open');
+
+      function setText(el, txt){ el.textContent = txt ?? ''; }
+
+      function makeClientLink(c, handle){
+        const a = document.createElement('a');
+        a.className = 'link ' + (c.cls || '');
+        a.href = c.base + encodeURIComponent(handle);
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', `Open ${c.name} for ${handle}`);
+
+        const img = document.createElement('img');
+        img.src = c.icon;
+        img.alt = c.name + ' icon';
+        img.loading = 'lazy';
+
+        const span = document.createElement('span');
+        span.className = 'label';
+        span.textContent = c.name;
+
+        a.append(img, span);
+        return a;
+      }
+
+      function openCustom(handle){
+        let url = (customInput.value || '').trim();
+        if(!url)return;
+        if(!/^https?:\/\//i.test(url))url='https://'+url;
+        url=url.replace(/\/+$/,'')+'/profile/'+encodeURIComponent(handle);
+        window.open(url,'_blank','noopener');
+      }
+
+      // ✅ Improved DID/handle entry support
+      function tryProfile() {
+        let value = (tryInput.value || '').trim();
+        if (!value) return;
+
+        // Strip leading @
+        if (value.startsWith('@')) value = value.slice(1);
+
+        // Extract handle from URLs like https://bsky.app/profile/handle
+        try {
+          const parsed = new URL(value);
+          const parts = parsed.pathname.split('/').filter(Boolean);
+          if (parts.length && (parts[0] === 'profile' || parts[0] === 'actor')) {
+            value = parts[1];
+          }
+        } catch (_) { /* not a URL */ }
+
+        // Update query param and reload
+        const u = new URL(location.href);
+        u.searchParams.set('did', value);
+        location.href = u.toString();
+      }
+
+      async function loadProfile(){
+        const params=new URLSearchParams(location.search);
+        const did=params.get('did');
+        if(!did){
+          setText(nameEl,'Missing ?did=');
+          setText(tagEl,'Add a DID or handle to view a profile.');
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
+          return;
+        }
+        try{
+          const res=await fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${encodeURIComponent(did)}`);
+          if(!res.ok)throw new Error('fetch failed');
+          const data=await res.json();
+          const handle=data.handle||did;
+          const avatar=data.avatar?`https://imrs.madebydanny.uk?url=${encodeURIComponent(data.avatar)}`:'https://imrs.madebydanny.uk/?url=https://public-cdn.madebydanny.uk/user-content/2025-10-11/1760220038748_cloudflare-brands-solid-full.svg';
+
+          avatarEl.src=avatar;
+          avatarEl.alt=`${data.displayName||handle} avatar`;
+          setText(nameEl,data.displayName||handle);
+          setText(tagEl,`@${handle} is on the AT Protocol — pick a client to follow them!`);
+
+          linksRoot.innerHTML='';
+          clients.forEach(c=>linksRoot.appendChild(makeClientLink(c,handle)));
+
+          customBtn.onclick=()=>openCustom(handle);
+          customInput.onkeydown=e=>{if(e.key==='Enter')openCustom(handle)};
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
+        }catch(e){
+          nameEl.textContent='Error loading profile';
+          tagEl.textContent='Check your DID or try again.';
+          linksRoot.innerHTML='';
+          tryBtn.onclick=tryProfile;
+          tryInput.onkeydown=e=>{if(e.key==='Enter')tryProfile()};
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded',loadProfile);
+    })();
+  </script>
+</body>
+</html>
