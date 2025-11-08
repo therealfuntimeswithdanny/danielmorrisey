@@ -1,0 +1,47 @@
+{
+  "lexicon": 1,
+  "id": "uk.madebydanny.photos",
+  "defs": {
+    "main": {
+      "type": "record",
+      "record": {
+        "key": "literal",
+        "literal": "self"
+      },
+      "properties": {
+        "photos": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "ref": "#blobObj"
+          }
+        },
+        "langs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      },
+      "required": ["photos", "createdAt"]
+    },
+    "blobObj": {
+      "type": "object",
+      "properties": {
+        "$type": { "type": "string", "const": "blob" },
+        "ref": {
+          "type": "object",
+          "properties": {
+            "$link": { "type": "string" }
+          },
+          "required": ["$link"]
+        },
+        "mimeType": { "type": "string" },
+        "size": { "type": "integer" }
+      },
+      "required": ["$type", "ref", "mimeType", "size"]
+    }
+  }
+}
